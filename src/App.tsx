@@ -1,4 +1,4 @@
-import './App.css'
+import './app.css'
 import { env } from './env'
 
 function App() {
