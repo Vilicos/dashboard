@@ -42,6 +42,18 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@connection/*": ["./src/connection/*"],
+      "@constans/*": ["./src/constants/*"],
+      "@context/*": ["./src/context/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@types/*": ["./src/types/*"],
+      "@wrappers/*": ["./src/wrappers/*"],
       "@/*": ["./src/*"]
     }
   },
