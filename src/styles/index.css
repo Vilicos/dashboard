@@ -61,10 +61,10 @@
 
 @layer base {
   * {
-    @apply border-border scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent;
+    @apply border-border;
   }
   html {
-    @apply scroll-smooth;;
+    @apply scroll-smooth scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent;
   }
   body {
     @apply bg-background text-foreground min-h-dvh w-screen selection:bg-sky-900/80;
