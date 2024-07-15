@@ -25,6 +25,7 @@
     "analyzer": "vite-bundle-visualizer"
   },
   "dependencies": {
+    "@fontsource/geist-sans": "^5.0.3",
     "@t3-oss/env-core": "^0.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
