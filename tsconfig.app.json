@@ -25,7 +25,7 @@
 
     /* Others */
     "types": ["vite/client"],
-    "strictNullChecks":true,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
@@ -41,7 +41,9 @@
     "checkJs": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src"]
 }
