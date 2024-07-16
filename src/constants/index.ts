@@ -1,0 +1,1 @@
+// for static and constants values
