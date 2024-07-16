@@ -1,0 +1,1 @@
+// for App wrappers - example: Tanstack Query wrapper
