@@ -62,8 +62,7 @@
   },
   "browserslist": [
     ">0.3%",
-    "defaults",
-    "supports es6-module",
+    "defaults and fully supports es6-module",
     "maintained node versions"
   ]
 }
