@@ -1,8 +1,15 @@
+import type { ThemeProviderState } from "@custom-types/component";
+import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { ReactNode } from "react"
+
 
 const queryClient = new QueryClient();
+
+const initialState: ThemeProviderState = {
+  theme: "system",
+  setTheme: () => null,
+}
 
 function Wrappers({children}:{children:ReactNode}) {
   return (

@@ -52,7 +52,7 @@
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@styles/*": ["./src/styles/*"],
-      "@types/*": ["./src/types/*"],
+      "@custom-types/*": ["./src/types/*"],
       "@wrappers/*": ["./src/wrappers/*"],
       "@/*": ["./src/*"]
     }
