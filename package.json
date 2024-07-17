@@ -1,13 +1,13 @@
 {
-  "name": "vite-boilerplate",
+  "name": "griffin-web3-dashboard",
   "author": "Nijat Hamid <nicatorium@gmail.com>",
   "description": "A production ready, batteries included starter template for Vite + React projects",
   "keywords": [
-    "vite",
+    "griffin",
+    "web3",
+    "dashboard",
     "react",
-    "boilerplate",
-    "starter",
-    "template"
+    "vite"
   ],
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "@fontsource/geist-sans": "^5.0.3",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-core": "^0.10.1",
+    "@tanstack/react-query": "^5.51.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.408.0",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@nabla/vite-plugin-eslint": "^2.0.4",
+    "@tanstack/eslint-plugin-query": "^5.51.1",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
