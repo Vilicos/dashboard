@@ -67,7 +67,7 @@
     @apply scroll-smooth scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent;
   }
   body {
-    @apply min-h-dvh w-screen selection:bg-sky-900/80;
+    @apply min-h-dvh w-screen selection:bg-sky-900/80 bg-background dark:bg-background;
     font-family: "Geist Sans", "-apple-system", "system-ui", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol";
     padding-right: calc(0 - var(--removed-body-scroll-bar-size)) !important;
