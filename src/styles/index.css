@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 154 37% 99%;
-    --foreground: 154 69% 4%;
-    --muted: 124 29% 91%;
-    --muted-foreground: 124 6% 40%;
-    --popover: 154 37% 99%;
-    --popover-foreground: 154 69% 4%;
-    --card: 154 37% 98%;
-    --card-foreground: 154 69% 3%;
-    --border: 154 7% 92%;
-    --input: 154 7% 92%;
+    --background: 0 0% 99.22%;
+    --foreground: 154 51% 0%;
+    --muted: 154 32% 87%;
+    --muted-foreground: 154 9% 37%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 0 0% 0%;
+    --card: 0 0% 99%;
+    --card-foreground: 0 0% 0%;
+    --border: 154 13% 92%;
+    --input: 154 13% 92%;
     --primary: 154 62% 22%;
     --primary-foreground: 154 62% 82%;
-    --secondary: 124 62% 22%;
-    --secondary-foreground: 124 62% 82%;
-    --accent: 184 62% 22%;
-    --accent-foreground: 184 62% 82%;
-    --destructive: 7 94% 39%;
+    --secondary: 154 17% 87%;
+    --secondary-foreground: 154 17% 27%;
+    --accent: 154 17% 87%;
+    --accent-foreground: 154 17% 27%;
+    --destructive: 15 88% 35%;
     --destructive-foreground: 0 0% 100%;
     --ring: 154 62% 22%;
     --radius: 0.5rem;
@@ -32,25 +32,26 @@
   }
 
   .dark {
-    --background: 154 53% 0%;
-    --foreground: 154 14% 97%;
-    --muted: 124 29% 9%;
-    --muted-foreground: 124 6% 60%;
-    --popover: 154 53% 0%;
-    --popover-foreground: 154 14% 97%;
-    --card: 0 0% 1%;
-    --card-foreground: 0 0% 92.94%;
-    --border: 154 7% 15%;
-    --input: 154 7% 15%;
+    --background: 154 57% 2%;
+    --foreground: 154 37% 97%;
+    --muted: 154 32% 13%;
+    --muted-foreground: 154 9% 63%;
+    --popover: 154 57% 3%;
+    --popover-foreground: 154 37% 98%;
+    --card: 154 57% 3%;
+    --card-foreground: 154 37% 98%;
+    --border: 154 13% 11%;
+    --input: 154 13% 11%;
     --primary: 154 62% 22%;
     --primary-foreground: 154 62% 82%;
-    --secondary: 124 62% 22%;
-    --secondary-foreground: 124 62% 82%;
-    --accent: 184 62% 22%;
-    --accent-foreground: 184 62% 82%;
-    --destructive: 7 94% 60%;
+    --secondary: 154 10% 8%;
+    --secondary-foreground: 154 10% 68%;
+    --accent: 154 10% 8%;
+    --accent-foreground: 154 10% 68%;
+    --destructive: 15 88% 56%;
     --destructive-foreground: 0 0% 0%;
     --ring: 154 62% 22%;
+    --radius: 0.5rem;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -67,12 +68,79 @@
     @apply scroll-smooth scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent;
   }
   body {
-    @apply min-h-dvh w-screen selection:bg-sky-900/80 bg-background dark:bg-background;
+    @apply min-h-dvh w-screen selection:bg-sky-900/80 bg-background dark:bg-background text-foreground dark:text-foreground;
     font-family: "Geist Sans", "-apple-system", "system-ui", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol";
     padding-right: calc(0 - var(--removed-body-scroll-bar-size)) !important;
+    /* position: relative; */
+    /* @apply transition-colors duration-200 ; */
+    &::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100dvh;
+      width: 100dvw;
+      transform-style: flat;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 75%, transparent 100%);
+      mask-composite: intersect;
+      background-image: linear-gradient(to right, #4f4f4f2e 1px, transparent 1px), linear-gradient(to bottom, #4f4f4f2e 1px, transparent 1px);
+      background-size: 14px 24px;
+      z-index: -10;
+    }
   }
   a {
     @apply no-underline;
+  }
+  ::view-transition-group(root) {
+    animation-duration: 1s;
+  }
+  ::view-transition-new(root),
+  ::view-transition-old(root) {
+    mix-blend-mode: normal;
+  }
+  
+  ::view-transition-new(root) {
+    animation-name: none;
+  }
+  
+  ::view-transition-old(root) {
+    animation-name: reveal-light;
+    animation-duration: 1s;
+    z-index: 2;
+  }
+  .dark::view-transition-new(root) {
+    animation-name: reveal-dark;
+    animation-duration: 1s;
+    z-index: 3;
+  }
+  .dark::view-transition-old(root) {
+    animation-name: none;
+  }
+  
+  @keyframes reveal-dark {
+    0% {
+      filter: brightness(0.2);
+      opacity: 0.5;
+      clip-path: circle(0% at 50% 50%);
+    }
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+      clip-path: circle(100% at 50% 50%)
+    }
+  }
+  
+  @keyframes reveal-light {
+    0% {
+      filter: brightness(1);
+      opacity: 1;
+      clip-path: circle(100% at 50% 50%);
+    }
+    100% {
+      opacity: 0.5;
+      filter: brightness(0.2);
+      clip-path: circle(0% at 50% 50%);
+    }
   }
 }
