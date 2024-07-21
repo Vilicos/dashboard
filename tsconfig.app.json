@@ -42,7 +42,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@connection/*": ["./src/connection/*"],
       "@constans/*": ["./src/constants/*"],

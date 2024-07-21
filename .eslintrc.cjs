@@ -13,7 +13,7 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:unicorn/recommended",
-    // "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "vite.config.ts", "postcss.config.js", "tailwind.config.js","./src/components/ui/*"],
   parser: "@typescript-eslint/parser",

@@ -1,4 +1,4 @@
-import Layout from "@components/layout";
+import Layout from "@components/shared/layout";
 import Test from "@pages/test";
 import { createBrowserRouter } from "react-router-dom";
 
