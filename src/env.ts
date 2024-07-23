@@ -5,8 +5,8 @@ export const env = createEnv({
   clientPrefix: "VITE_",
  
   client: {
-    VITE_string: z.string().min(1),
-    VITE_number: z.coerce.number()
+    VITE_coingecko_url: z.string().min(1),
+    VITE_coingecko_key: z.string().min(1),
   },
   
   runtimeEnv: import.meta.env,
