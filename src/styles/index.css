@@ -87,7 +87,7 @@
       mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 75%, transparent 100%);
       mask-size: 100% 120%;
       mask-composite: intersect;
-      background-image: linear-gradient(to right, #4f4f4f2e 1px, transparent 1px), linear-gradient(to bottom, #4f4f4f2e 1px, transparent 1px);
+      background-image: linear-gradient(to right, hsl(var(--primary) / 0.18) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary) / 0.18) 1px, transparent 1px);
       background-size: 14px 24px;
       z-index: -10;
     }
