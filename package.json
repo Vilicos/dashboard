@@ -1,9 +1,9 @@
 {
-  "name": "griffin-web3-dashboard",
+  "name": "lazarus-web3-dashboard",
   "author": "Nijat Hamid <nicatorium@gmail.com>",
-  "description": "A production ready, batteries included starter template for Vite + React projects",
+  "description": "A production ready Web3 fullstack app",
   "keywords": [
-    "griffin",
+    "lazarus",
     "web3",
     "dashboard",
     "react",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nijat-Hamid/vite-react-boilerplate"
+    "url": "https://github.com/Nijat-Hamid/lazarus-fullstack-web3-app"
   },
   "private": true,
   "version": "1.0.0",
@@ -37,6 +37,7 @@
     "@tanstack/react-query-devtools": "^5.51.11",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.8",
     "lucide-react": "^0.412.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
