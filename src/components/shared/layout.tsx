@@ -6,7 +6,9 @@ import SettingsButton from "./settings-button";
 import AuthButtons from "./auth-button";
 import Footer from "./footer";
 import Navbar from "./navbar";
-import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
+import {AnimatePresence, LazyMotion, m } from "framer-motion";
+
+const loadFeatures = await import("@constants/dynamic-animations")
 
 function Layout() {
   const location = useLocation();
@@ -26,7 +28,7 @@ function Layout() {
       <Navbar />
       <main className="container pt-20 pb-3 min-h-[calc(100dvh_-_40px)]">
         <AnimatePresence>
-          <LazyMotion features={domAnimation}>
+          <LazyMotion features={loadFeatures.default}>
             <m.div key={location.pathname} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.7, ease: "backInOut" } }} exit={{ opacity: 0 }}>
               <Outlet />
             </m.div>
