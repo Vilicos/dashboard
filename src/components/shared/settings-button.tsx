@@ -3,11 +3,11 @@ import CustomTooltip from "@components/ui/custom-tooltip";
 import { Label } from "@components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@components/ui/popover";
 import { Switch } from "@components/ui/switch";
-import { useThemeStore } from "@context/use-theme";
-import { Moon, Palette, Rocket, Settings, Sun } from "lucide-react";
+import { ThemeStore } from "@store/theme";
+import {  Moon, Palette, Rocket,Settings,Sun} from "lucide-react";
 
 function SettingsButton() {
-  const { setTheme, theme, useViewTransition, setViewTransition } = useThemeStore();
+  const { setTheme, theme, useViewTransition, setViewTransition } = ThemeStore();
 
   return (
     <Popover>
@@ -29,7 +29,6 @@ function SettingsButton() {
                 </div>
                 <span className="text-sm font-medium">Appearance</span>
               </div>
-
               <div className="flex items-center gap-x-1">
                 {theme === "light" ? (
                   <>

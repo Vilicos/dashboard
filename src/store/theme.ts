@@ -1,7 +1,7 @@
 import type { Theme, ThemeState } from "@custom-types/component";
 import { create } from "zustand";
 
-export const useThemeStore = create<ThemeState>((set,get) => ({
+export const ThemeStore = create<ThemeState>((set,get) => ({
   theme: localStorage.getItem("theme") as Theme || "dark",
   useViewTransition:true,
   setTheme: (theme: Theme) => {

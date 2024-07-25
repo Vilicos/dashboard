@@ -15,7 +15,7 @@
       "@components/*": ["./src/components/*"],
       "@connection/*": ["./src/connection/*"],
       "@constants/*": ["./src/constants/*"],
-      "@context/*": ["./src/context/*"],
+      "@store/*": ["src/store/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],

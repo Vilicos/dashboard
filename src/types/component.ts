@@ -15,3 +15,15 @@ export type ITooltip = {
   position?: "top" | "right" | "bottom" | "left"
   delay?: number
 }
+
+export type ISeo = {
+  title:string
+}
+
+export enum WidgetDateOption {
+  '24h' = '24h',
+  '7d' = '7d',
+  '1m' = '1m',
+  '3m' = '3m',
+  'All' = 'All'
+}

@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.0.3",
+    "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
@@ -41,6 +42,7 @@
     "lucide-react": "^0.414.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.25.1",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
