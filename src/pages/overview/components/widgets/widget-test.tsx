@@ -3,8 +3,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { WidgetDateOption } from "@custom-types/component";
 import { useState } from "react";
 
+
 function WidgetTest() {
   const [date, setDate] = useState<WidgetDateOption>(WidgetDateOption["24h"]);
+
+  
+  const selectDate = (value: WidgetDateOption) => {
+    setDate(value);
+  };
   return (
     <div className="shrink-0 snap-start overflow-hidden p-2 basis-full md:basis-1/2 lg:basis-1/3 h-56 ">
       <div className="p-4 bg-card text-card-foreground rounded-md border shadow-sm w-full h-full">
@@ -16,7 +22,7 @@ function WidgetTest() {
             </Avatar>
             <span className="text-muted-foreground ml-1.5">Bitcoin</span>
           </div>
-          <Select value={date} onValueChange={(value) => setDate(value as WidgetDateOption)}>
+          <Select value={date} onValueChange={selectDate}>
             <SelectTrigger className="w-fit h-6 px-1.5 rounded-[10px] text-xs overflow-hidden ">
               <SelectValue placeholder="" />
             </SelectTrigger>
@@ -29,6 +35,7 @@ function WidgetTest() {
             </SelectContent>
           </Select>
         </div>
+       
         
       </div>
     </div>

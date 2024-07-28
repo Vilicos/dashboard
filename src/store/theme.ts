@@ -1,9 +1,10 @@
 import type { Theme, ThemeState } from "@custom-types/component";
+import { getBooleanFromLocalStorage } from "@helpers/intex";
 import { create } from "zustand";
 
 export const ThemeStore = create<ThemeState>((set,get) => ({
   theme: localStorage.getItem("theme") as Theme || "dark",
-  useViewTransition:true,
+  useViewTransition: getBooleanFromLocalStorage('viewTransition',true),
   setTheme: (theme: Theme) => {
     const {useViewTransition} = get()
     if (localStorage.getItem("theme") === theme) return;

@@ -1,6 +1,6 @@
 import Github from "@assets/icons/github";
 import Logo from "@assets/icons/logo";
-import { navList } from "@constants/nav-list";
+import { navList } from "@constants/element-data";
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
