@@ -4,11 +4,10 @@ import { Label } from "@components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@components/ui/popover";
 import { Switch } from "@components/ui/switch";
 import { ThemeStore } from "@store/theme";
-import {  Moon, Palette, Rocket,Settings,Sun} from "lucide-react";
+import { Moon, Palette, Rocket, Settings, Sun } from "lucide-react";
 
 function SettingsButton() {
-  const { setTheme, theme, useViewTransition, setViewTransition } = ThemeStore();
-
+  const { setTheme, theme, useViewTransition, setViewTransition, isAviableTransition } = ThemeStore();
   return (
     <Popover>
       <CustomTooltip content="Settings" position="bottom">
@@ -18,15 +17,18 @@ function SettingsButton() {
           </Button>
         </PopoverTrigger>
       </CustomTooltip>
-      <PopoverContent sideOffset={5} className="w-60">
+      <PopoverContent sideOffset={5} className="w-60 px-3">
         <p className="font-medium leading-none text-base pb-3 px-2">Settings</p>
-        <div className="flex flex-col gap-y-2">
-          <Button asChild className="hover:cursor-pointer bg-transparent px-2 py-1 h-8" variant="ghost" onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}>
+        <div className="flex flex-col gap-y-2 ">
+          <Button
+            asChild
+            className="hover:cursor-pointer bg-transparent px-2 py-1 h-8 select-none"
+            variant="ghost"
+            onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}
+          >
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-1">
-                <div>
-                  <Palette size={16} strokeWidth={2.3} />
-                </div>
+                <Palette size={16} strokeWidth={2.3} className="shrink-0" />
                 <span className="text-sm font-medium">Appearance</span>
               </div>
               <div className="flex items-center gap-x-1">
@@ -44,16 +46,20 @@ function SettingsButton() {
               </div>
             </div>
           </Button>
-          <Label htmlFor="viewTransitionState" className="hover:cursor-pointer px-2 hover:bg-accent hover:text-accent-foreground group h-8 rounded-md py-1 transition-colors">
+          <Label
+            htmlFor="viewTransitionState"
+            className={`${
+              isAviableTransition ? "hover:cursor-pointer hover:bg-accent hover:text-accent-foreground" : "hover:cursor-not-allowed text-gray-500"
+            } px-2  group h-8 rounded-md py-1 transition-colors select-none overflow-hidden`}
+          >
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-1">
-                <div>
-                  <Rocket size={16} strokeWidth={2.3} />
-                </div>
+                <Rocket size={16} strokeWidth={2.3} className="shrink-0" />
                 <span className="text-sm font-medium">ViewTransition</span>
               </div>
               <Switch
-                checked={useViewTransition}
+                disabled={!isAviableTransition}
+                checked={isAviableTransition ? useViewTransition : false}
                 onCheckedChange={() => setViewTransition(!useViewTransition)}
                 id="viewTransitionState"
                 thumbClassName="data-[state=checked]:translate-x-4 
@@ -67,6 +73,7 @@ function SettingsButton() {
               />
             </div>
           </Label>
+          {!isAviableTransition && <small className="text-[10px] text-muted-foreground px-2">Browser doesn&apos;t support viewTransition</small>}
         </div>
       </PopoverContent>
     </Popover>

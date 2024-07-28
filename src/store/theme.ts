@@ -1,16 +1,20 @@
 import type { Theme, ThemeState } from "@custom-types/component";
-import { getBooleanFromLocalStorage } from "@helpers/intex";
+import { getBooleanFromLocalStorage } from "@helpers/index";
 import { create } from "zustand";
 
 export const ThemeStore = create<ThemeState>((set,get) => ({
   theme: localStorage.getItem("theme") as Theme || "dark",
   useViewTransition: getBooleanFromLocalStorage('viewTransition',true),
+  isAviableTransition:'startViewTransition' in document ? true : false,
   setTheme: (theme: Theme) => {
-    const {useViewTransition} = get()
+    const {useViewTransition,isAviableTransition} = get()
     if (localStorage.getItem("theme") === theme) return;
     localStorage.setItem("theme", theme);
-    if (!document.startViewTransition || !useViewTransition) return set({ theme });
+    if (!isAviableTransition || !useViewTransition) return set({ theme });
     document.startViewTransition(() => set({ theme }));
   },
-  setViewTransition:(value:boolean) => set({useViewTransition:value})
+  setViewTransition:(value:boolean) => {
+    localStorage.setItem('viewTransition',String(value))
+    set({useViewTransition:value})
+  }
 }));

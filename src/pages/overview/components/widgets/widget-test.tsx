@@ -2,12 +2,26 @@ import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/ui/select";
 import { WidgetDateOption } from "@custom-types/component";
 import { useState } from "react";
-
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+const chartData = [
+  { month: "January", desktop: 186 },
+  { month: "February", desktop: 305 },
+  { month: "March", desktop: 237 },
+  { month: "April", desktop: 73 },
+  { month: "May", desktop: 209 },
+  { month: "June", desktop: 214 },
+];
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
 
 function WidgetTest() {
   const [date, setDate] = useState<WidgetDateOption>(WidgetDateOption["24h"]);
 
-  
   const selectDate = (value: WidgetDateOption) => {
     setDate(value);
   };
@@ -35,8 +49,23 @@ function WidgetTest() {
             </SelectContent>
           </Select>
         </div>
-       
-        
+        <ChartContainer config={chartConfig} className="min-h-full w-full">
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              top: 12,
+              bottom:70,
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} horizontal={false} />
+            <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={4} tickFormatter={(value) => value.slice(0, 3)} />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+            <Area dataKey="desktop" type="natural" fill="var(--color-desktop)" fillOpacity={0.2} stroke="var(--color-desktop)" />
+          </AreaChart>
+        </ChartContainer>
       </div>
     </div>
   );

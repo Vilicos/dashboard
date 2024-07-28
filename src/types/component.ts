@@ -6,7 +6,8 @@ export type ThemeState = {
   theme: Theme;
   useViewTransition:boolean;
   setTheme: (theme: Theme) => void;
-  setViewTransition:(value:boolean)=> void
+  setViewTransition:(value:boolean)=> void;
+  isAviableTransition:boolean
 }
 
 export type ITooltip = {
