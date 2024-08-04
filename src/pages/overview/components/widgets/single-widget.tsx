@@ -19,14 +19,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function WidgetTest() {
+function SingleWidget() {
   const [date, setDate] = useState<WidgetDateOption>(WidgetDateOption["24h"]);
 
   const selectDate = (value: WidgetDateOption) => {
     setDate(value);
   };
   return (
-    <div className="shrink-0 snap-start overflow-hidden basis-full md:basis-[calc((100%_/_2)_-_8px)] lg:basis-[calc((100%_/_3)_-_8px)] h-56 ">
+    <div className="shrink-0 snap-start overflow-hidden basis-full md:basis-[calc((100%_/_2)_-_8px)] lg:basis-[calc((100%_/_3)_-_8px)] h-56">
       <div className="p-4 bg-card text-card-foreground rounded-md border shadow-sm w-full h-full">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -71,4 +71,4 @@ function WidgetTest() {
   );
 }
 
-export default WidgetTest;
+export default SingleWidget;

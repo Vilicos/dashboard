@@ -20,7 +20,7 @@ import { CoinListWithMarketMock } from "@constants/mock-data";
 import { useState } from "react";
 import { columns } from "./columns";
 
-export function DataTableDemo() {
+export function CoinTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

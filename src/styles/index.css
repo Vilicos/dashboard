@@ -69,7 +69,7 @@
     @apply border-border;
   }
   html {
-    @apply !scroll-smooth scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent;
+    @apply !scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent;
   }
   body {
     @apply min-h-dvh w-screen selection:bg-secondary bg-background text-foreground;

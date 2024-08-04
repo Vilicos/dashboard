@@ -15,7 +15,7 @@ function SearchBar() {
       <Label htmlFor="searchInput" className="hidden" />
       <Input
         id="searchInput"
-        className="w-full h-9 pl-8 pr-8 text-sm text-gray-600 dark:text-gray-200 bg-background placeholder:text-sm placeholder:text-gray-500 placeholder:dark:text-gray-400 focus-visible:transition peer placeholder:font-medium font-medium"
+        className="w-full  pl-8 pr-8 text-sm text-gray-600 dark:text-gray-200 bg-background placeholder:text-sm placeholder:text-gray-500 placeholder:dark:text-gray-400 focus-visible:transition peer placeholder:font-medium font-medium"
         autoComplete="off"
         type="text"
         placeholder="Search..."
