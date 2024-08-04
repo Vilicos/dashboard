@@ -116,5 +116,6 @@ module.exports = {
     "unicorn/no-array-reduce": "off",
     "unicorn/no-console-spaces": "error",
     "unicorn/no-null": "off",
+    "unicorn/numeric-separators-style":"off"
   },
 };

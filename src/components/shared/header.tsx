@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 function Header({ children }: { children: ReactNode }) {
   return (
-    <header className="fixed container inset-0 z-10 bg-card/80 w-full h-16 border-b shadow-sm backdrop-blur-sm flex items-center justify-between rounded-md">
-      {children}
+    <header className="fixed container inset-0 z-10 w-full h-16">
+      <div className="flex items-center justify-between bg-card w-full h-[inherit] shadow-md border-b backdrop-blur-sm rounded-md p-3">{children}</div>
     </header>
   );
 }

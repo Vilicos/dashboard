@@ -17,7 +17,7 @@ export type ITooltip = {
   delay?: number
 }
 
-export type ISeo = {
+export type ITitle = {
   title:string
 }
 
@@ -27,4 +27,12 @@ export enum WidgetDateOption {
   '1m' = '1m',
   '3m' = '3m',
   'All' = 'All'
+}
+
+export type INumberReducer = {
+  value:number | null | undefined 
+  style?:"decimal" | "percent" | "currency"
+  min?:number 
+  max?:number
+  notation?:"compact" | "standard"
 }

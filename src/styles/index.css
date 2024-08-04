@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: 334 62% 100%;
+    --background: 0 0% 98%;
     --foreground: 334 55% 1%;
     --muted: 334 35% 95%;
     --muted-foreground: 334 9% 37%;
     --popover: 334 62% 100%;
     --popover-foreground: 334 55% 1%;
-    --card: 334 62% 100%;
+    --card: 0 0% 100%;
     --card-foreground: 334 55% 1%;
     --border: 334 5% 95%;
     --input: 334 5% 95%;
@@ -87,8 +87,8 @@
       mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 75%, transparent 100%);
       mask-size: 100% 120%;
       mask-composite: intersect;
-      background-image: linear-gradient(to right, hsl(var(--primary) / 0.18) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary) / 0.18) 1px, transparent 1px);
-      background-size: 14px 24px;
+      background-image: linear-gradient(to right, #4f4f4f14 1px, transparent 1px), linear-gradient(to bottom, #4f4f4f14 1px, transparent 1px);
+      background-size: 14px 14px;
       z-index: -10;
     }
   }

@@ -1,7 +1,7 @@
-import type { ISeo } from "@custom-types/component"
+import type { ITitle } from "@custom-types/component"
 import { Helmet } from "react-helmet-async"
 
-function Seo({title}:ISeo) {
+function Title({title}:ITitle) {
   return (
     <Helmet>
       <title>{title}</title>
@@ -9,4 +9,4 @@ function Seo({title}:ISeo) {
   )
 }
 
-export default Seo
+export default Title

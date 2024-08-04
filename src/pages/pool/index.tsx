@@ -1,10 +1,8 @@
-import Seo from "@components/shared/seo"
-
-
+import Title from "@components/shared/title"
 function Pool() {
   return (
    <>
-    <Seo title="Pool"/>
+    <Title title="Pool"/>
     <div>Pool</div>
    </>
   )

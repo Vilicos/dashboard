@@ -26,7 +26,7 @@ function WidgetTest() {
     setDate(value);
   };
   return (
-    <div className="shrink-0 snap-start overflow-hidden p-2 basis-full md:basis-1/2 lg:basis-1/3 h-56 ">
+    <div className="shrink-0 snap-start overflow-hidden basis-full md:basis-[calc((100%_/_2)_-_8px)] lg:basis-[calc((100%_/_3)_-_8px)] h-56 ">
       <div className="p-4 bg-card text-card-foreground rounded-md border shadow-sm w-full h-full">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -54,8 +54,8 @@ function WidgetTest() {
             accessibilityLayer
             data={chartData}
             margin={{
-              top: 12,
-              bottom:70,
+              top: 30,
+              bottom:60,
               left: 12,
               right: 12,
             }}

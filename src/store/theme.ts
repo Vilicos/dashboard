@@ -1,5 +1,5 @@
 import type { Theme, ThemeState } from "@custom-types/component";
-import { getBooleanFromLocalStorage } from "@helpers/index";
+import getBooleanFromLocalStorage  from "@helpers/boolean-from-storage";
 import { create } from "zustand";
 
 export const ThemeStore = create<ThemeState>((set,get) => ({

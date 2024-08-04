@@ -1,10 +1,10 @@
-import Seo from "@components/shared/seo"
+import Title from "@components/shared/title"
 import { Link } from "react-router-dom"
 
 export default function NotFound() {
   return (
     <>
-    <Seo title="Not Found"/>
+    <Title title="Not Found"/>
     <section className="rounded-md w-fit container py-12 border bg-background/50">
       <div className="mx-auto max-w-md text-center">
         <h1 className="mt-4 text-3xl font-bold  text-foreground sm:text-4xl">Oops, page not found!</h1>
