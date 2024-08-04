@@ -6,12 +6,11 @@ import SettingsButton from "./settings-button";
 import AuthButtons from "./auth-button";
 import Footer from "./footer";
 import Navbar from "./navbar";
-import {AnimatePresence, LazyMotion, m } from "framer-motion";
-const loadFeatures = await import("@constants/animations")
+import { AnimatePresence, LazyMotion, m } from "framer-motion";
+const loadFeatures = await import("@constants/animations");
 
 function Layout() {
   const location = useLocation();
-  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
@@ -26,7 +25,7 @@ function Layout() {
         </div>
       </Header>
       <Navbar />
-      <main className="pt-24 pb-3 min-h-[calc(100dvh_-_40px)] container">
+      <main className="pt-20 pb-2 min-h-[calc(100dvh_-_40px)] container">
         <AnimatePresence>
           <LazyMotion features={loadFeatures.default}>
             <m.div key={location.pathname} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.7, ease: "backInOut" } }} exit={{ opacity: 0 }}>

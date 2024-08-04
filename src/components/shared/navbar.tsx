@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="fixed left-0 top-0 bottom-0 z-30 bg-card border-r shadow-md backdrop-blur-sm h-full w-[72px] hover:w-52 py-3 flex flex-col gap-y-4 transition-width overflow-hidden group rounded-md">
+    <nav className="fixed left-0 top-0 bottom-0 z-30 bg-card border-r shadow-md backdrop-blur-sm h-full w-[72px] hover:w-52 py-3 flex flex-col gap-y-4 transition-width overflow-hidden group rounded-r-md">
       <Link to="/" className="flex items-center gap-x-2 font-bold text-primary px-2">
         <Logo className="size-14 shrink-0" />
         <p className="text-2xl group-hover:opacity-100 group-hover:visible opacity-0 invisible transition">Lazarus⍛</p>
