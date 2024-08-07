@@ -3,7 +3,8 @@ import ErrorRoute from "@components/errors/error-route";
 import NotFound from "@components/errors/not-found";
 import Layout from "@components/shared/layout";
 import Overview from "@pages/overview";
-import Pool from "@pages/pool";
+import Protocols from "@pages/protocols";
+import Pools from "@pages/pools";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -16,8 +17,13 @@ export const routes = createBrowserRouter([
         errorElement: <ErrorRoute />,
       },
       {
-        path: "pool",
-        element: <Pool />,
+        path: "protocols",
+        element: <Protocols/>,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "pools",
+        element: <Pools/>,
         errorElement: <ErrorRoute />,
       },
       {

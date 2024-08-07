@@ -1,3 +1,4 @@
+import type { ColumnDef } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
 export type Theme = 'dark' | 'light';
@@ -36,3 +37,8 @@ export type INumberReducer = {
   max?:number
   notation?:"compact" | "standard"
 }
+
+export type DataTableProps<T> = {
+  data: Array<T>;
+  columns: Array<ColumnDef<T>>
+};
