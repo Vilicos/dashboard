@@ -6,6 +6,7 @@ import Overview from "@pages/overview";
 import Protocols from "@pages/protocols";
 import Pools from "@pages/pools";
 import Governance from "@pages/governance";
+import CoinDetails from "@pages/coin-details";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,11 @@ export const routes = createBrowserRouter([
       {
         path: "governance",
         element: <Governance/>,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "coin-details",
+        element: <CoinDetails/>,
         errorElement: <ErrorRoute />,
       },
       {

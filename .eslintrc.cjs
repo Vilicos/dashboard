@@ -14,7 +14,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "vite.config.ts", "postcss.config.js", "tailwind.config.js","src/components/ui/*"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "vite.config.ts", "postcss.config.js", "tailwind.config.js", "src/components/ui/*"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -26,7 +26,7 @@ module.exports = {
     project: "./tsconfig.app.json",
     tsconfigRootDir: __dirname,
   },
-  plugins: ["react", "react-hooks", "unused-imports", "react-refresh","unicorn"],
+  plugins: ["react", "react-hooks", "unused-imports", "react-refresh", "unicorn"],
   rules: {
     "no-await-in-loop": "error",
     "no-constant-binary-expression": "error",
@@ -51,6 +51,8 @@ module.exports = {
     "@typescript-eslint/no-useless-empty-export": "error",
     "@typescript-eslint/prefer-enum-initializers": "error",
     "@typescript-eslint/prefer-readonly": "error",
+    "no-loss-of-precision": "off",
+    "@typescript-eslint/no-loss-of-precision": "error",
     "no-return-await": "off",
     "no-unused-vars": "warn",
     "unused-imports/no-unused-imports": "warn",
@@ -116,6 +118,6 @@ module.exports = {
     "unicorn/no-array-reduce": "off",
     "unicorn/no-console-spaces": "error",
     "unicorn/no-null": "off",
-    "unicorn/numeric-separators-style":"off"
+    "unicorn/numeric-separators-style": "off",
   },
 };
