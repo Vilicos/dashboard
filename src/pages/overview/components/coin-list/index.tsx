@@ -4,7 +4,7 @@ import { CoinListWithMarketMock } from "@constants/mock-data"
 
 function CoinTable() {
   return (
-    <DataTable columns={columns} data={CoinListWithMarketMock}/>
+    <DataTable columns={columns} data={CoinListWithMarketMock} searchProperty="name"/>
   )
 }
 

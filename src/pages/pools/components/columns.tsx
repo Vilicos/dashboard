@@ -2,13 +2,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Button } from "@components/ui/button";
 import { Checkbox } from "@components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@components/ui/dropdown-menu";
-import type { ICoinListWithMarket } from "@custom-types/api";
-import NumberDecider from "@helpers/number-decider";
+import type { IPoolData } from "@custom-types/api";
 import NumberReducer from "@helpers/number-reducer";
 import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
+export const columns: Array<ColumnDef<IPoolData>> = [
   {
     id: "select",
     header: ({ table }) => (
@@ -24,120 +24,105 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
+    accessorKey: "symbol",
     header: "Name",
-    cell: ({ row }) => (
-      <div className="capitalize flex items-center gap-x-2 max-w-32 ">
-        <Avatar className="size-5 rounded-full overflow-hidden shrink-0">
-          <AvatarImage src={row.original.image} alt="Bitcoin" />
-          <AvatarFallback className="border bg-primary/10"></AvatarFallback>
-        </Avatar>
-        <span className="truncate">{row.getValue("name")}</span>
-      </div>
-    ),
+    cell: ({ row }) => <p className="capitalize truncate max-w-16">{row.getValue("symbol")}</p>,
     enableHiding: false,
   },
   {
-    accessorKey: "current_price",
-    header: ({ column }) => {
+    accessorKey: "project",
+    header: "Project",
+    cell: ({ row}) => {
+      
       return (
-        <Button variant="ghost" className="" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Price
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <>
+          <div className="capitalize flex items-center gap-x-2 max-w-32 ">
+            <Avatar className="size-6 rounded-full overflow-hidden shrink-0">
+              <AvatarImage src='' alt="Bitcoin" />
+              <AvatarFallback className="border bg-primary/10"></AvatarFallback>
+            </Avatar>
+            <Link to="/" className="capitalize text-blue-500">
+              {String(row.getValue("project"))}
+            </Link>
+          </div>
+        </>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-3.5">{NumberReducer({ value: row.getValue("current_price") })}</div>,
     enableHiding: false,
+    enableSorting: false,
   },
   {
-    accessorKey: "price_change_percentage_24h",
-    meta: "Price Change",
+    accessorKey: "tvlUsd",
+    meta: "Total TVL",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Change
+          TVL
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <div className={`uppercase px-4 ${NumberDecider(row.getValue("price_change_percentage_24h"))}`}>
-        {NumberReducer({ value: row.getValue("price_change_percentage_24h"), style: "percent" })}
-      </div>
-    ),
+    cell: ({ row }) => <div className={`uppercase px-4`}>{NumberReducer({ value: row.getValue("tvlUsd"), max: 2 })}</div>,
   },
   {
-    accessorKey: "market_cap",
-    meta: "Market Cap",
+    accessorKey: "apy",
+    meta: "Apy",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Market Cap
+          Apy
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("market_cap") })}</div>,
+    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("apy"), max: 2, style: "percent" })}</div>,
   },
   {
-    accessorKey: "market_cap_change_percentage_24h",
-    meta: "Market Change",
+    accessorKey: "apyMean30d",
+    meta: "Average APY",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Change
+          Average APY
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <div className={`uppercase px-4 ${NumberDecider(row.getValue("market_cap_change_percentage_24h"))}`}>
-        {NumberReducer({ value: row.getValue("market_cap_change_percentage_24h"), style: "percent" })}
-      </div>
-    ),
+    cell: ({ row }) => <div className={`uppercase px-4`}>{NumberReducer({ value: row.getValue("apyMean30d"), style: "percent", max: 2 })}</div>,
   },
   {
-    accessorKey: "total_supply",
-    meta: "Total Supply",
+    accessorKey: "apyBase",
+    meta: "Apy Base",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Total Supply
+          Apy Base
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("total_supply") })}</div>,
+    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("apyBase"), style: "percent", max: 2 })}</div>,
   },
   {
-    accessorKey: "circulating_supply",
-    meta: "circulating",
+    accessorKey: "volumeUsd1d",
+    meta: "Volume USD",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Circulating
+          Volume
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("circulating_supply") })}</div>,
+    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("volumeUsd1d") })}</div>,
   },
 
   {
-    accessorKey: "total_volume",
-    meta: "Total Volume",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Total Volume
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("total_volume") })}</div>,
+    accessorKey: "stablecoin",
+    meta: "Stablecoin",
+    header: "Stablecoin",
+    cell: ({ row }) => <div className="capitalize px-1.5">{String(row.getValue("stablecoin"))}</div>,
   },
-
   {
     id: "actions",
     enableHiding: false,
@@ -153,7 +138,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="min-w-0 overflow-hidden">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem className="cursor-pointer" onClick={() => navigator.clipboard.writeText(allData.id)}>
+            <DropdownMenuItem className="cursor-pointer" onClick={() => navigator.clipboard.writeText(allData.symbol)}>
               Copy ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />

@@ -1,4 +1,4 @@
-import {Component, House, Waypoints } from "lucide-react";
+import {Component, FileText, House, Waypoints } from "lucide-react";
 
 export const navList = [
     {
@@ -18,5 +18,11 @@ export const navList = [
         name:"Pools",
         path:'pools',
         icon:<Component className="size-5 shrink-0 block"/>
+    },
+    {
+        id:3,
+        name:"Governance",
+        path:'governance',
+        icon:<FileText className="size-5 shrink-0 block"/>
     },
 ] as const

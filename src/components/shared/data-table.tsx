@@ -17,9 +17,9 @@ import {
   import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
   
   import { useState } from "react";
-import type { DataTableProps } from "@custom-types/component";
+  import type { DataTableProps } from "@custom-types/component";
  
- function DataTable<T>({ data, columns}: DataTableProps<T>) {
+ function DataTable<T>({ data, columns,searchProperty}: DataTableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -49,8 +49,8 @@ import type { DataTableProps } from "@custom-types/component";
         <div className="flex items-center py-4">
           <Input
             placeholder="Search by Name ... "
-            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-            onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
+            value={(table.getColumn(searchProperty)?.getFilterValue() as string) ?? ""}
+            onChange={(event) => table.getColumn(searchProperty)?.setFilterValue(event.target.value)}
             className="max-w-56"
           />
           <div className="ml-auto space-x-4">

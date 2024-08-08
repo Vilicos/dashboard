@@ -1,5 +1,6 @@
 import Github from "@assets/icons/github";
 import Logo from "@assets/icons/logo";
+import { Separator } from "@components/ui/separator";
 import { navList } from "@constants/element-data";
 import { Link, NavLink } from "react-router-dom";
 
@@ -10,7 +11,6 @@ function Navbar() {
         <Logo className="size-14 shrink-0" />
         <p className="text-2xl group-hover:opacity-100 group-hover:visible opacity-0 invisible transition">Lazarus⍛</p>
       </Link>
-
       <ul className="px-4">
         {navList.map((item) => (
           <li key={item.id}>
@@ -28,16 +28,17 @@ function Navbar() {
           </li>
         ))}
       </ul>
-      <div className="px-4 mt-auto">
+      <Separator className="dark:bg-gray-700 bg-gray-300"/>
+      <div className="px-4">
         <Link
           to="https://github.com/Nijat-Hamid/lazarus-fullstack-web3-app"
           target="_blank"
           rel="noreferrer"
           className="bg-black/90 dark:bg-white/20 text-white/90 hover:bg-black/70 dark:hover:bg-white/40
-               py-2 pl-[9px] pr-2 w-full flex items-center gap-x-2 rounded-md overflow-hidden my-2 transition"
+               py-2 pl-[9px] pr-2 w-full flex items-center gap-x-2 rounded-md overflow-hidden transition"
         >
           <Github className="size-5 shrink-0 block" />
-          <span className="text-left text-sm font-medium truncate hidden group-hover:block grow">Repository</span>
+          <span className="text-left text-sm font-medium truncate hidden group-hover:block grow">Source Code</span>
         </Link>
       </div>
     </nav>

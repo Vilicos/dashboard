@@ -40,5 +40,6 @@ export type INumberReducer = {
 
 export type DataTableProps<T> = {
   data: Array<T>;
-  columns: Array<ColumnDef<T>>
+  columns: Array<ColumnDef<T>>;
+  searchProperty:string;
 };

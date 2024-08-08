@@ -5,6 +5,7 @@ import Layout from "@components/shared/layout";
 import Overview from "@pages/overview";
 import Protocols from "@pages/protocols";
 import Pools from "@pages/pools";
+import Governance from "@pages/governance";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,11 @@ export const routes = createBrowserRouter([
       {
         path: "pools",
         element: <Pools/>,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "governance",
+        element: <Governance/>,
         errorElement: <ErrorRoute />,
       },
       {

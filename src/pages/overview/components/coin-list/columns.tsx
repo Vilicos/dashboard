@@ -50,7 +50,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-3.5">{NumberReducer({ value: row.getValue("current_price") })}</div>,
+    cell: ({ row }) => <span className="uppercase px-3.5">{NumberReducer({ value: row.getValue("current_price"),max:2})}</span>,
     enableHiding: false,
   },
   {
@@ -64,7 +64,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className={`uppercase px-4 ${NumberDecider(row.getValue("price_change_percentage_24h"))}`}>{NumberReducer({ value: row.getValue("price_change_percentage_24h"), style: "percent" })}</div>,
+    cell: ({ row }) => <span className={`uppercase px-4 ${NumberDecider(row.getValue("price_change_percentage_24h"))}`}>{NumberReducer({ value: row.getValue("price_change_percentage_24h"), style: "percent" })}</span>,
   },
   {
     accessorKey: "market_cap",
@@ -77,7 +77,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("market_cap") })}</div>,
+    cell: ({ row }) => <span className="uppercase px-4">{NumberReducer({ value: row.getValue("market_cap") })}</span>,
   },
   {
     accessorKey: "market_cap_change_percentage_24h",
@@ -90,7 +90,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className={`uppercase px-4 ${NumberDecider(row.getValue("market_cap_change_percentage_24h"))}`}>{NumberReducer({ value: row.getValue("market_cap_change_percentage_24h"), style: "percent" })}</div>,
+    cell: ({ row }) => <span className={`uppercase px-4 ${NumberDecider(row.getValue("market_cap_change_percentage_24h"))}`}>{NumberReducer({ value: row.getValue("market_cap_change_percentage_24h"), style: "percent" })}</span>,
   },
   {
     accessorKey: "total_supply",
@@ -103,7 +103,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("total_supply") })}</div>,
+    cell: ({ row }) => <span className="uppercase px-4">{NumberReducer({ value: row.getValue("total_supply") })}</span>,
   },
   {
     accessorKey: "circulating_supply",
@@ -116,7 +116,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("circulating_supply") })}</div>,
+    cell: ({ row }) => <span className="uppercase px-4">{NumberReducer({ value: row.getValue("circulating_supply") })}</span>,
   },
 
   {
@@ -130,7 +130,7 @@ export const columns: Array<ColumnDef<ICoinListWithMarket>> = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="uppercase px-4">{NumberReducer({ value: row.getValue("total_volume") })}</div>,
+    cell: ({ row }) => <span className="uppercase px-4">{NumberReducer({ value: row.getValue("total_volume") })}</span>,
   },
 
   {
