@@ -1,6 +1,8 @@
+import InfoCard from "../components/info-card"
+
 function CoinDetails() {
   return (
-    <div>CoinDetails</div>
+    <InfoCard/>
   )
 }
 

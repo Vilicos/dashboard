@@ -2,6 +2,7 @@ import Github from "@assets/icons/github";
 import Logo from "@assets/icons/logo";
 import { Separator } from "@components/ui/separator";
 import { navList } from "@constants/element-data";
+import { Linkedin } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -39,6 +40,18 @@ function Navbar() {
         >
           <Github className="size-5 shrink-0 block" />
           <span className="text-left text-sm font-medium truncate hidden group-hover:block grow">Source Code</span>
+        </Link>
+      </div>
+      <div className="px-4">
+        <Link
+          to="https://www.linkedin.com/in/nijat-hamid/"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-sky-700 dark:bg-sky-800 text-white/90 hover:bg-sky-600 dark:hover:bg-sky-900
+               py-2 pl-[9px] pr-2 w-full flex items-center gap-x-2 rounded-md overflow-hidden transition"
+        >
+          <Linkedin className="size-5 shrink-0 block" />
+          <span className="text-left text-sm font-medium truncate hidden group-hover:block grow">Linkedin</span>
         </Link>
       </div>
     </nav>

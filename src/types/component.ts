@@ -15,7 +15,8 @@ export type ITooltip = {
   content:string;
   children:ReactNode;
   position?: "top" | "right" | "bottom" | "left"
-  delay?: number
+  delay?: number;
+  contentClass?:string
 }
 
 export type ITitle = {
