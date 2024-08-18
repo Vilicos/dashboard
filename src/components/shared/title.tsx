@@ -1,10 +1,9 @@
-import type { ITitle } from "@custom-types/component"
 import { Helmet } from "react-helmet-async"
 
-function Title({title}:ITitle) {
+function Title({content}:{content:string}) {
   return (
     <Helmet>
-      <title>{title}</title>
+      <title>{content}</title>
     </Helmet>
   )
 }

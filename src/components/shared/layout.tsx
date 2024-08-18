@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./header";
-import SearchBar from "./search-bar";
-import SettingsButton from "./settings-button";
-import AuthButtons from "./auth-button";
-import Footer from "./footer";
 import Navbar from "./navbar";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
+import OrganizationCard from "./organization-card";
+import LogoWrapper from "./logo-wrapper";
 const loadFeatures = await import("@constants/animations");
 
 function Layout() {
@@ -18,14 +16,11 @@ function Layout() {
   return (
     <>
       <Header>
-        <SearchBar />
-        <div className="flex items-center gap-x-3">
-          <SettingsButton />
-          <AuthButtons />
-        </div>
+        <LogoWrapper />
+        <OrganizationCard />
+        <Navbar/>
       </Header>
-      <Navbar />
-      <main className="pt-20 pb-2 min-h-[calc(100dvh_-_40px)] container">
+      <main className="">
         <AnimatePresence>
           <LazyMotion features={loadFeatures.default}>
             <m.div key={location.pathname} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.7, ease: "backInOut" } }} exit={{ opacity: 0 }}>
@@ -34,7 +29,6 @@ function Layout() {
           </LazyMotion>
         </AnimatePresence>
       </main>
-      <Footer />
     </>
   );
 }

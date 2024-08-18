@@ -55,8 +55,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "inner-input":"hsl(var(--inner-input))",
-        "brand-gray":"hsl(var(--brand-gray))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -96,21 +94,7 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
-        slide: "slide var(--speed) ease-in-out infinite alternate",
       },
-      transitionProperty:{
-        'width': 'width'
-      },
-      backgroundImage:{
-        'moon-dark':"url('/svg/moon-dark.svg')",
-        'moon-light':"url('/svg/moon-light.svg')",
-        'sun-light':"url('/svg/sun-light.svg')",
-        'sun-dark':"url('/svg/sun-dark.svg')",
-        'eye-dark':"url('/svg/eye-dark.svg')",
-        'eye-light':"url('/svg/eye-light.svg')",
-        'eye-off-dark':"url('/svg/eye-off-dark.svg')",
-        'eye-off-light':"url('/svg/eye-off-light.svg')",
-      }
     },
   },
   plugins: [require("tailwindcss-animate"),require('tailwind-scrollbar')],

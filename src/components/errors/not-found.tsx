@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export default function NotFound() {
   return (
     <>
-    <Title title="Not Found"/>
+    <Title content="Not Found"/>
     <section className="rounded-md w-fit container py-12 border bg-background/50">
       <div className="mx-auto max-w-md text-center">
         <h1 className="mt-4 text-3xl font-bold  text-foreground sm:text-4xl">Oops, page not found!</h1>
