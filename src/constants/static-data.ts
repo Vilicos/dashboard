@@ -9,17 +9,17 @@ export const navList = [
       {
         id: 1,
         name: "Discord",
-        path: "dashboard/helpdesk/discord",
+        path: "helpdesk/discord",
       },
       {
         id: 2,
         name: "Telegram",
-        path: "dashboard/helpdesk/telegram",
+        path: "helpdesk/telegram",
       },
       {
         id: 3,
         name: "Web chat",
-        path: "dashboard/helpdesk/webchat",
+        path: "helpdesk/webchat",
       },
     ],
   },
@@ -27,7 +27,7 @@ export const navList = [
     id: 4,
     name: "Knowledge",
     img: "/svg/nav/knowledge.svg",
-    path: "dashboard/knowledge",
+    path: "knowledge",
     parent: false,
     children: [],
   },
@@ -35,7 +35,7 @@ export const navList = [
     id: 5,
     name: "Insights",
     img: "/svg/nav/insight.svg",
-    path: "dashboard/insight",
+    path: "insight",
     parent: false,
     children: [],
   },
@@ -48,19 +48,51 @@ export const navList = [
     children: [
       {
         id: 7,
-        name: "Bots",
-        path: "dashboard/settings/bots",
+        name: "General",
+        path: "settings/general",
       },
       {
         id: 8,
-        name: "Team",
-        path: "dashboard/settings/team",
+        name: "Bots",
+        path: "settings/bots",
       },
       {
         id: 9,
+        name: "Team",
+        path: "settings/team",
+      },
+      {
+        id: 10,
         name: "Billing",
-        path: "dashboard/settings/billing",
+        path: "settings/billing",
       },
     ],
+  },
+];
+
+export const botList = [
+  {
+    id: 0,
+    name: "Discord Bot",
+    slug: "discord",
+    img: "/img/discord.png",
+    active: true,
+    enable:true,
+  },
+  {
+    id: 1,
+    name: "Telegram Bot",
+    slug: "telegram",
+    img: "/img/telegram.png",
+    active: false,
+    enable:true,
+  },
+  {
+    id: 2,
+    name: "Web Chatbot",
+    slug: "webchat",
+    img: "/img/webchat.png",
+    active: false,
+    enable:false,
   },
 ];

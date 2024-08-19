@@ -13,7 +13,7 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1440px",
+        "2xl": "1280px",
       },
     },
     extend: {
@@ -22,6 +22,10 @@ module.exports = {
         "ml":"867px"
       },
       colors: {
+        "brand-fifth": "hsl(var(--brand-fifth))",
+        "brand-third": "hsl(var(--brand-third))",
+        "brand-secondary": "hsl(var(--brand-secondary))",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

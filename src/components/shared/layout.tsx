@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Header from "./header";
 import Navbar from "./navbar";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
@@ -9,18 +8,14 @@ const loadFeatures = await import("@constants/animations");
 
 function Layout() {
   const location = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location]);
-
   return (
-    <>
+    <div className="grid grid-cols-[220px_1fr]">
       <Header>
         <LogoWrapper />
         <OrganizationCard />
-        <Navbar/>
+        <Navbar />
       </Header>
-      <main className="">
+      <main className="min-h-dvh pt-12 container">
         <AnimatePresence>
           <LazyMotion features={loadFeatures.default}>
             <m.div key={location.pathname} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.7, ease: "backInOut" } }} exit={{ opacity: 0 }}>
@@ -29,7 +24,8 @@ function Layout() {
           </LazyMotion>
         </AnimatePresence>
       </main>
-    </>
+      <ScrollRestoration />
+    </div>
   );
 }
 

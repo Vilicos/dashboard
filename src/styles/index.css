@@ -4,9 +4,15 @@
 
 @layer base {
   :root {
+    --brand-fifth: 221 100% 90%;
+    --secondary: 221 100% 80%;
+    --brand-third:221 99% 70%;
+    --brand-secondary:220 99% 60%;
+    --primary: 221 100% 50%;
+
     --background: 221 32% 23%;
     --foreground: 221 100% 97%;
-    --muted: 0 0% 78%;
+    --muted: 0 0% 34%;
     --muted-foreground: 220 4% 86%;
     --popover: 221 38% 17%;
     --popover-foreground: 221 100% 97%;
@@ -14,9 +20,7 @@
     --card-foreground: 221 100% 97%;
     --border: 219 38% 31%;
     --input: 219 38% 31%;
-    --primary: 221 100% 50%;
     --primary-foreground: 221 100% 97%;
-    --secondary: 221 100% 80%;
     --secondary-foreground: 221 100% 97%;
     --accent: 221 32% 23%;
     --accent-foreground: 334 20% 22%;
