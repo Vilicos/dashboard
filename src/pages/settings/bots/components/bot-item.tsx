@@ -16,7 +16,7 @@ function BotItem({ active, img, name, slug, enable }: IProps) {
       <p className="font-semibold mt-2 mb-5">{name}</p>
       {active ? (
         <EditBot>
-          <Button className="h-8 w-[90px] rounded-lg hover:bg-brand-secondary font-normal">Edit</Button>
+          <Button className="h-8 w-[90px] rounded-lg font-normal" variant={'brand'}>Edit</Button>
         </EditBot>
         
       ) : (

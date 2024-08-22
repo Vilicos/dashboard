@@ -56,7 +56,7 @@ function TeamItem({ email, fullName, role }: IProps) {
                 <Separator />
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel className="bg-secondary hover:bg-brand-fifth transition-colors rounded-xl font-semibold w-[90x] h-9">Cancel</AlertDialogCancel>
+                <AlertDialogCancel className="bg-secondary hover:bg-secondary/80 transition-colors rounded-xl font-semibold w-[90x] h-9">Cancel</AlertDialogCancel>
                 <AlertDialogAction className="bg-brand-dest-secondary hover:bg-destructive transition-colors rounded-xl font-semibold w-[90x] h-9">Remove</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

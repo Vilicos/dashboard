@@ -3,19 +3,18 @@ import { Button } from "@components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { Separator } from "@components/ui/separator";
+import { fileTypes, uploadSize } from "@constants/static-data";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 1;
-const ACCEPTED_FILE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/jpg"]);
 
 const formSchema = z.object({
   logo: z
     .instanceof(File, { message: "Upload Img" })
-    .refine((file) => ACCEPTED_FILE_TYPES.has(file.type), { message: "Only png, jpg, jpeg and webp supported" })
-    .refine((file) => file.size < MAX_UPLOAD_SIZE, { message: "Image must be less than 3MB" })
+    .refine((file) => fileTypes.has(file.type), { message: "Only png, jpg, jpeg and webp supported" })
+    .refine((file) => file.size < uploadSize, { message: "Image must be less than 3MB" })
     .optional(),
   companyName: z
     .string({
@@ -35,7 +34,7 @@ const formSchema = z.object({
     .trim(),
 });
 
-function OrgDetail() {
+function CompanyDetail() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
@@ -139,10 +138,10 @@ function OrgDetail() {
             )}
           />
           <div className="space-x-5 flex items-center justify-end">
-          <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold bg-secondary hover:bg-brand-fifth" type="submit">
+          <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={'secondary'}>
             Cancel
           </Button>
-          <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold" type="submit">
+          <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={'brand'}>
             Save
           </Button>
           </div>
@@ -153,4 +152,4 @@ function OrgDetail() {
   );
 }
 
-export default OrgDetail;
+export default CompanyDetail;

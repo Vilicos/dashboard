@@ -117,7 +117,7 @@ function EditBot({ children }: IProps) {
           </Form>
         </AlertDialogHeader>
         <AlertDialogFooter className="!space-x-3 items-end h-auto">
-          <AlertDialogCancel className="rounded-xl h-9 w-[90px] bg-secondary hover:bg-brand-fifth hover:text-foreground font-semibold">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="rounded-xl h-9 w-[90px] bg-secondary hover:bg-secondary/80 font-semibold">Cancel</AlertDialogCancel>
           <AlertDialogAction className="w-[120px] h-9 rounded-xl font-semibold hover:bg-brand-secondary" type="submit" form="editBotForm">
             Save
           </AlertDialogAction>

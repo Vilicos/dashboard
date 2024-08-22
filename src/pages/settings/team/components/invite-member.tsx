@@ -72,7 +72,7 @@ function InviteMember() {
   return (
     <AlertDialog open={isOpen} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="rounded-xl w-[90px] h-9 font-semibold ">Invite</Button>
+        <Button className="rounded-xl w-[90px] h-9 font-semibold" variant={'brand'}>Invite</Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-card px-4 pt-5 pb-4 max-w-[674px]">
         <AlertDialogHeader>
@@ -161,9 +161,9 @@ function InviteMember() {
           <Separator />
         </AlertDialogHeader>
         <AlertDialogFooter className="sm:space-x-3">
-          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-brand-fifth">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80">Cancel</AlertDialogCancel>
           <AlertDialogAction
-            className="w-[90px] h-9 rounded-xl font-semibold transition-colors"
+            className="w-[90px] h-9 rounded-xl font-semibold transition-colors hover:bg-brand-secondary"
             type="submit"
             form="inviteMemberForm"
             onClick={handleSubmit}
