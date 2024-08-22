@@ -10,16 +10,19 @@ export const navList = [
         id: 1,
         name: "Discord",
         path: "helpdesk/discord",
+        disabled:false
       },
       {
         id: 2,
         name: "Telegram",
         path: "helpdesk/telegram",
+        disabled:true
       },
       {
         id: 3,
         name: "Web chat",
         path: "helpdesk/webchat",
+        disabled:true
       },
     ],
   },
@@ -50,21 +53,25 @@ export const navList = [
         id: 7,
         name: "General",
         path: "settings/general",
+        disabled:false
       },
       {
         id: 8,
         name: "Bots",
         path: "settings/bots",
+        disabled:false
       },
       {
         id: 9,
         name: "Team",
         path: "settings/team",
+        disabled:false
       },
       {
         id: 10,
         name: "Billing",
         path: "settings/billing",
+        disabled:true
       },
     ],
   },

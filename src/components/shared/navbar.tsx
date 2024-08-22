@@ -19,12 +19,15 @@ function Navbar() {
                   className={({ isActive }) =>
                     `${
                       isActive && "bg-background"
-                    } hover:bg-background transition-colors rounded-xl py-[6px] pr-4 pl-[46px] my-1 font-medium flex items-center justify-between text-sm`
+                    } ${child.disabled ? "pointer-events-none text-gray-500":"hover:bg-background "} transition-colors rounded-xl py-[6px] pr-4 pl-[46px] my-1 font-medium flex items-center justify-between text-sm`
                   }
                 >
                   {child.name}
                  {
-                  item.id === 0 &&  <span>2</span>
+                  (item.id === 0 && !child.disabled) &&  <span>2</span>
+                 }
+                 {
+                  child.disabled && <span className="text-xs border px-1 rounded-xl border-gray-500">soon</span>
                  }
                 </NavLink>
               ))}

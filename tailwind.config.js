@@ -25,6 +25,7 @@ module.exports = {
         "brand-fifth": "hsl(var(--brand-fifth))",
         "brand-third": "hsl(var(--brand-third))",
         "brand-secondary": "hsl(var(--brand-secondary))",
+        "brand-dest-secondary": "hsl(var(--brand-dest-secondary))",
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

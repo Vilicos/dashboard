@@ -1,5 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Link } from "react-router-dom";
+import EditBot from "./edit-bot";
 
 interface IProps {
   img: string;
@@ -14,7 +15,10 @@ function BotItem({ active, img, name, slug, enable }: IProps) {
       <img src={img} alt={name} className="size-10 rounded-full object-cover bg-primary" />
       <p className="font-semibold mt-2 mb-5">{name}</p>
       {active ? (
-        <Button className="h-8 w-[90px] rounded-lg hover:bg-brand-secondary font-normal">Edit</Button>
+        <EditBot>
+          <Button className="h-8 w-[90px] rounded-lg hover:bg-brand-secondary font-normal">Edit</Button>
+        </EditBot>
+        
       ) : (
         <Link to={""} target="_blank" className={`${enable ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} flex items-center justify-center rounded-lg h-8 w-[90px] text-sm transition-colors `}>
           {

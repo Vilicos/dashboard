@@ -4,6 +4,7 @@ import NotFound from "@components/errors/not-found";
 import Layout from "@components/shared/layout";
 import General from "@pages/settings/general";
 import Bots from "@pages/settings/bots";
+import Team from "@pages/settings/team";
 
 
 
@@ -28,6 +29,11 @@ export const routes = createBrowserRouter([
       {
         path: "settings/bots",
         element: <Bots />,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "settings/team",
+        element: <Team />,
         errorElement: <ErrorRoute />,
       },
       {
