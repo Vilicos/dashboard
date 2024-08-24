@@ -9,6 +9,7 @@ const loadFeatures = await import("@constants/animations");
 function Layout() {
   const location = useLocation();
   return (
+    <>
     <div className="grid grid-cols-[220px_1fr]">
       <Header>
         <LogoWrapper />
@@ -24,8 +25,9 @@ function Layout() {
           </LazyMotion>
         </AnimatePresence>
       </main>
-      <ScrollRestoration />
     </div>
+    <ScrollRestoration />
+    </>
   );
 }
 
