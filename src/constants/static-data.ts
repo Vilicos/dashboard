@@ -166,3 +166,21 @@ export const authData: AuthData = {
     }
   },
 };
+
+export const conversationData = {
+  discord:{
+    logo:"/img/discord-two.png",
+    title:"Discord",
+    isActive:true,
+  },
+  telegram:{
+    logo:"/img/telegram-two.png",
+    title:"Telegram",
+    isActive:false,
+  },
+  webchat:{
+    logo:"/img/webchat-two.png",
+    title:"Webchat",
+    isActive:false,
+  },
+}

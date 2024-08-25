@@ -7,23 +7,23 @@ import Bots from "@pages/settings/bots";
 import Team from "@pages/settings/team";
 import Auth from "@pages/auth-page";
 import CreateCompany from "@pages/auth-page/create-company";
-
+import Knowledge from "@pages/knowledge";
 
 export const routes = createBrowserRouter([
   {
     path: "login",
     element: <Auth />,
-    errorElement: <ErrorRoute parent/>,
+    errorElement: <ErrorRoute parent />,
   },
   {
     path: "register",
     element: <Auth />,
-    errorElement: <ErrorRoute parent/>,
+    errorElement: <ErrorRoute parent />,
   },
   {
     path: "create-company",
     element: <CreateCompany />,
-    errorElement: <ErrorRoute parent/>,
+    errorElement: <ErrorRoute parent />,
   },
   {
     path: "*",
@@ -35,11 +35,11 @@ export const routes = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorRoute parent />,
     children: [
-      // {
-      //   index: true,
-      //   element: <Settings />,
-      //   errorElement: <ErrorRoute />,
-      // },
+      {
+        path: "knowledge",
+        element: <Knowledge />,
+        errorElement: <ErrorRoute />,
+      },
       {
         path: "settings/general",
         element: <General />,
