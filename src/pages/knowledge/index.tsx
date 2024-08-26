@@ -2,6 +2,7 @@ import PageHeading from "@components/shared/page-heading"
 import TestAgent from "./components/test-agent"
 import Files from "./components/files"
 import Conversation from "./components/conversation"
+import Websites from "./components/websites"
 
 function Knowledge() {
   return (
@@ -12,6 +13,7 @@ function Knowledge() {
       </div>
       <TestAgent/>
     </div>
+    <Websites/>
     <Files/>
     <Conversation/>
   </>

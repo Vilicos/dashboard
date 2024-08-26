@@ -44,3 +44,16 @@ export type ITooltip = {
   triggerClass?:string;
   sideOffSet?:number
 }
+
+export type PaginationProps = {
+  pageRange:Array<string|number>;
+  nextPage:()=>void;
+  previousPage:()=>void;
+  setPage:(arg0: number)=>void;
+  currentPage:number;
+  totalData:number;
+  startItemIndex:number;
+  endItemIndex:number;
+  hasPreviousPage:boolean;
+  hasNextPage:boolean;
+}

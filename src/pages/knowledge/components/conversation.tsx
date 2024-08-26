@@ -9,7 +9,7 @@ function Conversation() {
           <h2 className="font-bold text-xl">Conversation</h2>
           <p className="font-medium text-sm mt-1">Let AI agent use your community’s message history. </p>
         </div>
-        <div className="space-y-2 mt-6">
+        <div className="space-y-2 mt-6 &>*:nth-child(odd)]:bg-transparent [&>*:nth-child(even)]:bg-background">
             <ConversationItem networkName="discord"/>
             <ConversationItem networkName="telegram"/>
             <ConversationItem networkName="webchat"/>

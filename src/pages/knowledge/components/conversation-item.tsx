@@ -5,7 +5,7 @@ function ConversationItem({networkName}:{networkName:"telegram" | "discord" | "w
   
   const network = conversationData[networkName]
   return (
-    <div className={`flex items-center justify-between px-3 py-5 rounded-lg  ${network.isActive ? "hover:bg-background transition-colors":" pointer-events-none opacity-50"}`}>
+    <div className={`flex items-center justify-between px-3 py-5 rounded-lg  ${!network.isActive && "pointer-events-none opacity-50"}`}>
         <div className="flex items-center gap-x-2">
             <img src={network.logo} alt={network.title} className="w-5 h-auto shrink-0"/>
             <p className="text-sm font-medium w-[110px] truncate">{network.title}
