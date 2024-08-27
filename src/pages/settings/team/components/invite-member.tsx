@@ -68,7 +68,6 @@ function InviteMember() {
       setOpen(false); // Form geçerliyse dialog'u kapatın
     }
   };
-  console.log(form.getValues('role'))
   return (
     <AlertDialog open={isOpen} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
