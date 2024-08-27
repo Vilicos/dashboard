@@ -9,7 +9,8 @@ interface IProps {
   slug: string;
   enable: boolean;
 }
-function BotItem({ active, img, name, slug, enable }: IProps) {
+
+function BotItem({ active, img, name, enable }: IProps) {
   return (
     <div className="bg-card h-[180px] border rounded-lg basis-1/3 overflow-hidden p-7 flex flex-col items-center justify-center">
       <img src={img} alt={name} className="size-10 rounded-full object-cover bg-primary" />

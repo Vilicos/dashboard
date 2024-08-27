@@ -2,6 +2,14 @@ import type { loginFormSchema, registerFormSchema } from "@constants/static-data
 import type { ReactNode } from "react";
 import type { z } from "zod";
 
+export type INumberReducer = {
+  value:number | null | undefined 
+  style?:"decimal" | "percent" | "currency"
+  min?:number 
+  max?:number
+  notation?:"compact" | "standard"
+}
+
 export enum UserRole {
     Admin = 'admin',
     Member = 'member',

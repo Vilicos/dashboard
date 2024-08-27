@@ -1,4 +1,4 @@
-import type { INumberReducer } from "@custom-types/component";
+import type { INumberReducer } from "@custom-types/index";
 
 const NumberReducer = ({ value, min=0,max=1,notation="compact",style='currency' }: INumberReducer)=> {
   if (value === null || value === undefined) return "N/A";
