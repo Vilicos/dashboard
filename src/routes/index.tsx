@@ -8,6 +8,8 @@ import Team from "@pages/settings/team";
 import Auth from "@pages/auth-page";
 import CreateCompany from "@pages/auth-page/create-company";
 import Knowledge from "@pages/knowledge";
+import WebsiteDetails from "@pages/knowledge/details";
+
 
 export const routes = createBrowserRouter([
   {
@@ -38,6 +40,11 @@ export const routes = createBrowserRouter([
       {
         path: "knowledge",
         element: <Knowledge />,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "knowledge/:name",
+        element: <WebsiteDetails />,
         errorElement: <ErrorRoute />,
       },
       {

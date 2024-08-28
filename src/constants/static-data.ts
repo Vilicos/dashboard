@@ -8,6 +8,7 @@ export const navList = [
     img: "/svg/nav/help-desk.svg",
     path: "",
     parent: true,
+    disabled: false,
     children: [
       {
         id: 1,
@@ -35,6 +36,7 @@ export const navList = [
     img: "/svg/nav/knowledge.svg",
     path: "knowledge",
     parent: false,
+    disabled: false,
     children: [],
   },
   {
@@ -43,6 +45,7 @@ export const navList = [
     img: "/svg/nav/insight.svg",
     path: "insight",
     parent: false,
+    disabled: true,
     children: [],
   },
   {
@@ -51,6 +54,7 @@ export const navList = [
     img: "/svg/nav/settings.svg",
     path: "",
     parent: true,
+    disabled: false,
     children: [
       {
         id: 7,
@@ -107,7 +111,7 @@ export const botList = [
   },
 ];
 
-export const uploadSize= 1024 * 1024 * 1.5;
+export const uploadSize = 1024 * 1024 * 1.5;
 export const fileTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/jpg"]);
 
 export const loginFormSchema = z.object({
@@ -146,10 +150,10 @@ export const authData: AuthData = {
     submitName: "Log In",
     googleName: "Login with Google",
     formSchema: loginFormSchema,
-    defaultValues:{
+    defaultValues: {
       email: "",
       password: "",
-    }
+    },
   },
   "/register": {
     title: "Sign Up",
@@ -159,28 +163,34 @@ export const authData: AuthData = {
     submitName: "Next",
     googleName: "Continue with Google",
     formSchema: registerFormSchema,
-    defaultValues:{
+    defaultValues: {
       email: "",
       password: "",
-      fullName:""
-    }
+      fullName: "",
+    },
   },
 };
 
 export const conversationData = {
-  discord:{
-    logo:"/img/discord-two.png",
-    title:"Discord",
-    isActive:true,
+  discord: {
+    logo: "/img/discord-two.png",
+    title: "Discord",
+    isActive: true,
   },
-  telegram:{
-    logo:"/img/telegram-two.png",
-    title:"Telegram",
-    isActive:false,
+  telegram: {
+    logo: "/img/telegram-two.png",
+    title: "Telegram",
+    isActive: false,
   },
-  webchat:{
-    logo:"/img/webchat-two.png",
-    title:"Webchat",
-    isActive:false,
+  webchat: {
+    logo: "/img/webchat-two.png",
+    title: "Webchat",
+    isActive: false,
   },
-}
+};
+
+export const agentWelcome = [
+  "👋 Hi, I am your support agent.",
+  "Please keep in mind that the quality of my answers directly correlates with the information you provide.",
+  "I'd love to chat with you.",
+];

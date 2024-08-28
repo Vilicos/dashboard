@@ -11,8 +11,8 @@ interface IProps {
 function TeamItem({ email, fullName, role }: IProps) {
   
   return (
-    <TableRow className="hover:bg-background group border-none">
-      <TableCell className="font-medium group-hover:rounded-l-lg truncate max-w-[100px]">{fullName}</TableCell>
+    <TableRow className="border-none">
+      <TableCell className="font-medium truncate max-w-[100px] rounded-l-lg">{fullName}</TableCell>
       <TableCell className="font-medium truncate max-w-[100px]">{email}</TableCell>
       <TableCell>
         <Select defaultValue={role}>
@@ -28,7 +28,7 @@ function TeamItem({ email, fullName, role }: IProps) {
           </SelectContent>
         </Select>
       </TableCell>
-      <TableCell className="group-hover:rounded-r-lg ml-3 min-w-[56px]">
+      <TableCell className="ml-3 min-w-[56px] rounded-r-lg">
         {
             role === UserRole.Member && <RemoveDialog type="member"/>
         }

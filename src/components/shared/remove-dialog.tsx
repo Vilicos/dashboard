@@ -17,7 +17,7 @@ function RemoveDialog({type}:{type:`${removeDialogContent}`}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded">
+        <Button className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0">
           <img src="/svg/remove.svg" alt="Remove" className="w-[10] h-3 pointer-events-none" />
         </Button>
       </AlertDialogTrigger>

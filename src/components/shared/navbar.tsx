@@ -36,10 +36,13 @@ function Navbar() {
             <li key={item.id}>
               <NavLink
                 to={item.path}
-                className={({ isActive }) => `${isActive && "bg-background"} hover:bg-background transition-colors rounded-xl py-1 px-3 font-medium flex items-center gap-x-3`}
+                className={({ isActive }) => `${isActive && "bg-background"} ${item.disabled ? "pointer-events-none text-gray-500":"hover:bg-background "} hover:bg-background transition-colors rounded-xl py-1 px-3 font-medium flex items-center gap-x-3 overflow-hidden`}
               >
                 <img src={item.img} alt={item.name} className="size-[22px] shrink-0" />
                 {item.name}
+                {
+                  item.disabled && <span className="text-xs border px-1 rounded-xl border-gray-500">soon</span>
+                }
               </NavLink>
             </li>
           )
