@@ -9,6 +9,7 @@ import Auth from "@pages/auth-page";
 import CreateCompany from "@pages/auth-page/create-company";
 import Knowledge from "@pages/knowledge";
 import WebsiteDetails from "@pages/knowledge/details";
+import Discord from "@pages/help-desk/discord";
 
 
 export const routes = createBrowserRouter([
@@ -37,6 +38,11 @@ export const routes = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorRoute parent />,
     children: [
+      {
+        path: "helpdesk/discord",
+        element: <Discord />,
+        errorElement: <ErrorRoute />,
+      },
       {
         path: "knowledge",
         element: <Knowledge />,

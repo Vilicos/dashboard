@@ -27,6 +27,7 @@ module.exports = {
         "brand-secondary": "hsl(var(--brand-secondary))",
         "brand-dest-secondary": "hsl(var(--brand-dest-secondary))",
         "brand-auth-placeholder": "hsl(var(--brand-auth-placeholder))",
+        "brand-chats-questions": "hsl(var(--brand-chats-questions))",
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

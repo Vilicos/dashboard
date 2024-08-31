@@ -14,7 +14,7 @@ export const navList = [
         id: 1,
         name: "Discord",
         path: "helpdesk/discord",
-        disabled: true,
+        disabled: false,
       },
       {
         id: 2,

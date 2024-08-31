@@ -38,7 +38,7 @@ function WebsiteDetails() {
           </TableHeader>
           <TableBody className="[&>*:nth-child(even)]:bg-background [&>*:nth-child(odd)]:bg-transparent">
             {paginatedData.map((item) => (
-              <DetailsItem key={item} id={item}/>
+              <DetailsItem key={item} id={item} />
             ))}
           </TableBody>
         </Table>
