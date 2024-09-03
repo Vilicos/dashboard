@@ -1,4 +1,5 @@
 import type { loginFormSchema, registerFormSchema } from "@constants/static-data";
+import type { ClassValue } from "clsx";
 import type { ReactNode } from "react";
 import type { z } from "zod";
 
@@ -64,4 +65,5 @@ export type PaginationProps = {
   endItemIndex:number;
   hasPreviousPage:boolean;
   hasNextPage:boolean;
+  className?:ClassValue
 }

@@ -58,4 +58,7 @@
   a {
     @apply no-underline;
   }
+  img {
+    @apply inline-block;
+  }
 }

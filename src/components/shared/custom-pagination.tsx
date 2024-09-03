@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@components/ui/button";
 import type { PaginationProps } from "@custom-types/index";
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 
-function WebsitePagination({ pageRange, nextPage, previousPage, setPage, currentPage, totalData,endItemIndex,startItemIndex,hasNextPage,hasPreviousPage}: PaginationProps) {
+function CustomPagination({ pageRange, nextPage, previousPage, setPage, currentPage, totalData,endItemIndex,startItemIndex,hasNextPage,hasPreviousPage,className}: PaginationProps) {
   return (
-    <div className="flex items-center gap-x-3 w-full mt-6">
+    <div className={cn("flex items-center gap-x-3 w-full",className)}>
       <p className="shrink-0 font-medium text-sm text-secondary w-[165px] truncate">{`Showing ${startItemIndex} - ${endItemIndex} of ${totalData}`}</p>
       <Button className="p-0 size-5 bg-border/30 rounded hover:bg-background" onClick={previousPage} disabled={!hasPreviousPage}>
         <ChevronLeft size={12} />
@@ -31,4 +32,4 @@ function WebsitePagination({ pageRange, nextPage, previousPage, setPage, current
   );
 }
 
-export default WebsitePagination;
+export default CustomPagination;

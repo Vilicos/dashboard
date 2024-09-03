@@ -1,7 +1,7 @@
 import usePagination from "@hooks/utils/use-pagination";
-import WebsitePagination from "./website-pagination";
 import WebsitesAdd from "./websites-add";
 import WebsiteItem from "./websites-item";
+import CustomPagination from "@components/shared/custom-pagination";
 
 function Websites() {
   const array = [...Array.from({ length: 100 }).keys()];
@@ -22,9 +22,10 @@ function Websites() {
             <WebsiteItem key={item} id={item} />
           ))}
         </div>
-        <WebsitePagination
+        <CustomPagination
           pageRange={pageRange}
           nextPage={nextPage}
+          className="mt-6"
           previousPage={previousPage}
           setPage={setPage}
           currentPage={currentPage}

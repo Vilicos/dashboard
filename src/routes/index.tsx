@@ -10,6 +10,7 @@ import CreateCompany from "@pages/auth-page/create-company";
 import Knowledge from "@pages/knowledge";
 import WebsiteDetails from "@pages/knowledge/details";
 import Discord from "@pages/help-desk/discord";
+import Insights from "@pages/insights";
 
 
 export const routes = createBrowserRouter([
@@ -51,6 +52,11 @@ export const routes = createBrowserRouter([
       {
         path: "knowledge/:name",
         element: <WebsiteDetails />,
+        errorElement: <ErrorRoute />,
+      },
+      {
+        path: "insights",
+        element: <Insights />,
         errorElement: <ErrorRoute />,
       },
       {

@@ -4,7 +4,7 @@ import { Table, TableBody, TableCaption, TableHead, TableHeader, TableRow } from
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import DetailsItem from "./components/details-item";
 import usePagination from "@hooks/utils/use-pagination";
-import WebsitePagination from "./components/website-pagination";
+import CustomPagination from "@components/shared/custom-pagination";
 
 function WebsiteDetails() {
   const array = [...Array.from({ length: 97 }).keys()];
@@ -43,10 +43,11 @@ function WebsiteDetails() {
           </TableBody>
         </Table>
         <div className="mx-4 w-[calc(100%_-_32px)]">
-          <WebsitePagination
+          <CustomPagination
             pageRange={pageRange}
             nextPage={nextPage}
             previousPage={previousPage}
+            className="mt-6"
             setPage={setPage}
             currentPage={currentPage}
             totalData={totalData}

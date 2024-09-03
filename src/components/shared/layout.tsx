@@ -16,7 +16,7 @@ function Layout() {
           <OrganizationCard />
           <Navbar />
         </Header>
-        <main className="min-h-dvh pt-12 container pb-6">
+        <main className="min-h-dvh pt-12 container pb-6 screenshoot">
           <AnimatePresence>
             <LazyMotion features={loadFeatures}>
               <m.div key={location.pathname} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.7, ease: "backInOut" } }} exit={{ opacity: 0 }}>
