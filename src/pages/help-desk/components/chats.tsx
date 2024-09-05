@@ -7,11 +7,15 @@ import { useState } from "react";
 import ChatsNoResponse from "./chats-no-response";
 
 function Chats() {
-  const [activeTab, setActiveTab] = useState<string | null>(null);
-  console.log(activeTab);
+  const [activeTab, setActiveTab] = useState<string | undefined>();
+
+  const onTabChange = (value:string) => {
+    setActiveTab(previous => (previous === value ? undefined : value))
+  }
+  
   return (
     <section className="mt-5 bg-card  pl-5 pr-3 border rounded-lg h-[calc(100vh-152px)] overflow-hidden">
-      <Tabs className="grid grid-cols-[412px_1fr] h-full" onValueChange={setActiveTab}>
+      <Tabs className="grid grid-cols-[412px_1fr] h-full" value={activeTab} onValueChange={onTabChange}>
         <div className="pr-1 py-5">
           <p className="font-bold text-xl">Chats</p>
           <div className="mt-5 mb-8 flex items-center gap-x-8">
@@ -22,11 +26,6 @@ function Chats() {
             <TabsList className="w-full bg-transparent justify-start h-full p-0 flex-col space-y-5">
               <ChatsQuestion value="1" />
               <ChatsQuestion value="2" />
-              <ChatsQuestion value="3" />
-              <ChatsQuestion value="4" />
-              <ChatsQuestion value="5" />
-              <ChatsQuestion value="6" />
-              <ChatsQuestion value="7" />
             </TabsList>
           </ScrollArea>
         </div>
