@@ -14,7 +14,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "vite.config.ts", "postcss.config.js", "tailwind.config.js", "src/components/ui/*"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "vite.config.ts", "postcss.config.js", "tailwind.config.js", "**/components/ui/*"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",

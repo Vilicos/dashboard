@@ -1,1 +1,1 @@
-//for api custom hooks
+export default function Test(){return 1}

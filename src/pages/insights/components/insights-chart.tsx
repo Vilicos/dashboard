@@ -1,5 +1,5 @@
 import { ReactECharts, type EChartsOption } from "@components/shared/custom-chart"
-import { useInsightDate } from "@store/use-insights-date";
+// import { useInsightDate } from "@store/use-insights-date";
 import { format } from "date-fns";
 
 function InsightsChart() {
@@ -69,7 +69,8 @@ function InsightsChart() {
     { timestamp: 1724966400, value: 175 },
   ];
   
-  const insightDate = useInsightDate(state=> state.date)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  // const insightDate = useInsightDate(state=> state.date)
   
   const chartOption:EChartsOption = {
     color: ["#0052FE", "#CCDCFF"],
