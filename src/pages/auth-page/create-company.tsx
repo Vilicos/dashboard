@@ -71,7 +71,7 @@ function CreateCompany() {
                   <FormItem className="relative mb-8">
                     <FormLabel className="max-w-fit">
                       <Avatar className="size-20 overflow-hidden mx-auto cursor-pointer">
-                        <AvatarImage src={selectedImage ?? ""} />
+                        <AvatarImage src={selectedImage ?? ""} className="object-cover"/>
                         <AvatarFallback>
                           <img src="/img/empty-upload.png" alt="Empty" className="w-full h-full object-cover" />
                         </AvatarFallback>

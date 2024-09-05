@@ -1,27 +1,17 @@
 import { Button } from "@components/ui/button";
-import { useNavigate, useRouteError } from "react-router-dom"
+import { useNavigate, useRouteError } from "react-router-dom";
 
-export default function ErrorRoute({ parent = false }: { parent?: boolean }) {
+export default function ErrorRoute() {
   const error = useRouteError() as Error;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <section className={`rounded-md w-fit container py-12 border bg-background/50 overflow-hidden ${parent && 'relative top-12'}`}>
-      <div className="mx-auto max-w-md text-center">
-        <h1 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl">
-          {
-            parent ? "Oops, app crashed!":"Oops, something went wrong!"
-          }
-          </h1>
-        <p className="mt-4 text-muted-foreground line-clamp-2">
-        {error.message}
-        </p>
-          <Button
-          onClick={()=> navigate(0)}
-            className="mt-6"
-          >
-            Refresh Page
-          </Button>
-      </div>
+    <section className={`py-12 bg-background/50 overflow-hidden mx-auto max-w-md text-center`}>
+      <img src="/svg/error-image.svg" alt="Error" className="size-[280px] object-cover" />
+        <h1 className="mt-8 font-bold sm:text-xl"><span className="text-primary">Oops,</span>{" "}Something Went Wrong</h1>
+        <p className="mt-4 text-muted-foreground line-clamp-2">{error.message}</p>
+        <Button onClick={() => navigate(0)} className="mt-6">
+          Refresh Page
+        </Button>
     </section>
-  )
+  );
 }

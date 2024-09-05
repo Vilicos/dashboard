@@ -17,17 +17,17 @@ export const routes = createBrowserRouter([
   {
     path: "login",
     element: <Auth />,
-    errorElement: <ErrorRoute parent />,
+    errorElement: <ErrorRoute />,
   },
   {
     path: "register",
     element: <Auth />,
-    errorElement: <ErrorRoute parent />,
+    errorElement: <ErrorRoute />,
   },
   {
     path: "create-company",
     element: <CreateCompany />,
-    errorElement: <ErrorRoute parent />,
+    errorElement: <ErrorRoute />,
   },
   {
     path: "*",
@@ -37,7 +37,7 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <ErrorRoute parent />,
+    errorElement: <ErrorRoute />,
     children: [
       {
         path: "helpdesk/discord",
