@@ -7,7 +7,7 @@ export default function NotFound() {
     <Title content="Not Found"/>
     <section className="rounded-md w-fit container py-28 bg-background/50">
       <div className="mx-auto max-w-md text-center">
-        <img src="/svg/not-found.svg" alt="Not Found" className="size-[320px] object-cover" />
+        <img src="/svg/not-found.svg" alt="Not Found" className="object-contain w-[131px] h-[129]" />
         <h1 className="mt-8 text-3xl font-bold text-foreground sm:text-xl">Sorry, Page Not Found</h1>
         <Link
             to="/"
