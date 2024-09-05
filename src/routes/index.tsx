@@ -40,12 +40,12 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorRoute parent />,
     children: [
       {
-        index:true,
+        path: "discord",
         element: <Discord />,
         errorElement: <ErrorRoute />,
       },
       {
-        path: "knowledge",
+        index:true,
         element: <Knowledge />,
         errorElement: <ErrorRoute />,
       },
