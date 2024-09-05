@@ -40,7 +40,7 @@ function FilesUpload() {
     <>
       <Label htmlFor="fileUpload" className={`${loading ? "bg-muted/40 pointer-events-none":"bg-primary "} w-[90px] h-7 rounded-lg gap-x-1 flex items-center justify-center cursor-pointer hover:bg-brand-secondary transition-colors select-none`}>
         {
-            loading ? <RefreshCw className="size-[17px] animate-spin"/> : <img src="/svg/upload.svg" alt="Upload" className="pointer-events-none size-[14px] spin" />
+            loading ? <RefreshCw className="size-[17px] animate-spin"/> : <img src="/svg/upload.svg" alt="Upload" className="pointer-events-none size-[14px]" />
         }
         Upload
       </Label>

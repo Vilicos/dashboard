@@ -63,7 +63,7 @@ function TestAgent() {
           Test Agent
         </Button>
       </DialogTrigger>
-      <DialogContent className="border max-w-[600px] py-5 px-4 h-[700px] bg-card" closeClassName="top-6">
+      <DialogContent className="border max-w-[600px] py-5 px-4 h-[calc(100dvh-2rem)] max-h-[700px] bg-card" closeClassName="top-6">
         <DialogHeader className="after:absolute after:h-px after:w-full after:top-14 after:left-0 after:bg-border">
           <DialogTitle className="font-bold text-xl">Vilicos AI Agent</DialogTitle>
           <VisuallyHidden>
@@ -91,6 +91,7 @@ function TestAgent() {
                     <FormMessage className="absolute !text-xs -top-8 left-3" />
                     <FormControl>
                       <Input
+                        autoComplete="off"
                         placeholder="Ask a question..."
                         {...field}
                         className="rounded-[32px] bg-transparent h-[60px] py-0 pl-5 pr-14 placeholder:text-xl placeholder:text-input placeholder:font-medium text-md"

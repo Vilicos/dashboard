@@ -36,7 +36,8 @@ export interface AuthRouteConfig {
   defaultValues:{
     email:string;
     password:string;
-    fullName?:string
+    fullName?:string;
+    agreement?:boolean
   }
 }
 export type AuthData = {

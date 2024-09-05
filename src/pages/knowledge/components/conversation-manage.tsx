@@ -17,6 +17,7 @@ import { Separator } from "@components/ui/separator";
 import { Switch } from "@components/ui/switch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,6 +26,8 @@ const formSchema = z.object({
   channel: z.string(),
 });
 function ConversationManage() {
+  const [isOpen, setOpen] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
@@ -35,12 +38,19 @@ function ConversationManage() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setOpen((previous) => !previous);
     console.log(values);
+    form.reset();
+  };
+  const formReset = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setOpen((previous) => !previous);
+    form.reset();
   };
 
-  const isActive = true
+  const isActive = true;
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setOpen}>
       <AlertDialogTrigger disabled={!isActive} asChild>
         <Button className="rounded-sm size-6 p-0 bg-border hover:bg-brand-secondary">
           <CustomTooltip content="Manage" contentClass="text-sm" sideOffSet={12}>
@@ -56,7 +66,7 @@ function ConversationManage() {
           </VisuallyHidden>
           <Separator />
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="!my-3 space-y-5" id="conversationManageForm">
+            <form className="!my-3 space-y-5" id="conversationManageForm">
               <FormField
                 control={form.control}
                 name="messageHistory"
@@ -109,13 +119,10 @@ function ConversationManage() {
           <Separator />
         </AlertDialogHeader>
         <AlertDialogFooter className="sm:space-x-3">
-          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80">Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => onSubmit}
-            className="w-[90px] h-9 rounded-xl font-semibold transition-colors hover:bg-brand-secondary"
-            type="submit"
-            form="conversationManageForm"
-          >
+          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80" onClick={formReset}>
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={form.handleSubmit(onSubmit)} className="w-[90px] h-9 rounded-xl font-semibold transition-colors hover:bg-brand-secondary" type="submit">
             Save
           </AlertDialogAction>
         </AlertDialogFooter>

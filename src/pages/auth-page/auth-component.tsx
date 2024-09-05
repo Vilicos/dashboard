@@ -7,8 +7,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@components/ui/input";
 import { Button } from "@components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { authData } from "@constants/static-data";
+import { Checkbox } from "@components/ui/checkbox";
 
 function AuthComponent() {
   const [showPass, setPass] = useState(false);
@@ -21,9 +22,9 @@ function AuthComponent() {
     resolver: zodResolver(config.formSchema),
     shouldFocusError: false,
     mode: "onBlur",
-    defaultValues: config.defaultValues,
+    defaultValues: useMemo(() => config.defaultValues, [config.defaultValues]),
   });
-
+ 
   const onSubmit = async (values: z.infer<typeof config.formSchema>) => {
     console.log(values);
   };
@@ -33,12 +34,12 @@ function AuthComponent() {
   };
   
   useEffect(() => {
-    if (authType === "/login" && form.formState.isSubmitSuccessful){
+    if (authType === "/login" && form.formState.isSubmitSuccessful) {
       form.reset();
-      navigate("/")
-    }else if(authType === "/register" && form.formState.isSubmitSuccessful){
+      navigate("/");
+    } else if (authType === "/register" && form.formState.isSubmitSuccessful) {
       form.reset();
-      navigate('/create-company')
+      navigate("/create-company");
     }
   }, [authType, form, form.formState.isSubmitSuccessful, navigate]);
 
@@ -50,7 +51,7 @@ function AuthComponent() {
         {config.urlTitle}
       </Button>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-9">
+        <form onSubmit={form.handleSubmit(onSubmit)} key={authType} className="mt-9">
           {authType === "/register" && (
             <FormField
               control={form.control}
@@ -117,6 +118,29 @@ function AuthComponent() {
               </FormItem>
             )}
           />
+           {authType === "/register" && (
+            <FormField
+              control={form.control}
+              name="agreement"
+              render={({ field }) => (
+                <FormItem className="relative mb-7 flex items-center space-y-0">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="size-4 mr-2 border-input"/>
+                  </FormControl>
+                  <FormLabel className="font-medium text-sm !text-foreground">
+                    <span>I agree to{" "}
+                      <Link to={'https://vilicos.com/terms'} target="_blank" className="text-brand-secondary">Terms and Conditions</Link> & {" "}
+                      <Link to={'https://vilicos.com/privacy'} target="_blank" className="text-brand-secondary">Privacy Policy</Link> 
+                      </span>
+                  </FormLabel>
+                  <VisuallyHidden>
+                    <FormDescription></FormDescription>
+                  </VisuallyHidden>
+                  <FormMessage className="absolute -bottom-5 left-1 text-xs" />
+                </FormItem>
+              )}
+            />
+          )}
           <Button type="submit" variant={"brand"} className="w-full rounded-lg h-11">
             {config.submitName}
           </Button>

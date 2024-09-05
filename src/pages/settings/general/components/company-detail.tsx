@@ -6,16 +6,20 @@ import { Separator } from "@components/ui/separator";
 import { fileTypes, uploadSize } from "@constants/static-data";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { RefreshCw } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-
 const formSchema = z.object({
-  logo: z
-    .instanceof(File, { message: "Upload Img" })
-    .refine((file) => fileTypes.has(file.type), { message: "Only png, jpg, jpeg and webp supported" })
-    .refine((file) => file.size < uploadSize, { message: "Image must be less than 3MB" })
-    .optional(),
+  logo: z.union([
+    z
+      .instanceof(File, { message: "Upload Image" })
+      .refine((file) => fileTypes.has(file.type), { message: "Only png, jpg, jpeg and webp supported" })
+      .refine((file) => file.size < uploadSize, { message: "Image must be less than 1.5MB" })
+      .optional(),
+    z.literal(""),
+  ]),
   companyName: z
     .string({
       required_error: "Name is required",
@@ -35,6 +39,7 @@ const formSchema = z.object({
 });
 
 function CompanyDetail() {
+  const [selectedImage, setSelectedImage] = useState<null | string>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
@@ -44,10 +49,29 @@ function CompanyDetail() {
       userFullName: "",
     },
   });
-  const fileRef = form.register("logo");
+  const isChanged = form.formState.isDirty;
+  const isSubmitting = false
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) =>{
+      if(key === "logo"){
+        if (value instanceof File){
+          formData.append(key, value);
+        }else{
+          formData.append(key, String(""));
+        }
+      }else{
+        formData.append(key, String(value));
+      }
+    })
+    for (const pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
   };
+
+  const formReset = () =>{
+    form.reset()
+  }
   return (
     <div className="bg-card p-5 rounded-lg border">
       <Form {...form}>
@@ -55,34 +79,39 @@ function CompanyDetail() {
           <FormField
             control={form.control}
             name="logo"
-            render={({ field: { onChange } }) => (
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+            render={({ field: { value, onChange, ...field } }) => (
               <>
                 <FormItem className="relative space-y-0">
-                  <FormLabel className="font-bold text-xl !text-foreground">Company Logo</FormLabel>
+                  <p className="font-bold text-xl !text-foreground">Company Logo</p>
                   <FormDescription className="font-medium text-sm text-brand-fifth !my-5">This is your company’s logo.</FormDescription>
+                  <FormLabel className="inline-block cursor-pointer size-20 rounded-full">
+                    <Avatar className="size-20 overflow-hidden rounded-full">
+                      <AvatarImage src={selectedImage ?? ""} className="object-cover"/>
+                      <AvatarFallback>
+                        <img src="/img/empty-upload.png" alt="Empty" className="w-full h-full object-cover" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </FormLabel>
                   <FormControl>
-                    <>
-                      <Avatar className="size-20 overflow-hidden">
-                        <AvatarImage src="https://github.com/shadcn.pn" />
-                        <AvatarFallback>
-                          <img src="/img/empty-upload.png" alt="Empty" className="w-full h-full object-cover" />
-                        </AvatarFallback>
-                      </Avatar>
-                      <VisuallyHidden asChild>
-                        <Input
-                          id="uploadIMG"
-                          className="pointer-events-none"
-                          accept="image/png,image/jpg,image/jpeg,image/webp"
-                          disabled={form.formState.isSubmitting ? true : false}
-                          type="file"
-                          {...fileRef}
-                          onChange={(event) => {
-                            onChange(event.target?.files?.[0] ?? undefined);
-                            // setLogo(URL.createObjectURL(event.target?.files?.[0] ?? undefined));
-                          }}
-                        />
-                      </VisuallyHidden>
-                    </>
+                    <VisuallyHidden asChild>
+                      <Input
+                        className="pointer-events-none"
+                        accept="image/png,image/jpg,image/jpeg,image/webp"
+                        disabled={form.formState.isSubmitting ? true : false}
+                        type="file"
+                        {...field}
+                        onChange={(event) => {
+                          const file = event.target.files ? event.target.files[0] : "";
+                          if (file && file instanceof File) {
+                            onChange(file);
+                            setSelectedImage(URL.createObjectURL(file));
+                          } else {
+                            setSelectedImage(null);
+                          }
+                        }}
+                      />
+                    </VisuallyHidden>
                   </FormControl>
 
                   <FormMessage className="text-xs h-4 truncate absolute -bottom-5" />
@@ -138,14 +167,19 @@ function CompanyDetail() {
             )}
           />
           <div className="space-x-5 flex items-center justify-end">
-          <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={'secondary'}>
-            Cancel
-          </Button>
-          <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={'brand'}>
-            Save
-          </Button>
+            {isChanged && (
+              <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={"secondary"} onClick={formReset}>
+                Cancel
+              </Button>
+            )}
+
+            <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold relative" type="submit" variant={"brand"} disabled={isSubmitting} >
+              {
+                isSubmitting && <RefreshCw className="size-4 animate-spin mr-0.5 shrink-0"/>
+              }
+              Save
+            </Button>
           </div>
-          
         </form>
       </Form>
     </div>

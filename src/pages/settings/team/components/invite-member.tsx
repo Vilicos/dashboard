@@ -55,19 +55,15 @@ function InviteMember() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setOpen(previous => !previous)
     console.log(values);
+    form.reset()
   };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    // Form validation logic
-    const isValid = form.formState.isValid; // Form doğrulama fonksiyonunuzu çağırın
-
-    if (isValid) {
-      setOpen(false); // Form geçerliyse dialog'u kapatın
-    }
-  };
+  const formReset = async (event:React.MouseEvent<HTMLButtonElement>)=> {
+    event.preventDefault()
+    setOpen(previous => !previous)
+    form.reset()
+}
   return (
     <AlertDialog open={isOpen} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
@@ -81,12 +77,12 @@ function InviteMember() {
           </VisuallyHidden>
           <Separator />
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="!my-6 flex items-start gap-x-8" id="inviteMemberForm">
+            <form className="!mt-6 !mb-7 flex items-start gap-x-8" id="inviteMemberForm">
               <FormField
                 control={form.control}
                 name="fullName"
                 render={({field}) => (
-                  <FormItem className="basis-1/3">
+                  <FormItem className="basis-1/3 relative">
                     <FormLabel className="font-medium text-sm text-brand-fifth">Full Name</FormLabel>
                     <FormControl>
                       <Input
@@ -100,7 +96,7 @@ function InviteMember() {
                       <FormDescription></FormDescription>
                     </VisuallyHidden>
 
-                    <FormMessage className="text-xs h-4 truncate"/>
+                    <FormMessage className="text-xs h-4 truncate absolute -bottom-6 left-1"/>
                   </FormItem>
                 )}
               />
@@ -108,7 +104,7 @@ function InviteMember() {
                 control={form.control}
                 name="email"
                 render={({field}) => (
-                  <FormItem className="basis-1/3">
+                  <FormItem className="basis-1/3 relative">
                     <FormLabel className="font-medium text-sm text-brand-fifth">Email</FormLabel>
                     <FormControl>
                       <Input
@@ -122,7 +118,7 @@ function InviteMember() {
                       <FormDescription></FormDescription>
                     </VisuallyHidden>
 
-                    <FormMessage className="text-xs h-4 truncate"/>
+                    <FormMessage className="text-xs h-4 truncate absolute -bottom-6 left-1"/>
                   </FormItem>
                 )}
               />
@@ -130,7 +126,7 @@ function InviteMember() {
                 control={form.control}
                 name="role"
                 render={({ field }) => (
-                  <FormItem className="basis-1/3">
+                  <FormItem className="basis-1/3 relative">
                     <FormLabel className="font-medium text-sm text-brand-fifth">Role</FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -151,7 +147,7 @@ function InviteMember() {
                       <FormDescription></FormDescription>
                     </VisuallyHidden>
 
-                    <FormMessage className="text-xs h-4 truncate"/>
+                    <FormMessage className="text-xs h-4 truncate absolute -bottom-6 left-1"/>
                   </FormItem>
                 )}
               />
@@ -160,12 +156,11 @@ function InviteMember() {
           <Separator />
         </AlertDialogHeader>
         <AlertDialogFooter className="sm:space-x-3">
-          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80" onClick={formReset}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="w-[90px] h-9 rounded-xl font-semibold transition-colors hover:bg-brand-secondary"
             type="submit"
-            form="inviteMemberForm"
-            onClick={handleSubmit}
+            onClick={form.handleSubmit(onSubmit)}
           >
             Invite
           </AlertDialogAction>

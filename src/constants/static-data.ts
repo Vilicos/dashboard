@@ -139,6 +139,7 @@ export const registerFormSchema = loginFormSchema.extend({
     .min(3, { message: "Minimum 3 characters" })
     .max(40, { message: "Maximum 40 characters" })
     .trim(),
+  agreement:z.boolean().refine((value)=> value === true,{message:"Agreement must be accepted"}),
 });
 
 export const authData: AuthData = {
@@ -167,6 +168,7 @@ export const authData: AuthData = {
       email: "",
       password: "",
       fullName: "",
+      agreement:false
     },
   },
 };

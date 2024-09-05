@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@components/ui/alert-dialog";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,6 +29,7 @@ const formSchema = z.object({
 });
 
 function EditBot({ children }: IProps) {
+  const[open,setOpen] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,10 +40,17 @@ function EditBot({ children }: IProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setOpen(previous => !previous)
     console.log(values);
+    form.reset()
   };
+  const formReset = async (event:React.MouseEvent<HTMLButtonElement>)=> {
+    event.preventDefault()
+    setOpen(previous => !previous)
+    form.reset()
+}
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent className="max-w-[482px] border bg-card p-4 overflow-hidden">
         <AlertDialogHeader>
@@ -53,7 +61,7 @@ function EditBot({ children }: IProps) {
             <span>Reply</span>
           </AlertDialogDescription>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 !mt-3" id="editBotForm">
+            <form className="space-y-4 !mt-3" id="editBotForm">
               <FormField
                 control={form.control}
                 name="allChannels"
@@ -117,8 +125,8 @@ function EditBot({ children }: IProps) {
           </Form>
         </AlertDialogHeader>
         <AlertDialogFooter className="!space-x-3 items-end h-auto">
-          <AlertDialogCancel className="rounded-xl h-9 w-[90px] bg-secondary hover:bg-secondary/80 font-semibold">Cancel</AlertDialogCancel>
-          <AlertDialogAction className="w-[120px] h-9 rounded-xl font-semibold hover:bg-brand-secondary" type="submit" form="editBotForm">
+          <AlertDialogCancel className="rounded-xl h-9 w-[90px] bg-secondary hover:bg-secondary/80 font-semibold" onClick={formReset}>Cancel</AlertDialogCancel>
+          <AlertDialogAction className="w-[120px] h-9 rounded-xl font-semibold hover:bg-brand-secondary" type="submit" onClick={form.handleSubmit(onSubmit)}>
             Save
           </AlertDialogAction>
         </AlertDialogFooter>

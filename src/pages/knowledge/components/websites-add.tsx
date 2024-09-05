@@ -41,6 +41,11 @@ function WebsitesAdd() {
     form.reset()
   };
 
+  const formReset = async (event:React.MouseEvent<HTMLButtonElement>)=> {
+      event.preventDefault()
+      setOpen(previous => !previous)
+      form.reset()
+  }
   const isActive = true;
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -86,12 +91,12 @@ function WebsitesAdd() {
           <Separator />
         </AlertDialogHeader>
         <AlertDialogFooter className="sm:space-x-3">
-          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="w-[90px] h-9 rounded-xl font-semibold transition-colors bg-secondary hover:bg-secondary/80" onClick={formReset}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={form.handleSubmit(onSubmit)}
             className="w-[90px] h-9 rounded-xl font-semibold transition-colors hover:bg-brand-secondary"
             type="submit"
-            // form="conversationManageForm"
+
           >
             Sync
           </AlertDialogAction>
