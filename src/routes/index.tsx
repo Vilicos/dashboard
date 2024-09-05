@@ -40,7 +40,7 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorRoute parent />,
     children: [
       {
-        path: "helpdesk/discord",
+        index:true,
         element: <Discord />,
         errorElement: <ErrorRoute />,
       },
