@@ -34,7 +34,7 @@ export const navList = [
     id: 4,
     name: "Knowledge",
     img: "/svg/nav/knowledge.svg",
-    path: "knowledge",
+    path: "/",
     parent: false,
     disabled: false,
     children: [],
