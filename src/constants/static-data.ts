@@ -127,7 +127,7 @@ export const loginFormSchema = z.object({
       invalid_type_error: "Invalid password",
     })
     .min(5, { message: "Minimum 5 characters" })
-    .max(15, { message: "Maximum 40 characters" })
+    .max(40, { message: "Maximum 40 characters" })
     .trim(),
 });
 export const registerFormSchema = loginFormSchema.extend({

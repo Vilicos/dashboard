@@ -34,7 +34,7 @@ const formSchema = z.object({
       invalid_type_error: "Invalid full name",
     })
     .min(3, { message: "Minimum 3 characters" })
-    .max(32, { message: "Maximum 32 characters" })
+    .max(40, { message: "Maximum 32 characters" })
     .trim(),
 });
 
