@@ -15,12 +15,12 @@ function WebsiteDetails() {
   return (
     <div>
       <section className="flex items-center gap-x-3">
-        <Link to=".." relative="path" className="shrink-0">
+        <Link to="/" relative="path" className="shrink-0">
           <ArrowLeft className="stroke-[#CCDCFF] hover:stroke-brand-secondary transition-colors" />
         </Link>
         <div>
           <h1 className="font-medium text-brand-fifth">
-            Knowledge Base <span className="text-foreground">/ Website Details</span>
+            <Link to={"/"} className="hover:text-brand-secondary transition-colors">Knowledge Base</Link> <span className="text-foreground">/ Website Details</span>
           </h1>
         </div>
       </section>
