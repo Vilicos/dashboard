@@ -1,4 +1,4 @@
-import usePagination from "@hooks/utils/use-pagination";
+import usePagination from "@hooks/use-pagination";
 import WebsitesAdd from "./websites-add";
 import WebsiteItem from "./websites-item";
 import CustomPagination from "@components/shared/custom-pagination";
@@ -7,7 +7,7 @@ function Websites() {
   const array = [...Array.from({ length: 100 }).keys()];
   const { paginatedData, pageRange, nextPage, previousPage, setPage, currentPage, totalData, endItemIndex, startItemIndex,hasNextPage,hasPreviousPage } = usePagination({ data: array, perPage: 5 });
   return (
-    <section className="border pl-5 py-5 pr-3 bg-card rounded-lg flex items-start gap-x-3 my-8">
+    <section className="border pl-5 py-5 pr-3 bg-card rounded-lg flex items-start gap-x-3 mb-8">
       <img src="/svg/website.svg" alt="Website" className="pointer-events-none size-7 shrink-0" />
       <div className="w-full">
         <div className="flex items-start justify-between mb-6">

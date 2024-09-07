@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Table, TableBody, TableCaption, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import DetailsItem from "./components/details-item";
-import usePagination from "@hooks/utils/use-pagination";
+import usePagination from "@hooks/use-pagination";
 import CustomPagination from "@components/shared/custom-pagination";
 
 function WebsiteDetails() {

@@ -2,7 +2,7 @@ import LogoWrapper from "@components/shared/logo-wrapper";
 import AuthComponent from "./auth-component";
 
 
-function Auth() {
+function AuthPage() {
   return (
     <main className="min-h-dvh flex items-center justify-center">
       <div className="absolute top-8 left-10">
@@ -13,4 +13,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default AuthPage;

@@ -118,6 +118,7 @@ module.exports = {
     "unicorn/no-console-spaces": "error",
     "unicorn/no-null": "off",
     "unicorn/numeric-separators-style": "off",
-    "unicorn/consistent-function-scoping":"off"
+    "unicorn/consistent-function-scoping":"off",
+    // "unicorn/no-useless-promise-resolve-reject":"off"
   },
 };

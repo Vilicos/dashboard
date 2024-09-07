@@ -7,7 +7,7 @@ function InsightsInfoCards() {
         <InsightsInfoSingle title="Agent Answers" value="90"/>
         <InsightsInfoSingle title="Agent Resolution Rate" value="90%"/>
         <InsightsInfoSingle title="Agent Upvote Ratio" value="90%" icon/>
-        <InsightsInfoSingle title="Saved Time" value="5H 20min."/>
+        <InsightsInfoSingle title="Saved Time" value="5h 20min."/>
     </section>
   )
 }

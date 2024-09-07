@@ -6,7 +6,7 @@ export const navList = [
     id: 0,
     name: "Help Desk",
     img: "/svg/nav/help-desk.svg",
-    path: "",
+    path: "helpdesk/discord",
     parent: true,
     disabled: false,
     children: [
@@ -52,7 +52,7 @@ export const navList = [
     id: 6,
     name: "Settings",
     img: "/svg/nav/settings.svg",
-    path: "",
+    path: "settings/general",
     parent: true,
     disabled: false,
     children: [

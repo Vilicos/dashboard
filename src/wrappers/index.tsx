@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@components/ui/toaster";
 import NoSupport from "@components/errors/no-support";
-import { useDebounce } from "@hooks/utils/use-debounce";
+import { useDebounce } from "@hooks/use-debounce";
 
 const queryClient = new QueryClient();
 

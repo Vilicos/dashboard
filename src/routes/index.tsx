@@ -5,23 +5,23 @@ import Layout from "@components/shared/layout";
 import General from "@pages/settings/general";
 import Bots from "@pages/settings/bots";
 import Team from "@pages/settings/team";
-import Auth from "@pages/auth-page";
 import CreateCompany from "@pages/auth-page/create-company";
 import Knowledge from "@pages/knowledge";
 import WebsiteDetails from "@pages/knowledge/details";
 import Discord from "@pages/help-desk/discord";
 import Insights from "@pages/insights";
+import AuthPage from "@pages/auth-page";
 
 
 export const routes = createBrowserRouter([
   {
     path: "login",
-    element: <Auth />,
+    element: <AuthPage />,
     errorElement: <ErrorRoute />,
   },
   {
     path: "register",
-    element: <Auth />,
+    element: <AuthPage />,
     errorElement: <ErrorRoute />,
   },
   {

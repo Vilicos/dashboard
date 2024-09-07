@@ -8,10 +8,10 @@ function Navbar() {
         {navList.map((item) =>
           item.parent ? (
             <li key={item.id}>
-              <span className={`py-1 px-3 font-medium flex items-center gap-x-3 mb-3`}>
+              <NavLink to={item.path} className={`py-1 px-3 font-medium flex items-center gap-x-3 mb-3 hover:bg-background rounded-xl `}>
                 <img src={item.img} alt={item.name} className="size-[22px] shrink-0" />
                 {item.name}
-              </span>
+              </NavLink>
               {item.children.map((child) => (
                 <NavLink
                   key={child.id}

@@ -1,5 +1,5 @@
 import { Button } from "@components/ui/button";
-import html2canvas from "html2canvas";
+import { domToPng } from "modern-screenshot";
 import { useState } from "react";
 
 function InsightsScreenShoot() {
@@ -12,11 +12,12 @@ function InsightsScreenShoot() {
     setIsTakingScreenshot(true);
 
     try {
-      const canvas = await html2canvas(insightPage, { scale: 4, backgroundColor: "#28334D" });
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = "screenshot.png";
-      link.click();
+      domToPng(insightPage,{scale: 4, backgroundColor: "#28334D",style:{color:"#EFF4FF"}}).then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "screenshot.png";
+        link.href = dataUrl;
+        link.click();
+      });
     } catch (error) {
       console.error("Screenshot capture failed:", error);
     } finally {

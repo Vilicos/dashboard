@@ -2,7 +2,7 @@ import CustomPagination from "@components/shared/custom-pagination";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@components/ui/sheet";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@components/ui/table";
 import { TabsContent } from "@components/ui/tabs";
-import usePagination from "@hooks/utils/use-pagination";
+import usePagination from "@hooks/use-pagination";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChevronRight } from "lucide-react";
 

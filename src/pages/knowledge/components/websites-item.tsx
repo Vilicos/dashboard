@@ -5,7 +5,7 @@ import RemoveDialog from "@components/shared/remove-dialog"
 function WebsiteItem({id}:{id:number}) {
   return (
     <div className="flex items-center justify-between px-3 py-5 rounded-lg">
-        <Link to={'testt'} className="flex items-center gap-x-2 hover:underline">
+        <Link to={'knowledge/test'} className="flex items-center gap-x-2 hover:underline">
             <img src="/svg/globe.svg" alt="Site" className="pointer-events-none size-5 shrink-0" />
             <p className="font-medium text-sm w-36 truncate">remox.io{" "}{id}</p>
         </Link>
