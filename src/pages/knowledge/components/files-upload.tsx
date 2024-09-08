@@ -3,6 +3,7 @@ import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { useToast } from "@components/ui/use-toast";
 import { companyFileSize, companyFileType } from "@constants/static-data";
+import { errorHandler } from "@helpers/error-handler";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { RefreshCw } from "lucide-react";
 
@@ -20,8 +21,7 @@ function FilesUpload() {
 
     if (isInvalidFormat) {
       toast({
-        title: "Wrong file format!",
-        description: "Only PDF files are supported",
+        title: "Only PDF files are supported",
         variant: "brandDestructive",
         duration: 3000,
       });
@@ -29,8 +29,7 @@ function FilesUpload() {
 
     if (isOversized) {
       toast({
-        title: "File size is too large!",
-        description: "File size must be a maximum of 25 MB",
+        title: "File size must be a maximum of 25 MB",
         variant: "brandDestructive",
         duration: 3000,
       });
@@ -39,17 +38,16 @@ function FilesUpload() {
     const formData = new FormData();
     formData.append("file", file);
     mutate(formData, {
-      onSuccess(data) {
+      onSuccess() {
         toast({
-          title: data.data.message,
+          title: "File Uploaded",
           variant: "brandDefault",
           duration: 3000,
         });
       },
       onError(error) {
         toast({
-          title: error.code,
-          description: error.message,
+          title: errorHandler(error),
           variant: "brandDestructive",
           duration: 3000,
         });

@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import instance from "./instance";
-import type { AuthResponse, LoginFormValues, RegisterFormValues } from "@custom-types/index";
+import type { AuthResponse, BaseResponse, LoginFormValues, RegisterFormValues } from "@custom-types/index";
 import type { AxiosError, AxiosResponse } from "axios";
 import Cookies from "js-cookie";
 import { accessTokenOptions, refreshTokenOptions } from "@constants/static-data";
 import { useEffect, useState } from "react";
+import { errorHandler } from "@helpers/error-handler";
 
 export const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -44,7 +45,7 @@ export const useAuth = () => {
     queryClient.clear();
   };
 
-  const login = useMutation<AxiosResponse<AuthResponse>, AxiosError, LoginFormValues>({
+  const login = useMutation<AxiosResponse<AuthResponse>, AxiosError<BaseResponse>, LoginFormValues>({
     mutationFn: (loginData) => instance.post("/api/user/login", loginData),
     onSuccess(data) {
       const { access, refresh } = data.data.result;
@@ -52,11 +53,11 @@ export const useAuth = () => {
       Cookies.set("accessToken", access, { refreshTokenOptions });
     },
     onError(error) {
-      console.error(`${error.code}: ${error.message}`);
+      console.error(errorHandler(error));
     },
   });
   
-  const register = useMutation<AxiosResponse<AuthResponse>, AxiosError, RegisterFormValues>({
+  const register = useMutation<AxiosResponse<AuthResponse>, AxiosError<BaseResponse>, RegisterFormValues>({
     mutationFn: (registerData) => instance.post("/api/user/register", registerData),
     onSuccess(data) {
       const { access, refresh } = data.data.result;
@@ -64,7 +65,7 @@ export const useAuth = () => {
       Cookies.set("accessToken", access, { refreshTokenOptions });
     },
     onError(error) {
-      console.error(`${error.code}: ${error.message}`);
+      console.error(errorHandler(error));
     },
   });
 

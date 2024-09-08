@@ -10,7 +10,6 @@ function InsightsShare() {
       await clipboard.writeText(window.location.href);
       toast({
         title: "URL copied to clipboard",
-        description:"You can share the Insights page with others.",
         variant: "brandDefault",
         duration: 3000,
       });
@@ -18,7 +17,6 @@ function InsightsShare() {
       console.error("Unable to copy to clipboard:", error);
       toast({
         title: "Oops! Something went wrong.",
-        description:"Unable to copy URL to clipboard",
         variant: "brandDestructive",
         duration: 3000,
       });

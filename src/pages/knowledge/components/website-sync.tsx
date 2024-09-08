@@ -8,7 +8,6 @@ function WebsiteSync() {
     console.log("Debounced")
     toast({
       title: "Sync request has been sent.",
-      description: "Links will be indexed again",
       variant: "brandDefault",
       duration: 3000,
 

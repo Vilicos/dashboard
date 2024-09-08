@@ -49,7 +49,7 @@ export type PaginationProps = {
   className?:ClassValue
 }
 
-interface BaseResponse {
+export interface BaseResponse {
   status:string;
   message:string
 }
@@ -69,4 +69,8 @@ export interface FileAddResponse extends BaseResponse{
     name:string;
     file:string;
   }
+}
+
+export interface FileRemoveResponse extends BaseResponse{
+  result:string
 }

@@ -12,6 +12,7 @@ import { useAuth } from "@/api/use-auth";
 import { useToast } from "@components/ui/use-toast";
 import AuthWrapper from "./auth-wrapper";
 import { Checkbox } from "@components/ui/checkbox";
+import { errorHandler } from "@helpers/error-handler";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const registerFormSchema = z.object({
@@ -66,8 +67,7 @@ function Register() {
       },
       onError(error) {
         toast({
-          title: error.code,
-          description: error.message,
+          title: errorHandler(error),
           variant: "brandDestructive",
           duration: 3000,
         });
