@@ -1,13 +1,18 @@
-import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
+import { Navigate, Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Header from "./header";
 import Navbar from "./navbar";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
 import OrganizationCard from "./organization-card";
 import LogoWrapper from "./logo-wrapper";
+import { useAuth } from "@/api/use-auth";
 const loadFeatures = () => import("@constants/animations").then((response) => response.default);
 
 function Layout() {
   const location = useLocation();
+  // const { isLoggedIn,hasCompany } = useAuth();
+  // if (!isLoggedIn) return <Navigate to="/login" replace />;
+  // if(isLoggedIn && !hasCompany) return <Navigate to='/create-company' replace/>
+
   return (
     <>
       <div className="grid grid-cols-[220px_1fr]">

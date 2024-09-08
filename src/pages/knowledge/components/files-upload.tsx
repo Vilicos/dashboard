@@ -1,47 +1,72 @@
+import { useFileAdd } from "@/api/use-file-add";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { useToast } from "@components/ui/use-toast";
+import { companyFileSize, companyFileType } from "@constants/static-data";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { RefreshCw } from "lucide-react";
 
 function FilesUpload() {
   const { toast } = useToast();
+  const { mutate, isPending } = useFileAdd();
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
     const file = input.files?.[0];
 
     if (!file) return;
 
-    const isInvalidFormat = file.type !== "application/pdf";
-    const isOversized = file.size > 25 * 1024 * 1024;
+    const isInvalidFormat = file.type !== companyFileType;
+    const isOversized = file.size > companyFileSize;
 
     if (isInvalidFormat) {
       toast({
         title: "Wrong file format!",
         description: "Only PDF files are supported",
         variant: "brandDestructive",
-        duration: 2000,
+        duration: 3000,
       });
-    } else if (isOversized) {
+    }
+
+    if (isOversized) {
       toast({
         title: "File size is too large!",
         description: "File size must be a maximum of 25 MB",
         variant: "brandDestructive",
-        duration: 2000,
+        duration: 3000,
       });
-    } else {
-      console.log(file);
     }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    mutate(formData, {
+      onSuccess(data) {
+        toast({
+          title: data.data.message,
+          variant: "brandDefault",
+          duration: 3000,
+        });
+      },
+      onError(error) {
+        toast({
+          title: error.code,
+          description: error.message,
+          variant: "brandDestructive",
+          duration: 3000,
+        });
+      },
+    });
 
     input.value = "";
   };
-  const loading = false;
   return (
     <>
-      <Label htmlFor="fileUpload" className={`${loading ? "bg-muted/40 pointer-events-none":"bg-primary "} w-[90px] h-7 rounded-lg gap-x-1 flex items-center justify-center cursor-pointer hover:bg-brand-secondary transition-colors select-none`}>
-        {
-            loading ? <RefreshCw className="size-[17px] animate-spin"/> : <img src="/svg/upload.svg" alt="Upload" className="pointer-events-none size-[14px]" />
-        }
+      <Label
+        htmlFor="fileUpload"
+        className={`${
+          isPending ? "bg-muted/40 pointer-events-none" : "bg-primary "
+        } w-[90px] h-7 rounded-lg gap-x-1 flex items-center justify-center cursor-pointer hover:bg-brand-secondary transition-colors select-none`}
+      >
+        {isPending ? <RefreshCw className="size-[17px] animate-spin" /> : <img src="/svg/upload.svg" alt="Upload" className="pointer-events-none size-[14px]" />}
         Upload
       </Label>
       <VisuallyHidden>

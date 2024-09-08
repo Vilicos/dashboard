@@ -112,6 +112,8 @@ export const botList = [
 
 export const uploadSize = 1024 * 1024 * 1.5;
 export const fileTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/jpg"]);
+export const companyFileType = "application/pdf";
+export const companyFileSize = 25 * 1024 * 1024;
 
 
 export const conversationData = {

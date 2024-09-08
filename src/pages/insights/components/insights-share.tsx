@@ -12,7 +12,7 @@ function InsightsShare() {
         title: "URL copied to clipboard",
         description:"You can share the Insights page with others.",
         variant: "brandDefault",
-        duration: 2000,
+        duration: 3000,
       });
     } catch (error) {
       console.error("Unable to copy to clipboard:", error);
@@ -20,7 +20,7 @@ function InsightsShare() {
         title: "Oops! Something went wrong.",
         description:"Unable to copy URL to clipboard",
         variant: "brandDestructive",
-        duration: 2000,
+        duration: 3000,
       });
     }
   };

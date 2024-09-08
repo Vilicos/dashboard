@@ -49,13 +49,24 @@ export type PaginationProps = {
   className?:ClassValue
 }
 
-export type AuthResponse = {
+interface BaseResponse {
   status:string;
-  message:string;
+  message:string
+}
+
+export interface AuthResponse extends BaseResponse {
   result:{
     refresh:string;
     access:string;
     user_type: `${UserRole}`;
     user_id:number
   } | Record<string, never>
+}
+
+export interface FileAddResponse extends BaseResponse{
+  result:{
+    id:number;
+    name:string;
+    file:string;
+  }
 }

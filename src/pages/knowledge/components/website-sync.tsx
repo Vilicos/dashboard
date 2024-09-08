@@ -10,7 +10,7 @@ function WebsiteSync() {
       title: "Sync request has been sent.",
       description: "Links will be indexed again",
       variant: "brandDefault",
-      duration: 2000,
+      duration: 3000,
 
     });
   }
