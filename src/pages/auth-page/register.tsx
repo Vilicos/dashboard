@@ -73,7 +73,7 @@ function Register() {
         });
       },
     });
-    console.log(values)
+
   };
 
   const handleNavigation = () => {
