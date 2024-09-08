@@ -1,16 +1,16 @@
 import LogoWrapper from "@components/shared/logo-wrapper";
-import AuthComponent from "./auth-component";
+import type { ReactNode } from "react";
 
 
-function AuthPage() {
+function AuthWrapper({children}:{children:ReactNode}) {
   return (
     <main className="min-h-dvh flex items-center justify-center">
       <div className="absolute top-8 left-10">
         <LogoWrapper />
       </div>
-        <AuthComponent />
+        {children}
     </main>
   );
 }
 
-export default AuthPage;
+export default AuthWrapper;

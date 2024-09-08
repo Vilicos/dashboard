@@ -1,4 +1,5 @@
-import type { loginFormSchema, registerFormSchema } from "@constants/static-data";
+import type { loginFormSchema } from "@pages/auth-page/login";
+import type { registerFormSchema } from "@pages/auth-page/register";
 import type { ClassValue } from "clsx";
 import type { ReactNode } from "react";
 import type { z } from "zod";
@@ -24,27 +25,6 @@ export enum removeDialogContent {
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 export type RegisterFormValues = z.infer<typeof registerFormSchema>;
 
-export interface AuthRouteConfig {
-  title: string;
-  description: string;
-  urlTitle: string;
-  urlPath: string;
-  submitName: string;
-  googleName: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formSchema: z.ZodSchema<any>;
-  defaultValues:{
-    email:string;
-    password:string;
-    fullName?:string;
-    agreement?:boolean
-  }
-}
-export type AuthData = {
-  "/login": AuthRouteConfig;
-  "/register": AuthRouteConfig;
-};
-
 export type ITooltip = {
   content:string;
   children:ReactNode;
@@ -67,4 +47,15 @@ export type PaginationProps = {
   hasPreviousPage:boolean;
   hasNextPage:boolean;
   className?:ClassValue
+}
+
+export type AuthResponse = {
+  status:string;
+  message:string;
+  result:{
+    refresh:string;
+    access:string;
+    user_type: `${UserRole}`;
+    user_id:number
+  } | Record<string, never>
 }

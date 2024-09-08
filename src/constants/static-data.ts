@@ -1,5 +1,4 @@
-import type { AuthData } from "@custom-types/index";
-import { z } from "zod";
+import { env } from "@/env";
 
 export const navList = [
   {
@@ -114,64 +113,6 @@ export const botList = [
 export const uploadSize = 1024 * 1024 * 1.5;
 export const fileTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/jpg"]);
 
-export const loginFormSchema = z.object({
-  email: z
-    .string({
-      required_error: "Email is required",
-      invalid_type_error: "Invalid email address",
-    })
-    .email({ message: "Invalid email address" }),
-  password: z
-    .string({
-      required_error: "Password is required",
-      invalid_type_error: "Invalid password",
-    })
-    .min(5, { message: "Minimum 5 characters" })
-    .max(40, { message: "Maximum 40 characters" })
-    .trim(),
-});
-export const registerFormSchema = loginFormSchema.extend({
-  fullName: z
-    .string({
-      required_error: "Name is required",
-      invalid_type_error: "Invalid full name",
-    })
-    .min(3, { message: "Minimum 3 characters" })
-    .max(40, { message: "Maximum 40 characters" })
-    .trim(),
-  agreement:z.boolean().refine((value)=> value === true,{message:"Agreement must be accepted"}),
-});
-
-export const authData: AuthData = {
-  "/login": {
-    title: "Log In",
-    description: "Don't have an account?",
-    urlTitle: "Create Now",
-    urlPath: "/register",
-    submitName: "Log In",
-    googleName: "Login with Google",
-    formSchema: loginFormSchema,
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  },
-  "/register": {
-    title: "Sign Up",
-    description: "Already have an account?",
-    urlTitle: "Log in",
-    urlPath: "/login",
-    submitName: "Next",
-    googleName: "Continue with Google",
-    formSchema: registerFormSchema,
-    defaultValues: {
-      email: "",
-      password: "",
-      fullName: "",
-      agreement:false
-    },
-  },
-};
 
 export const conversationData = {
   discord: {
@@ -196,3 +137,15 @@ export const agentWelcome = [
   "Please keep in mind that the quality of my answers directly correlates with the information you provide.",
   "I'd love to chat with you.",
 ];
+
+export const refreshTokenOptions = {
+  expires: env.VITE_Refresh_Expire,
+  secure: true,
+  sameSite: "Strict",
+};
+
+export const accessTokenOptions = {
+  expires: env.VITE_Refresh_Expire,
+  secure: true,
+  sameSite: "Strict",
+};

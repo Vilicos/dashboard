@@ -10,18 +10,19 @@ import Knowledge from "@pages/knowledge";
 import WebsiteDetails from "@pages/knowledge/details";
 import Discord from "@pages/help-desk/discord";
 import Insights from "@pages/insights";
-import AuthPage from "@pages/auth-page";
+import Login from "@pages/auth-page/login";
+import Register from "@pages/auth-page/register";
 
 
 export const routes = createBrowserRouter([
   {
     path: "login",
-    element: <AuthPage />,
+    element: <Login />,
     errorElement: <ErrorRoute />,
   },
   {
     path: "register",
-    element: <AuthPage />,
+    element: <Register />,
     errorElement: <ErrorRoute />,
   },
   {
