@@ -51,9 +51,9 @@ instance.interceptors.response.use(
     if (status === 401 && originalRequest) {
       try {
         const refreshToken = Cookies.get("refreshToken");
-        const { data: token } = await instance.post("/api/refresh-token", { refreshToken });
-        Cookies.set("refreshToken", token, { expires: env.VITE_Refresh_Expire, secure: true, sameSite: "Strict" });
-        originalRequest.headers.Authorization = `Bearer ${token}`;
+        const { data: token } = await instance.post<{refresh:string}>("/api/user/token/refresh", { refreshToken });
+        Cookies.set("refreshToken", token.refresh, { expires: env.VITE_Refresh_Expire, secure: true, sameSite: "Strict" });
+        originalRequest.headers.Authorization = `Bearer ${token.refresh}`;
         return await instance(originalRequest);
       } catch (error) {
         Cookies.remove("accessToken");
