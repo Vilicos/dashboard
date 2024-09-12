@@ -54,7 +54,7 @@ function Login() {
       },
       onError(error) {
         toast({
-          title: errorHandler(error),
+          title: errorHandler(error) || "Oops! Something Went Wrong!",
           variant: "brandDestructive",
           duration: 3000,
         });

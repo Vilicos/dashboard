@@ -37,7 +37,7 @@ export const registerFormSchema = z.object({
     .min(5, { message: "Minimum 5 characters" })
     .max(40, { message: "Maximum 40 characters" })
     .trim(),
-  agreement: z.boolean().refine((value) => value === true, { message: "Agreement must be accepted" }),
+    is_term: z.boolean().refine((value) => value === true, { message: "Agreement must be accepted" }),
 });
 function Register() {
   const [showPass, setPass] = useState(false);
@@ -54,7 +54,7 @@ function Register() {
       full_name: "",
       email: "",
       password: "",
-      agreement:false
+      is_term:false
     },
   });
 
@@ -65,7 +65,7 @@ function Register() {
       },
       onError(error) {
         toast({
-          title: error.response?.data[0] ?? "Oops! Something Went Wrong!",
+          title: error.response?.data[0] || "Oops! Something Went Wrong!",
           variant: "brandDestructive",
           duration: 3000,
         });
@@ -168,7 +168,7 @@ function Register() {
             />
             <FormField
               control={form.control}
-              name="agreement"
+              name="is_term"
               render={({ field }) => (
                 <FormItem className="relative mb-7 flex items-center space-y-0">
                   <FormControl>
