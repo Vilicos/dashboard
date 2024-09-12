@@ -1,4 +1,3 @@
-import { env } from "@/env";
 
 export const navList = [
   {
@@ -140,14 +139,3 @@ export const agentWelcome = [
   "I'd love to chat with you.",
 ];
 
-export const refreshTokenOptions = {
-  expires: env.VITE_Refresh_Expire,
-  secure: true,
-  sameSite: "Strict",
-};
-
-export const accessTokenOptions = {
-  expires: env.VITE_Refresh_Expire,
-  secure: true,
-  sameSite: "Strict",
-};

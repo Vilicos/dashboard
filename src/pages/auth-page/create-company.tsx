@@ -1,12 +1,14 @@
+import { useCreateCompany } from "@/api/use-create-company";
 import LogoWrapper from "@components/shared/logo-wrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Button } from "@components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
 import { Input } from "@components/ui/input";
+import { useToast } from "@components/ui/use-toast";
 import { fileTypes, uploadSize } from "@constants/static-data";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -20,7 +22,7 @@ const formSchema = z.object({
       .optional(),
     z.literal(""),
   ]),
-  companyName: z
+  name: z
     .string({
       required_error: "Name is required",
       invalid_type_error: "Invalid full name",
@@ -31,28 +33,54 @@ const formSchema = z.object({
 });
 function CreateCompany() {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const { mutate } = useCreateCompany();
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
     defaultValues: {
       logo: undefined,
-      companyName: "",
+      name: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === "logo") {
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else {
+          formData.append(key, String(""));
+        }
+      } else {
+        formData.append(key, String(value));
+      }
+    });
+    
+    mutate(formData, {
+      onSuccess() {
+        navigate('/',{replace:true})
+        form.reset();
+      },
+      onError(error) {
+        const combinedErrorMessage = Object.values(error.response?.data.message || {})
+          .flat()
+          .join(", ");
+        toast({
+          title: combinedErrorMessage || "Oops! Something Went Wrong!",
+          variant: "brandDestructive",
+          duration: 3000,
+        });
+      },
+    });
   };
 
   const previousNavigate = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigate("/register", { replace: true });
   };
-
-  useEffect(() => {
-    if (form.formState.isSubmitSuccessful) return navigate("/");
-  }, [form.formState.isSubmitSuccessful, navigate]);
 
   return (
     <main className="min-h-dvh flex items-center justify-center">
@@ -71,7 +99,7 @@ function CreateCompany() {
                   <FormItem className="relative mb-8">
                     <FormLabel className="max-w-fit">
                       <Avatar className="size-20 overflow-hidden mx-auto cursor-pointer">
-                        <AvatarImage src={selectedImage ?? ""} className="object-cover"/>
+                        <AvatarImage src={selectedImage ?? ""} className="object-cover" />
                         <AvatarFallback>
                           <img src="/img/empty-upload.png" alt="Empty" className="w-full h-full object-cover" />
                         </AvatarFallback>
@@ -105,7 +133,7 @@ function CreateCompany() {
             />
             <FormField
               control={form.control}
-              name="companyName"
+              name="name"
               render={({ field }) => (
                 <FormItem className="relative">
                   <FormLabel className="font-medium text-sm !text-brand-fifth">Company Name</FormLabel>

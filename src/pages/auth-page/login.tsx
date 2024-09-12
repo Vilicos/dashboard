@@ -8,10 +8,10 @@ import { Input } from "@components/ui/input";
 import { Button } from "@components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
-import { useAuth } from "@/api/use-auth";
 import { useToast } from "@components/ui/use-toast";
 import AuthWrapper from "./auth-wrapper";
 import { errorHandler } from "@helpers/error-handler";
+import { useSign } from "@/api/use-sign";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const loginFormSchema = z.object({
@@ -35,7 +35,7 @@ function Login() {
   const [showPass, setPass] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { login } = useAuth();
+  const { login } = useSign();
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -47,12 +47,10 @@ function Login() {
       password: "",
     },
   });
-
   const onSubmit = (values: z.infer<typeof loginFormSchema>) => {
     login.mutate(values, {
       onSuccess() {
         form.reset();
-        navigate("/", { replace: true });
       },
       onError(error) {
         toast({
@@ -64,11 +62,11 @@ function Login() {
     });
   };
 
- 
   const handleNavigation = () => {
+    form.reset();
     navigate("/register", { replace: true });
   };
-  
+
   return (
     <AuthWrapper>
       <section className="max-w-[350px] w-full">

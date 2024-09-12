@@ -12,22 +12,23 @@ import Discord from "@pages/help-desk/discord";
 import Insights from "@pages/insights";
 import Login from "@pages/auth-page/login";
 import Register from "@pages/auth-page/register";
+import AuthLayout from "@components/shared/auth-layout";
 
 
 export const routes = createBrowserRouter([
   {
     path: "login",
-    element: <Login />,
+    element: <AuthLayout><Login /></AuthLayout>,
     errorElement: <ErrorRoute />,
   },
   {
     path: "register",
-    element: <Register />,
+    element: <AuthLayout><Register /></AuthLayout>,
     errorElement: <ErrorRoute />,
   },
   {
     path: "create-company",
-    element: <CreateCompany />,
+    element: <AuthLayout><CreateCompany /></AuthLayout>,
     errorElement: <ErrorRoute />,
   },
   {

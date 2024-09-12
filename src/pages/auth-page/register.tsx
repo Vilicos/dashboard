@@ -8,11 +8,10 @@ import { Input } from "@components/ui/input";
 import { Button } from "@components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
-import { useAuth } from "@/api/use-auth";
 import { useToast } from "@components/ui/use-toast";
 import AuthWrapper from "./auth-wrapper";
 import { Checkbox } from "@components/ui/checkbox";
-import { errorHandler } from "@helpers/error-handler";
+import { useSign } from "@/api/use-sign";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const registerFormSchema = z.object({
@@ -44,7 +43,7 @@ function Register() {
   const [showPass, setPass] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { register } = useAuth();
+  const { register } = useSign();
 
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
@@ -63,11 +62,10 @@ function Register() {
     register.mutate(values, {
       onSuccess() {
         form.reset();
-        navigate("/", { replace: true });
       },
       onError(error) {
         toast({
-          title: errorHandler(error),
+          title: error.response?.data[0] ?? "Oops! Something Went Wrong!",
           variant: "brandDestructive",
           duration: 3000,
         });
