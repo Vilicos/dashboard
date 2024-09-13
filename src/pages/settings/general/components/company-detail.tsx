@@ -1,3 +1,4 @@
+import { useGetCompany } from "@/api/use-get-company";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Button } from "@components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
@@ -8,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -40,6 +42,9 @@ const formSchema = z.object({
 
 function CompanyDetail() {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
+  // const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  // const { data,isPending,isSuccess,isError } = useGetCompany(cookies.refreshToken);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",

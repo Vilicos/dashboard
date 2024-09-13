@@ -1,15 +1,14 @@
-import { useFileAdd } from "@/api/use-file-add";
+import { useCreateFiles } from "@/api/use-create-files";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { useToast } from "@components/ui/use-toast";
 import { companyFileSize, companyFileType } from "@constants/static-data";
-import { errorHandler } from "@helpers/error-handler";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { RefreshCw } from "lucide-react";
 
 function FilesUpload() {
   const { toast } = useToast();
-  const { mutate, isPending } = useFileAdd();
+  const { mutate, isPending } = useCreateFiles();
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
     const file = input.files?.[0];
@@ -45,9 +44,9 @@ function FilesUpload() {
           duration: 3000,
         });
       },
-      onError(error) {
+      onError() {
         toast({
-          title: errorHandler(error),
+          title: "Oops! Somethings Went Wrong!",
           variant: "brandDestructive",
           duration: 3000,
         });

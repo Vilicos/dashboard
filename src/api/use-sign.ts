@@ -4,6 +4,7 @@ import type { AuthResponse, LoginFormValues, RegisterFormValues } from "@custom-
 import type { AxiosError, AxiosResponse } from "axios";
 import { env } from "@/env";
 import { useCookies } from "react-cookie";
+import { queryClient } from "@wrappers/index";
 
 type RegisterErrorResponse = Array<string>
 
@@ -31,6 +32,11 @@ export const useSign = () => {
       console.error(error)
   },
   });
+  const logOut = ()=>{
+    removeCookie('accessToken')
+    removeCookie('refreshToken')
+    queryClient.clear();
+}
 
-  return { login, register };
+  return { login, register,logOut};
 };

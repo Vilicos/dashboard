@@ -6,7 +6,8 @@ import { Toaster } from "@components/ui/toaster";
 import NoSupport from "@components/errors/no-support";
 import { useDebounce } from "@hooks/use-debounce";
 
-const queryClient = new QueryClient();
+// eslint-disable-next-line react-refresh/only-export-components
+export const queryClient = new QueryClient();
 
 function Wrappers({ children }: { children: ReactNode }) {
   const [width, setWidth] = useState<number>(window.innerWidth);
