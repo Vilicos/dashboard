@@ -30,13 +30,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
-    // const url = response.config.url?.toLowerCase();
-    // if (url?.includes("/login") || url?.includes("/register")) {
-    //   const responseData = response.data as Response;
-    //   Cookies.set("accessToken", responseData.result.access, { expires: env.VITE_Refresh_Expire, secure: true, sameSite: "Strict" });
-    //   Cookies.set("refreshToken", responseData.result.refresh, { expires: env.VITE_Refresh_Expire, secure: true, sameSite: "Strict" });
-    //   return response;
-    // }
     return response;
   },
   async (error: AxiosError) => {
