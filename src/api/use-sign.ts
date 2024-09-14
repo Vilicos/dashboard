@@ -10,7 +10,7 @@ type RegisterErrorResponse = Array<string>
 
 export const useSign = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  const [cookies, setCookie, removeCookie] = useCookies(['refreshToken','accessToken']);
+  const [_, setCookie, removeCookie] = useCookies(['refreshToken','accessToken']);
   const login = useMutation<AxiosResponse<AuthResponse>, AxiosError<AuthResponse>, LoginFormValues>({
     mutationFn: (loginData) => instance.post("/api/user/login", loginData),
     onSuccess(data) {

@@ -30,7 +30,7 @@ function TeamItem({ email, fullName, role }: IProps) {
       </TableCell>
       <TableCell className="ml-3 min-w-[56px] rounded-r-lg">
         {
-            role === UserRole.Member && <RemoveDialog type="member"/>
+            role === UserRole.Member && <RemoveDialog type="member" id={0}/>
         }
       </TableCell>
     </TableRow>
