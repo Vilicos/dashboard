@@ -20,7 +20,7 @@ export const fetchGetCompany = async () => {
 
 export const useGetCompany = (parameters:IProps) =>
   useQuery({
-    queryKey: ["getCompany"],
+    queryKey: ["getCompany",parameters],
     retry: 0,
     queryFn: fetchGetCompany,
     enabled:!!parameters

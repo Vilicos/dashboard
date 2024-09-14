@@ -22,7 +22,7 @@ export const fetchGetWebsites = async () => {
 
 export const useGetWebsites = (parameters: IProps) =>
   useQuery({
-    queryKey: ["getWebsites"],
+    queryKey: ["getWebsites",parameters],
     retry: 0,
     refetchInterval:30000,
     queryFn: fetchGetWebsites,

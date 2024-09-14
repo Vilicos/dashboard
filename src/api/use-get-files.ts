@@ -24,7 +24,7 @@ export const fetchGetFiles = async () => {
 
 export const useGetFiles = (parameters:IProps) =>
   useQuery({
-    queryKey: ["getFiles"],
+    queryKey: ["getFiles",parameters],
     retry: 0,
     queryFn: fetchGetFiles,
     placeholderData: (previousData) => previousData,

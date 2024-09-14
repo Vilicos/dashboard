@@ -20,7 +20,8 @@ export enum UserRole {
 export enum removeDialogContent {
   Member = "member",
   File = "file",
-  Website = "website"
+  Website = "website",
+  Source = "source"
 }
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 export type RegisterFormValues = z.infer<typeof registerFormSchema>;

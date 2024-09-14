@@ -1,5 +1,6 @@
 import { useDeleteFiles } from "@/api/use-delete-files";
 import { useDeleteWebsites } from "@/api/use-delete-websites";
+import { useDeleteWebsitesSource } from "@/api/use-delete-websites-source";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,20 +21,38 @@ function RemoveDialog({ type, id }: { type: `${removeDialogContent}`; id: number
   const [open, setOpen] = useState(false);
   const { mutate: mutateFile } = useDeleteFiles();
   const { mutate: mutateWebsites } = useDeleteWebsites();
+  const { mutate: mutateSource } = useDeleteWebsitesSource();
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    if (type === "file") {
+    switch (type) {
+    case "file": {
       mutateFile(id, {
         onSettled() {
           setOpen(false);
         },
       });
-    } else if (type === "website") {
+    
+    break;
+    }
+    case "website": {
       mutateWebsites(id, {
         onSettled() {
           setOpen(false);
         },
       });
+    
+    break;
+    }
+    case "source": {
+      mutateSource(id, {
+        onSettled() {
+          setOpen(false);
+        },
+      });
+    
+    break;
+    }
+    // No default
     }
   };
   return (

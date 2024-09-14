@@ -52,7 +52,7 @@ export const routes = createBrowserRouter([
         errorElement: <ErrorRoute />,
       },
       {
-        path: "knowledge/:name",
+        path: "knowledge/:id",
         element: <WebsiteDetails />,
         errorElement: <ErrorRoute />,
       },
