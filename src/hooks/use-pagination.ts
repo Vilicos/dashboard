@@ -26,7 +26,7 @@ function usePagination<T>({ data, perPage,}: UsePaginationProps<T>): UsePaginati
 
   const totalPages = useMemo(() => Math.ceil(data.length / perPage), [data.length, perPage]);
   const totalData = data.length
-  const startItemIndex = (currentPage - 1) * perPage + 1;
+  const startItemIndex = (currentPage - 1) * perPage + (totalData > 0 ? 1:0);
   const endItemIndex = Math.min(startItemIndex + perPage - 1, data.length);
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * perPage;

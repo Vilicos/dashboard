@@ -4,14 +4,15 @@ import type { AxiosError, AxiosResponse } from "axios";
 import type { BaseResponse, FileAddResponse } from "@custom-types/index";
 import { queryClient } from "@wrappers/index";
 
-export const useCreateFiles= () => {
-  return useMutation<AxiosResponse<FileAddResponse>, AxiosError<BaseResponse>, FormData>({
-    mutationFn: (file) => instance.post("/api/company/file/create", file),
+
+export const useCreateWebsites= () => {
+  return useMutation<AxiosResponse<FileAddResponse>, AxiosError<BaseResponse>, {name:string}>({
+    mutationFn: (website) => instance.post("/api/company/website/create", website),
     onError(error) {
       console.error(error);
     },
     onSettled() {
-      queryClient.refetchQueries({ queryKey: ["getFiles"] });
-    },
+        queryClient.refetchQueries({ queryKey: ["getWebsites"] });
+      },
   });
 };

@@ -1,4 +1,5 @@
 import { useDeleteFiles } from "@/api/use-delete-files";
+import { useDeleteWebsites } from "@/api/use-delete-websites";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,16 +16,26 @@ import { Separator } from "@components/ui/separator";
 import type { removeDialogContent } from "@custom-types/index";
 import { useState } from "react";
 
-function RemoveDialog({type,id}:{type:`${removeDialogContent}`;id:number}) {
-  const[open,setOpen] = useState(false)
-  const {mutate} = useDeleteFiles();
-
-  const onSubmit = (event:React.MouseEvent<HTMLButtonElement>)=>{
-    event.preventDefault()
-    mutate(id,{onSettled() {
-        setOpen(false)
-    },})
-  }
+function RemoveDialog({ type, id }: { type: `${removeDialogContent}`; id: number }) {
+  const [open, setOpen] = useState(false);
+  const { mutate: mutateFile } = useDeleteFiles();
+  const { mutate: mutateWebsites } = useDeleteWebsites();
+  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (type === "file") {
+      mutateFile(id, {
+        onSettled() {
+          setOpen(false);
+        },
+      });
+    } else if (type === "website") {
+      mutateWebsites(id, {
+        onSettled() {
+          setOpen(false);
+        },
+      });
+    }
+  };
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
@@ -41,7 +52,9 @@ function RemoveDialog({type,id}:{type:`${removeDialogContent}`;id:number}) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="bg-secondary hover:bg-secondary/80 transition-colors rounded-xl font-semibold w-[90x] h-9">Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onSubmit} className="bg-brand-dest-secondary hover:bg-destructive transition-colors rounded-xl font-semibold w-[90x] h-9">Remove</AlertDialogAction>
+          <AlertDialogAction onClick={onSubmit} className="bg-brand-dest-secondary hover:bg-destructive transition-colors rounded-xl font-semibold w-[90x] h-9">
+            Remove
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
