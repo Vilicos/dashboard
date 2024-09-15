@@ -4,8 +4,9 @@ import Navbar from "./navbar";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
 import OrganizationCard from "./organization-card";
 import LogoWrapper from "./logo-wrapper";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { BeatLoader } from "react-spinners";
 const loadFeatures = () => import("@constants/animations").then((response) => response.default);
 
 function Layout() {
@@ -13,13 +14,25 @@ function Layout() {
   const navigate = useNavigate();
   const path = location.pathname;
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
-
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   // Auth Logic
 
   useEffect(() => {
-    if (!cookies.refreshToken) return navigate("/login", { replace: true });
+    // eslint-disable-next-line unicorn/no-negated-condition
+    if (!cookies.refreshToken) {
+      navigate("/login", { replace: true });
+    } else {
+      setIsAuthChecked(true);
+    }
   }, [cookies.refreshToken, navigate, path]);
 
+  if (!isAuthChecked) {
+    return (
+      <div className="flex items-center min-h-screen">
+        <BeatLoader size={14} color="#3375FE" className="mx-auto" />
+      </div>
+    );
+  }
   return (
     <>
       <div className="grid grid-cols-[220px_1fr]">

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import DeleteAccount from "./delete-account";
 
 const formSchema = z.object({
   logo: z.union([
@@ -32,7 +33,7 @@ const formSchema = z.object({
     .min(3, { message: "Minimum 3 characters" })
     .max(40, { message: "Maximum 40 characters" })
     .trim(),
-    full_name: z
+  full_name: z
     .string({
       required_error: "Name is required",
       invalid_type_error: "Invalid full name",
@@ -45,9 +46,9 @@ const formSchema = z.object({
 function CompanyDetail() {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
-  const { data,isPending,isSuccess} = useGetCompany(cookies.refreshToken);
-  const {mutate:updateCompany,isPending:companyPending} = useUpdateCompany()
-  const {mutate:updateUser,isPending:userPending} = useUpdateUser()
+  const { data, isPending, isSuccess } = useGetCompany(cookies.refreshToken);
+  const { mutate: updateCompany, isPending: companyPending } = useUpdateCompany();
+  const { mutate: updateUser, isPending: userPending } = useUpdateUser();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
@@ -58,44 +59,43 @@ function CompanyDetail() {
     },
   });
   const isChanged = form.formState.isDirty;
-  const isSubmitting = companyPending || userPending || isPending
+  const isSubmitting = companyPending || userPending || isPending;
 
   useEffect(() => {
-    if(data && data.results && isSuccess){
-      form.resetField('full_name',{defaultValue:data.results.full_name})
-      form.resetField('name',{defaultValue:data.results.name})
-      setSelectedImage(data.results.logo)
+    if (data && data.results && isSuccess) {
+      form.resetField("full_name", { defaultValue: data.results.full_name });
+      form.resetField("name", { defaultValue: data.results.name });
+      setSelectedImage(data.results.logo);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data,isSuccess])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isSuccess]);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) =>{
-      if(key === "logo"){
-        if (value instanceof File){
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === "logo") {
+        if (value instanceof File) {
           formData.append(key, value);
         }
-      }else{
+      } else {
         formData.append(key, String(value));
       }
-    })
-    if(isSuccess && data && data.results.id){
-      updateCompany({formData:formData,id:data.results.id})
-      updateUser(values.full_name)
+    });
+    if (isSuccess && data && data.results.id) {
+      updateCompany({ formData: formData, id: data.results.id });
+      updateUser(values.full_name);
     }
   };
 
-  const formReset = () =>{
-    if(data && data.results && !isPending && isSuccess){
-      setSelectedImage(data.results.logo)
-      form.resetField('full_name',{defaultValue:data.results.full_name})
-      form.resetField('name',{defaultValue:data.results.name})
+  const formReset = () => {
+    if (data && data.results && !isPending && isSuccess) {
+      setSelectedImage(data.results.logo);
+      form.resetField("full_name", { defaultValue: data.results.full_name });
+      form.resetField("name", { defaultValue: data.results.name });
     } else {
-      form.reset()
+      form.reset();
     }
-    
-  }
+  };
   return (
     <div className="bg-card p-5 rounded-lg border">
       <Form {...form}>
@@ -111,7 +111,7 @@ function CompanyDetail() {
                   <FormDescription className="font-medium text-sm text-brand-fifth !my-5">This is your company’s logo.</FormDescription>
                   <FormLabel className="inline-block cursor-pointer size-20 rounded-full">
                     <Avatar className="size-20 overflow-hidden rounded-full">
-                      <AvatarImage src={selectedImage ?? ""} className="object-cover"/>
+                      <AvatarImage src={selectedImage ?? ""} className="object-cover" />
                       <AvatarFallback>
                         <img src="/img/empty-upload.png" alt="Empty" className="w-full h-full object-cover" />
                       </AvatarFallback>
@@ -190,19 +190,20 @@ function CompanyDetail() {
               </>
             )}
           />
-          <div className="space-x-5 flex items-center justify-end">
-            {isChanged && (
-              <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={"secondary"} onClick={formReset}>
-                Cancel
-              </Button>
-            )}
+          <div className="flex items-center justify-between">
+            <DeleteAccount/>
+            <div className="space-x-5 flex items-center">
+              {isChanged && (
+                <Button className="w-[90px] h-9 rounded-xl text-sm font-semibold" type="submit" variant={"secondary"} onClick={formReset}>
+                  Cancel
+                </Button>
+              )}
 
-            <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold relative" type="submit" variant={"brand"} disabled={isSubmitting} >
-              {
-                isSubmitting && <RefreshCw className="size-4 animate-spin mr-0.5 shrink-0"/>
-              }
-              Save
-            </Button>
+              <Button className="w-[120px] h-9 rounded-xl text-sm font-semibold relative" type="submit" variant={"brand"} disabled={isSubmitting}>
+                {isSubmitting && <RefreshCw className="size-4 animate-spin mr-0.5 shrink-0" />}
+                Save
+              </Button>
+            </div>
           </div>
         </form>
       </Form>
