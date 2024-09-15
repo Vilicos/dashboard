@@ -13,7 +13,7 @@ function OrganizationCard() {
       {isSuccess && data && !isError ? (
         <>
           <Avatar className="size-6 overflow-hidden shrink-0">
-            <AvatarImage src={data.results.logo} className="object-cover inline-block" alt="Nijat Hamid" />
+            <AvatarImage src={data.results.logo ?? ""} className="object-cover inline-block" alt="Nijat Hamid" />
             <AvatarFallback className="bg-background border"></AvatarFallback>
           </Avatar>
           <span className="truncate font-semibold">{data.results.name}</span>

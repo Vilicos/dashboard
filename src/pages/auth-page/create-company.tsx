@@ -51,8 +51,6 @@ function CreateCompany() {
       if (key === "logo") {
         if (value instanceof File) {
           formData.append(key, value);
-        } else {
-          formData.append(key, String(""));
         }
       } else {
         formData.append(key, String(value));

@@ -5,7 +5,11 @@ import instance from "./instance";
 interface GetCompany  {
     results: {
       name: string;
-      logo: string;
+      logo: string | null;
+      modified:string;
+      created:string;
+      id:number;
+      full_name:string;
     };
   }
 

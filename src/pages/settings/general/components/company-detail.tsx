@@ -1,3 +1,6 @@
+import { useGetCompany } from "@/api/use-get-company";
+import { useUpdateCompany } from "@/api/use-update-company";
+import { useUpdateUser } from "@/api/use-update-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Button } from "@components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
@@ -7,7 +10,8 @@ import { fileTypes, uploadSize } from "@constants/static-data";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -20,7 +24,7 @@ const formSchema = z.object({
       .optional(),
     z.literal(""),
   ]),
-  companyName: z
+  name: z
     .string({
       required_error: "Name is required",
       invalid_type_error: "Invalid full name",
@@ -28,7 +32,7 @@ const formSchema = z.object({
     .min(3, { message: "Minimum 3 characters" })
     .max(40, { message: "Maximum 40 characters" })
     .trim(),
-  userFullName: z
+    full_name: z
     .string({
       required_error: "Name is required",
       invalid_type_error: "Invalid full name",
@@ -40,40 +44,57 @@ const formSchema = z.object({
 
 function CompanyDetail() {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
-  // const [cookies] = useCookies(["refreshToken", "accessToken"]);
-  // const { data,isPending,isSuccess,isError } = useGetCompany(cookies.refreshToken);
-
+  const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  const { data,isPending,isSuccess} = useGetCompany(cookies.refreshToken);
+  const {mutate:updateCompany,isPending:companyPending} = useUpdateCompany()
+  const {mutate:updateUser,isPending:userPending} = useUpdateUser()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
     defaultValues: {
       logo: undefined,
-      companyName: "",
-      userFullName: "",
+      name: "",
+      full_name: "",
     },
   });
   const isChanged = form.formState.isDirty;
-  const isSubmitting = false
+  const isSubmitting = companyPending || userPending || isPending
+
+  useEffect(() => {
+    if(data && data.results && isSuccess){
+      form.resetField('full_name',{defaultValue:data.results.full_name})
+      form.resetField('name',{defaultValue:data.results.name})
+      setSelectedImage(data.results.logo)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data,isSuccess])
+  
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
     Object.entries(values).forEach(([key, value]) =>{
       if(key === "logo"){
         if (value instanceof File){
           formData.append(key, value);
-        }else{
-          formData.append(key, String(""));
         }
       }else{
         formData.append(key, String(value));
       }
     })
-    for (const pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-  }
+    if(isSuccess && data && data.results.id){
+      updateCompany({formData:formData,id:data.results.id})
+      updateUser(values.full_name)
+    }
   };
 
   const formReset = () =>{
-    form.reset()
+    if(data && data.results && !isPending && isSuccess){
+      setSelectedImage(data.results.logo)
+      form.resetField('full_name',{defaultValue:data.results.full_name})
+      form.resetField('name',{defaultValue:data.results.name})
+    } else {
+      form.reset()
+    }
+    
   }
   return (
     <div className="bg-card p-5 rounded-lg border">
@@ -126,7 +147,7 @@ function CompanyDetail() {
           />
           <FormField
             control={form.control}
-            name="companyName"
+            name="name"
             render={({ field }) => (
               <>
                 <FormItem className="relative space-y-0">
@@ -149,7 +170,7 @@ function CompanyDetail() {
           />
           <FormField
             control={form.control}
-            name="userFullName"
+            name="full_name"
             render={({ field }) => (
               <>
                 <FormItem className="relative space-y-0">
