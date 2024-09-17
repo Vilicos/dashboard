@@ -119,7 +119,7 @@ export const conversationData = {
   discord: {
     logo: "/img/discord-two.png",
     title: "Discord",
-    isActive: true,
+    isActive: false,
   },
   telegram: {
     logo: "/img/telegram-two.png",
