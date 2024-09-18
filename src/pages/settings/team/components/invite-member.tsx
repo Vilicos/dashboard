@@ -20,6 +20,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Input } from "@components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/ui/select";
 import { Button } from "@components/ui/button";
+import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
 
 const formSchema = z.object({
   fullName: z
@@ -77,7 +78,7 @@ function InviteMember() {
           </VisuallyHidden>
           <Separator />
           <Form {...form}>
-            <form className="!mt-6 !mb-7 flex items-start gap-x-8" id="inviteMemberForm">
+            <form className="!mt-6 !mb-7 flex items-start gap-x-8" id="inviteMemberForm" onKeyDown={preventEnterKeySubmission}>
               <FormField
                 control={form.control}
                 name="fullName"

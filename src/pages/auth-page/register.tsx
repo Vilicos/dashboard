@@ -12,6 +12,7 @@ import { useToast } from "@components/ui/use-toast";
 import AuthWrapper from "./auth-wrapper";
 import { Checkbox } from "@components/ui/checkbox";
 import { useSign } from "@/api/use-sign";
+import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const registerFormSchema = z.object({
@@ -91,7 +92,7 @@ function Register() {
           Log in
         </Button>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="mt-9">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="mt-9" onKeyDown={preventEnterKeySubmission}>
             <FormField
               control={form.control}
               name="full_name"

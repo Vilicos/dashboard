@@ -15,6 +15,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@components/ui/input";
 import { Separator } from "@components/ui/separator";
 import { useToast } from "@components/ui/use-toast";
+import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
@@ -61,12 +62,7 @@ function WebsitesAdd() {
   };
   const isActive = true;
   
-  const preventEnterKeySubmission = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    const target = event.target;
-    if (event.key === "Enter" && target instanceof HTMLInputElement) {
-      event.preventDefault();
-    }
-  };
+ 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger disabled={!isActive} asChild>

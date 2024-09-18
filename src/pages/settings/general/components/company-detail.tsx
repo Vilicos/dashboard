@@ -15,6 +15,7 @@ import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import DeleteAccount from "./delete-account";
+import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
 
 const formSchema = z.object({
   logo: z.union([
@@ -99,7 +100,7 @@ function CompanyDetail() {
   return (
     <div className="bg-card p-5 rounded-lg border">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} id="inviteMemberForm">
+        <form onSubmit={form.handleSubmit(onSubmit)} id="inviteMemberForm" onKeyDown={preventEnterKeySubmission}>
           <FormField
             control={form.control}
             name="logo"

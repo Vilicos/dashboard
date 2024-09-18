@@ -6,6 +6,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@components/ui/input";
 import { useToast } from "@components/ui/use-toast";
 import { fileTypes, uploadSize } from "@constants/static-data";
+import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
@@ -87,7 +88,7 @@ function CreateCompany() {
       </section>
       <section className="max-w-[350px] w-full">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} onKeyDown={preventEnterKeySubmission}>
             <FormField
               control={form.control}
               name="logo"
