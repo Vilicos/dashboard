@@ -8,11 +8,11 @@ function WebsiteItem({id,name,modified,source_count}:{id:number;name:string;modi
   const agoDate = formatDistanceToNow(new Date(modified),{addSuffix:true})
   return (
     <div className="flex items-center justify-between px-3 py-5 rounded-lg">
-        <Link to={`knowledge/${id}`} className="flex items-center gap-x-2 hover:underline">
+        <Link to={`knowledge/${id}`} className="flex items-center gap-x-2 hover:underline basis-1/3 overflow-hidden">
             <img src="/svg/globe.svg" alt="Site" className="pointer-events-none size-5 shrink-0" />
-            <p className="font-medium text-sm w-36 truncate">{name}</p>
+            <p className="font-medium text-sm truncate">{name}</p>
         </Link>
-        <p className="font-medium text-sm text-brand-fifth">{source_count} pages, updated {agoDate}</p>
+        <p className="font-medium text-sm text-brand-fifth basis-1/3 text-left truncate">{source_count} pages, updated {agoDate}</p>
         <div className="flex items-center gap-x-5">
         <WebsiteSync id ={id}/>
         <RemoveDialog type="website" id={id}/>

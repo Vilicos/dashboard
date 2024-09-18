@@ -82,24 +82,25 @@ export const navList = [
   },
 ];
 
-export const botList = [
-  {
+export const botList = {
+
+  discord:{
     id: 0,
     name: "Discord Bot",
     slug: "discord",
     img: "/img/discord.png",
-    active: true,
+    active: false,
     enable: true,
   },
-  {
+  telegram:{
     id: 1,
     name: "Telegram Bot",
     slug: "telegram",
     img: "/img/telegram.png",
     active: false,
-    enable: true,
+    enable: false,
   },
-  {
+  webchat:{
     id: 2,
     name: "Web Chatbot",
     slug: "webchat",
@@ -107,7 +108,8 @@ export const botList = [
     active: false,
     enable: false,
   },
-];
+} as const
+
 
 export const uploadSize = 1024 * 1024 * 1.5;
 export const fileTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/jpg"]);

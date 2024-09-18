@@ -1,16 +1,22 @@
 import { Button } from "@components/ui/button";
-import { Link } from "react-router-dom";
 import EditBot from "./edit-bot";
+import { botList } from "@constants/static-data";
+import { useInviteBot } from "@/api/use-invite-bot";
 
 interface IProps {
-  img: string;
-  name: string;
-  active: boolean;
-  slug: string;
-  enable: boolean;
+  type: "discord" | "telegram" | "webchat"
 }
 
-function BotItem({ active, img, name, enable }: IProps) {
+function BotItem({type }: IProps) {
+  const {active,enable,img,name} = botList[type]
+  const {mutate:inviteDiscord} = useInviteBot()
+
+  const inviteBot = ()=>{
+    inviteDiscord(undefined,{onSuccess(data) {
+        if(!data.data.result) return;
+        window.open(data.data.result,"_blank")
+    },})
+  }
   return (
     <div className="bg-card h-[180px] border rounded-lg basis-1/3 overflow-hidden p-7 flex flex-col items-center justify-center">
       <img src={img} alt={name} className="size-10 rounded-full object-cover bg-primary" />
@@ -21,11 +27,11 @@ function BotItem({ active, img, name, enable }: IProps) {
         </EditBot>
         
       ) : (
-        <Link to={""} target="_blank" className={`${enable ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} flex items-center justify-center rounded-lg h-8 w-[90px] text-sm transition-colors `}>
+        <Button onClick={inviteBot} className={`${enable ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} rounded-lg h-8 w-[90px] text-sm`}>
           {
             enable ? "Activate": "Soon"
           }
-        </Link>
+        </Button>
       )}
     </div>
   );
