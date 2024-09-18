@@ -60,6 +60,13 @@ function WebsitesAdd() {
     form.reset();
   };
   const isActive = true;
+  
+  const preventEnterKeySubmission = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    const target = event.target;
+    if (event.key === "Enter" && target instanceof HTMLInputElement) {
+      event.preventDefault();
+    }
+  };
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger disabled={!isActive} asChild>
@@ -75,7 +82,7 @@ function WebsitesAdd() {
           <AlertDialogDescription className="font-medium text-base text-foreground">Enter the URL of the content you want to sync</AlertDialogDescription>
 
           <Form {...form}>
-            <form className="!mt-3 !mb-5 " id="conversationManageForm">
+            <form className="!mt-3 !mb-5 " id="conversationManageForm" onKeyDown={preventEnterKeySubmission}>
               <FormField
                 control={form.control}
                 name="name"

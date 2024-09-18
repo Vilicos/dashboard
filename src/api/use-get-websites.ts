@@ -8,7 +8,8 @@ interface GetWebsites {
       name: string;
       created:string;
       modified:string;
-      source_count:number
+      source_count:number;
+      is_analyzed:boolean;
     }
   ];
 }

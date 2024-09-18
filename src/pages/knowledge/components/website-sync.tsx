@@ -2,7 +2,7 @@ import { useSyncWebsites } from "@/api/use-sync-websites";
 import { Button } from "@components/ui/button";
 import { useToast } from "@components/ui/use-toast";
 
-function WebsiteSync({ id }: { id: number }) {
+function WebsiteSync({ id,isAnalyzed }: { id: number;isAnalyzed:boolean }) {
   const { toast } = useToast();
   const { mutate, isPending } = useSyncWebsites();
   const handler = () => {
@@ -25,7 +25,7 @@ function WebsiteSync({ id }: { id: number }) {
   };
 
   return (
-    <Button className="p-0 size-6 rounded bg-border hover:bg-brand-secondary" disabled={isPending} onClick={handler}>
+    <Button className="p-0 size-6 rounded bg-border hover:bg-brand-secondary" disabled={isPending || !isAnalyzed} onClick={handler}>
       <img src="/svg/sync.svg" alt="Sync" className={`pointer-events-none select-none size-3 ${isPending && "animate-reverse-spin"}`} />
     </Button>
   );

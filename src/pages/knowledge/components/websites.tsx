@@ -28,7 +28,7 @@ function Websites() {
           {!isPending &&
             isSuccess &&
             data &&
-            paginatedData.map((item) => <WebsiteItem key={item.id} id={item.id} name={item.name} modified={item.modified} source_count={item.source_count} />)}
+            paginatedData.map((item) => <WebsiteItem key={item.id} id={item.id} name={item.name} modified={item.modified} source_count={item.source_count} isAnalyzed={item.is_analyzed} />)}
         </div>
         <CustomPagination
           pageRange={pageRange}
