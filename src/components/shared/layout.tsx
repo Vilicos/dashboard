@@ -6,7 +6,7 @@ import OrganizationCard from "./organization-card";
 import LogoWrapper from "./logo-wrapper";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { BeatLoader } from "react-spinners";
+import Loader from "./loader";
 const loadFeatures = () => import("@constants/animations").then((response) => response.default);
 
 function Layout() {
@@ -26,13 +26,7 @@ function Layout() {
     }
   }, [cookies.refreshToken, navigate, path]);
 
-  if (!isAuthChecked) {
-    return (
-      <div className="flex items-center min-h-screen">
-        <BeatLoader size={14} color="#3375FE" className="mx-auto" />
-      </div>
-    );
-  }
+  if (!isAuthChecked) return <Loader/>;
   return (
     <>
       <div className="grid grid-cols-[220px_1fr]">
