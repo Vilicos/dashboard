@@ -25,7 +25,7 @@ function WebsiteSync({ id,isAnalyzed }: { id: number;isAnalyzed:boolean }) {
   };
 
   return (
-    <Button className="p-0 size-6 rounded bg-border hover:bg-brand-secondary" disabled={isPending || !isAnalyzed} onClick={handler}>
+    <Button className="p-0 size-6 rounded bg-border hover:bg-brand-secondary" disabled={isPending || isAnalyzed} onClick={handler}>
       <img src="/svg/sync.svg" alt="Sync" className={`pointer-events-none select-none size-3 ${isPending && "animate-reverse-spin"}`} />
     </Button>
   );

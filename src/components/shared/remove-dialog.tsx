@@ -17,7 +17,7 @@ import { Separator } from "@components/ui/separator";
 import type { removeDialogContent } from "@custom-types/index";
 import { useState } from "react";
 
-function RemoveDialog({ type, id }: { type: `${removeDialogContent}`; id: number }) {
+function RemoveDialog({ type, id,isAnalyzed=false }: { type: `${removeDialogContent}`; id: number;isAnalyzed?:boolean }) {
   const [open, setOpen] = useState(false);
   const { mutate: mutateFile } = useDeleteFiles();
   const { mutate: mutateWebsites } = useDeleteWebsites();
@@ -58,7 +58,7 @@ function RemoveDialog({ type, id }: { type: `${removeDialogContent}`; id: number
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0">
+        <Button className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0" disabled={isAnalyzed}>
           <img src="/svg/remove.svg" alt="Remove" className="w-[10] h-3 pointer-events-none" />
         </Button>
       </AlertDialogTrigger>
