@@ -14,8 +14,8 @@ export const useSign = () => {
   const login = useMutation<AxiosResponse<AuthResponse>, AxiosError<AuthResponse>, LoginFormValues>({
     mutationFn: (loginData) => instance.post("/api/user/login", loginData),
     onSuccess(data) {
-        setCookie("refreshToken", data.data.result.refresh,{secure:true,maxAge:env.VITE_Refresh_Expire});
-        setCookie("accessToken", data.data.result.access,{secure:true,maxAge:env.VITE_Access_Expire});
+        setCookie("refreshToken", data.data.result.refresh,{secure:true,maxAge:env.VITE_Refresh_Expire,sameSite:"strict"});
+        setCookie("accessToken", data.data.result.access,{secure:true,maxAge:env.VITE_Access_Expire,sameSite:"strict"});
     },
     onError(error) {
         console.error(error)
@@ -25,8 +25,8 @@ export const useSign = () => {
   const register = useMutation<AxiosResponse<AuthResponse>, AxiosError<RegisterErrorResponse>, RegisterFormValues>({
     mutationFn: (registerData) => instance.post("/api/user/register", registerData),
     onSuccess(data) {
-      setCookie("refreshToken", data.data.result.refresh,{secure:true,maxAge:env.VITE_Refresh_Expire});
-      setCookie("accessToken", data.data.result.access,{secure:true,maxAge:env.VITE_Access_Expire});
+      setCookie("refreshToken", data.data.result.refresh,{secure:true,maxAge:env.VITE_Refresh_Expire,sameSite:"strict"});
+      setCookie("accessToken", data.data.result.access,{secure:true,maxAge:env.VITE_Access_Expire,sameSite:"strict"});
   },
     onError(error) {
       console.error(error)
