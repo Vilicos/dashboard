@@ -16,10 +16,13 @@ function AuthLayout({ children }: { children: ReactNode }) {
       if(isPending){
         setIsAuthChecked(false);
       }else if(isSuccess){
+        setIsAuthChecked(true);
         navigate("/", { replace: true });
       }else if(error.status === 404){
+        setIsAuthChecked(true);
         navigate("/create-company", { replace: true })
       }else{
+        setIsAuthChecked(true);
         navigate("/login", { replace: true })
       }
     }else {
