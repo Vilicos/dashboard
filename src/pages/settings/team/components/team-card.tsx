@@ -1,7 +1,13 @@
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@components/ui/table";
 import TeamItem from "./team-item";
+import { useCookies } from "react-cookie";
+import { useGetTeamMembers } from "@/api/use-get-team-members";
 
 function TeamCard() {
+  const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  const {data,isPending,isSuccess} = useGetTeamMembers(cookies.refreshToken)
+  const teamMembers = data?.results[0]?.users
+
   return (
     <section className="bg-card rounded-lg border pb-5 relative">
       <Table className="mx-5 w-[calc(100%_-_40px)] table-fixed">
@@ -14,9 +20,11 @@ function TeamCard() {
           </TableRow>
         </TableHeader>
         <TableBody className="[&>*:nth-child(even)]:bg-background [&>*:nth-child(odd)]:bg-transparent ">
-          <TeamItem fullName="Nijat Hamid" email="nicatorium@gmail.com" role='admin'/>
-          <TeamItem fullName="Orkhan Aslanov" email="orkhan@vilicos.com" role='member'/>
-          <TeamItem fullName="Orkhan Aslanov" email="orkhan@vilicos.com" role='member'/>
+          {
+            !isPending &&
+            isSuccess &&
+            data && data.results && teamMembers && teamMembers.map(item => (<TeamItem key={item.id} id={item.id} fullName={item.full_name} email={item.email} role={item.user_type}/>)) 
+          }
         </TableBody>
       </Table>
     </section>

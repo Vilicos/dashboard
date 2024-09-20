@@ -1,4 +1,5 @@
 import { useDeleteFiles } from "@/api/use-delete-files";
+import { useDeleteTeamMembers } from "@/api/use-delete-team-members";
 import { useDeleteWebsites } from "@/api/use-delete-websites";
 import { useDeleteWebsitesSource } from "@/api/use-delete-websites-source";
 import {
@@ -22,6 +23,7 @@ function RemoveDialog({ type, id,isAnalyzed=false }: { type: `${removeDialogCont
   const { mutate: mutateFile } = useDeleteFiles();
   const { mutate: mutateWebsites } = useDeleteWebsites();
   const { mutate: mutateSource } = useDeleteWebsitesSource();
+  const {mutate:mutateTeamMembers} = useDeleteTeamMembers()
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     switch (type) {
@@ -45,6 +47,15 @@ function RemoveDialog({ type, id,isAnalyzed=false }: { type: `${removeDialogCont
     }
     case "source": {
       mutateSource(id, {
+        onSettled() {
+          setOpen(false);
+        },
+      });
+    
+    break;
+    }
+    case "member": {
+      mutateTeamMembers(id, {
         onSettled() {
           setOpen(false);
         },

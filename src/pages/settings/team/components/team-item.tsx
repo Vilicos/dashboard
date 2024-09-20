@@ -7,8 +7,9 @@ interface IProps {
   fullName: string;
   email: string;
   role: `${UserRole}`;
+  id:number;
 }
-function TeamItem({ email, fullName, role }: IProps) {
+function TeamItem({ email, fullName, role,id }: IProps) {
   
   return (
     <TableRow className="border-none">
@@ -29,9 +30,7 @@ function TeamItem({ email, fullName, role }: IProps) {
         </Select>
       </TableCell>
       <TableCell className="ml-3 min-w-[56px] rounded-r-lg">
-        {
-            role === UserRole.Member && <RemoveDialog type="member" id={0}/>
-        }
+          <RemoveDialog type="member" id={id}/>
       </TableCell>
     </TableRow>
   );
