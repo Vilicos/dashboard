@@ -23,6 +23,7 @@ export const useGetDiscordChannels = (parameters: IProps) =>
   useQuery({
     queryKey: ["getDiscordChannels", parameters],
     retry: 0,
+    refetchInterval:30000,
     queryFn: fetchGetDiscordChannels,
     placeholderData: (previousData) => previousData,
     staleTime: 10 * (60 * 1000), //10 mins
