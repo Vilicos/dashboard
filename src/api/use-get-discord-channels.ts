@@ -1,24 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import instance from "./instance";
-import type { UserRole } from "@custom-types/index";
 
 interface GetDiscordChannels {
-  count: number;
-  next: null;
-  previous: null;
   results: Array<{
-    id: number;
-    created: string;
-    modified: string;
-    users: Array<{
-      id: number;
-      email: string;
-      full_name: string;
-      is_active: boolean;
-      user_type: `${UserRole}`;
-      created: string;
-      modified: string;
-    }>;
+    id:number;
+    created:string;
+    is_active:boolean;
+    modified:string;
+    name:string;
+    type:string
   }>;
 }
 

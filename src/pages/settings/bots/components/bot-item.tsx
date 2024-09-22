@@ -13,7 +13,7 @@ function BotItem({type }: IProps) {
   const {enable,img,name} = botList[type]
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
   const {data,isPending,isSuccess} = useGetDiscordChannels(cookies.refreshToken)
-
+  
   const {mutate:inviteDiscord} = useInviteBot()
 
   const inviteBot = ()=>{
@@ -26,13 +26,13 @@ function BotItem({type }: IProps) {
     <div className="bg-card h-[180px] border rounded-lg basis-1/3 overflow-hidden p-7 flex flex-col items-center justify-center">
       <img src={img} alt={name} className="size-10 rounded-full object-cover bg-primary" />
       <p className="font-semibold mt-2 mb-5">{name}</p>
-      {data && isSuccess ? (
+      {data && isSuccess && enable ? (
         <EditBot>
           <Button className="h-8 w-[90px] rounded-lg font-normal" variant={'brand'}>Edit</Button>
         </EditBot>
         
       ) : (
-        <Button onClick={inviteBot} className={`${enable ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} rounded-lg h-8 w-[90px] text-sm`}>
+        <Button onClick={inviteBot} className={`${enable && !isPending ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} rounded-lg h-8 w-[90px] text-sm`}>
           {
             enable ? (isPending ? "Loading" : "Activate"): "Soon"
           }

@@ -1,137 +1,38 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@components/ui/alert-dialog";
 import { useState, type ReactNode } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
-import { Switch } from "@components/ui/switch";
 import { Separator } from "@components/ui/separator";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@components/ui/dialog";
+import { useCookies } from "react-cookie";
+import { useGetDiscordChannels } from "@/api/use-get-discord-channels";
+import { ScrollArea } from "@components/ui/scroll-area";
+import ChannelItem from "./channel-item";
 
 interface IProps {
   children: ReactNode;
 }
 
-const formSchema = z.object({
-  allChannels: z.boolean(),
-  general: z.boolean(),
-  support: z.boolean(),
-});
-
 function EditBot({ children }: IProps) {
-  const[open,setOpen] = useState(false)
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      allChannels: false,
-      general: false,
-      support: false,
-    },
-  });
+  const [open, setOpen] = useState(false);
+  const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  const { data, isPending, isSuccess } = useGetDiscordChannels(cookies.refreshToken);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setOpen(previous => !previous)
-    console.log(values);
-    form.reset()
-  };
-  const formReset = async (event:React.MouseEvent<HTMLButtonElement>)=> {
-    event.preventDefault()
-    setOpen(previous => !previous)
-    form.reset()
-}
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent className="max-w-[482px] border bg-card p-4 overflow-hidden">
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-xl font-bold mb-3">Edit Discord Bot</AlertDialogTitle>
-          <Separator className="mb-3 !mt-0" />
-          <AlertDialogDescription className="text-brand-fifth font-medium flex justify-between">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="max-w-[482px] border bg-card p-4 overflow-hidden min-h-[318px] max-h-[600px] gap-0">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-bold">Edit Discord Bot</DialogTitle>
+          <Separator className="!my-2" />
+          <DialogDescription className="text-brand-fifth font-medium flex justify-between !mt-0">
             <span>Channel</span>
             <span>Reply</span>
-          </AlertDialogDescription>
-          <Form {...form}>
-            <form className="space-y-4 !mt-3" id="editBotForm">
-              <FormField
-                control={form.control}
-                name="allChannels"
-                render={({ field }) => (
-                  <FormItem>
-                    <Separator className="mb-4" />
-                    <div className="flex items-center justify-between">
-                      <FormLabel className="font-medium text-base">All Channels</FormLabel>
-                      <FormControl>
-                        <Switch checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                    </div>
-                    <VisuallyHidden>
-                      <FormDescription></FormDescription>
-                    </VisuallyHidden>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="general"
-                render={({ field }) => (
-                  <FormItem>
-                    <Separator className="mb-4" />
-                    <div className="flex items-center justify-between">
-                      <FormLabel className="font-medium text-base">General</FormLabel>
-                      <FormControl>
-                        <Switch checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                    </div>
-                    <VisuallyHidden>
-                      <FormDescription></FormDescription>
-                    </VisuallyHidden>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="support"
-                render={({ field }) => (
-                  <FormItem>
-                    <Separator className="mb-4" />
-                    <div className="flex items-center justify-between">
-                      <FormLabel className="font-medium text-base">Support</FormLabel>
-                      <FormControl>
-                        <Switch checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                    </div>
-                    <VisuallyHidden>
-                      <FormDescription></FormDescription>
-                    </VisuallyHidden>
-                    <FormMessage />
-                    <Separator className="!mt-4" />
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
-        </AlertDialogHeader>
-        <AlertDialogFooter className="!space-x-3 items-end h-auto">
-          <AlertDialogCancel className="rounded-xl h-9 w-[90px] bg-secondary hover:bg-secondary/80 font-semibold" onClick={formReset}>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="w-[120px] h-9 rounded-xl font-semibold hover:bg-brand-secondary" type="submit" onClick={form.handleSubmit(onSubmit)}>
-            Save
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </DialogDescription>
+          <Separator className="!mt-2" />
+        </DialogHeader>
+        <ScrollArea type="always" className="overflow-y-auto scrollbar-thin scrollbar-thumb-secondary/50 scrollbar-track-transparent h-full">
+          {!isPending && isSuccess && data && data.results.map((item) => <ChannelItem key={item.id} name={item.name} id={item.id} isEnable={item.is_active} />)}
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
   );
 }
 
