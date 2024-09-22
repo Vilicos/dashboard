@@ -2,6 +2,7 @@ import { useDeleteFiles } from "@/api/use-delete-files";
 import { useDeleteTeamMembers } from "@/api/use-delete-team-members";
 import { useDeleteWebsites } from "@/api/use-delete-websites";
 import { useDeleteWebsitesSource } from "@/api/use-delete-websites-source";
+import { useGetCompany } from "@/api/use-get-company";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,59 +18,66 @@ import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import type { removeDialogContent } from "@custom-types/index";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
-function RemoveDialog({ type, id,isAnalyzed=false }: { type: `${removeDialogContent}`; id: number;isAnalyzed?:boolean }) {
+function RemoveDialog({ type, id, isAnalyzed = false }: { type: `${removeDialogContent}`; id: number; isAnalyzed?: boolean }) {
   const [open, setOpen] = useState(false);
   const { mutate: mutateFile } = useDeleteFiles();
   const { mutate: mutateWebsites } = useDeleteWebsites();
   const { mutate: mutateSource } = useDeleteWebsitesSource();
-  const {mutate:mutateTeamMembers} = useDeleteTeamMembers()
+  const { mutate: mutateTeamMembers } = useDeleteTeamMembers();
+
+  const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  const { data, isPending, isSuccess } = useGetCompany(cookies.refreshToken);
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     switch (type) {
-    case "file": {
-      mutateFile(id, {
-        onSettled() {
-          setOpen(false);
-        },
-      });
-    
-    break;
-    }
-    case "website": {
-      mutateWebsites(id, {
-        onSettled() {
-          setOpen(false);
-        },
-      });
-    
-    break;
-    }
-    case "source": {
-      mutateSource(id, {
-        onSettled() {
-          setOpen(false);
-        },
-      });
-    
-    break;
-    }
-    case "member": {
-      mutateTeamMembers(id, {
-        onSettled() {
-          setOpen(false);
-        },
-      });
-    
-    break;
-    }
-    // No default
+      case "file": {
+        mutateFile(id, {
+          onSettled() {
+            setOpen(false);
+          },
+        });
+
+        break;
+      }
+      case "website": {
+        mutateWebsites(id, {
+          onSettled() {
+            setOpen(false);
+          },
+        });
+
+        break;
+      }
+      case "source": {
+        mutateSource(id, {
+          onSettled() {
+            setOpen(false);
+          },
+        });
+
+        break;
+      }
+      case "member": {
+        mutateTeamMembers(id, {
+          onSettled() {
+            setOpen(false);
+          },
+        });
+
+        break;
+      }
+      // No default
     }
   };
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0" disabled={isAnalyzed}>
+        <Button
+          className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0"
+          disabled={isAnalyzed || (isPending || (isSuccess && data.results.user_type === "member") && type==="member")}
+        >
           <img src="/svg/remove.svg" alt="Remove" className="w-[10] h-3 pointer-events-none" />
         </Button>
       </AlertDialogTrigger>

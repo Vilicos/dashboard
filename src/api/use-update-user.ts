@@ -19,9 +19,10 @@ type ErrorResponse = {
     }
 }
 
+type Argument = {full_name:string;password?:string}
 export const useUpdateUser = () => {
-  return useMutation<AxiosResponse<SuccessResponse>, AxiosError<ErrorResponse>, string>({
-    mutationFn: (data) => instance.put(`/api/user/profile/update`, {full_name:data}),
+  return useMutation<AxiosResponse<SuccessResponse>, AxiosError<ErrorResponse>, Argument>({
+    mutationFn: (data) => instance.put(`/api/user/profile/update`, data),
     onError(error) {
       console.error(error);
     },

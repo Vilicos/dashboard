@@ -16,7 +16,7 @@ function TeamItem({ email, fullName, role,id }: IProps) {
       <TableCell className="font-medium truncate max-w-[100px] rounded-l-lg">{fullName}</TableCell>
       <TableCell className="font-medium truncate max-w-[100px]">{email}</TableCell>
       <TableCell>
-        <Select defaultValue={role}>
+        <Select defaultValue={role} disabled>
           <SelectTrigger className="w-[90px] h-7 rounded-lg pl-2 pr-1 bg-input">
             <SelectValue placeholder="Role" />
           </SelectTrigger>

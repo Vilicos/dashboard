@@ -21,9 +21,11 @@ import { Input } from "@components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/ui/select";
 import { Button } from "@components/ui/button";
 import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
+import { useInviteMember } from "@/api/use-invite-member";
+import { useToast } from "@components/ui/use-toast";
 
 const formSchema = z.object({
-  fullName: z
+  full_name: z
     .string({
       required_error: "Name is required",
       invalid_type_error: "Invalid full name",
@@ -49,22 +51,35 @@ function InviteMember() {
     resolver: zodResolver(formSchema),
     mode:"onBlur",
     defaultValues: {
-      fullName: "",
+      full_name: "",
       email: "",
-      role: undefined,
+      role: UserRole.Member,
     },
   });
 
+  const {mutate} = useInviteMember()
+  const { toast } = useToast();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setOpen(previous => !previous)
-    console.log(values);
-    form.reset()
+     mutate(values, {
+      onError() {
+        toast({
+          title: "Oops! Somethings Went Wrong!",
+          variant: "brandDestructive",
+          duration: 3000,
+        });
+      },
+      onSettled() {
+        setOpen(false);
+        form.reset();
+      },
+    });
   };
-  const formReset = async (event:React.MouseEvent<HTMLButtonElement>)=> {
-    event.preventDefault()
-    setOpen(previous => !previous)
-    form.reset()
-}
+  
+  const formReset = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setOpen(false);
+    form.reset();
+  };
   return (
     <AlertDialog open={isOpen} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
@@ -81,7 +96,7 @@ function InviteMember() {
             <form className="!mt-6 !mb-7 flex items-start gap-x-8" id="inviteMemberForm" onKeyDown={preventEnterKeySubmission}>
               <FormField
                 control={form.control}
-                name="fullName"
+                name="full_name"
                 render={({field}) => (
                   <FormItem className="basis-1/3 relative">
                     <FormLabel className="font-medium text-sm text-brand-fifth">Full Name</FormLabel>
@@ -130,7 +145,7 @@ function InviteMember() {
                   <FormItem className="basis-1/3 relative">
                     <FormLabel className="font-medium text-sm text-brand-fifth">Role</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled>
                         <SelectTrigger className="!border rounded-lg pl-3 pr-3 bg-transparent font-semibold text-base">
                           <SelectValue placeholder="Role" />
                         </SelectTrigger>

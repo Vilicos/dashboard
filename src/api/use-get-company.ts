@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import instance from "./instance";
+import type { UserRole } from "@custom-types/index";
 
 
 interface GetCompany  {
@@ -10,6 +11,7 @@ interface GetCompany  {
       created:string;
       id:number;
       full_name:string;
+      user_type:`${UserRole}`
     };
   }
 

@@ -60,12 +60,10 @@ function WebsitesAdd() {
     setOpen(false);
     form.reset();
   };
-  const isActive = true;
-  
  
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger disabled={!isActive} asChild>
+      <AlertDialogTrigger asChild>
         <Button className="rounded-lg w-[70px] h-7 p-0 font-medium text-sm mr-2" variant={"brand"}>
           + Add
         </Button>

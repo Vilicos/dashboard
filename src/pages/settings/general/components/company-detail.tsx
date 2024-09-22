@@ -42,10 +42,13 @@ const formSchema = z.object({
     .min(3, { message: "Minimum 3 characters" })
     .max(40, { message: "Maximum 32 characters" })
     .trim(),
+  password:z
+  .string().optional().refine((value)=> !value || (value.length>=5 && value.length <=40),{message:"Password must be between 5 and 40 characters if provided"})
 });
 
 function CompanyDetail() {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
+  const [showPass, setPass] = useState(false);
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
   const { data, isPending, isSuccess } = useGetCompany(cookies.refreshToken);
   const { mutate: updateCompany, isPending: companyPending } = useUpdateCompany();
@@ -57,6 +60,7 @@ function CompanyDetail() {
       logo: undefined,
       name: "",
       full_name: "",
+      password:""
     },
   });
   const isChanged = form.formState.isDirty;
@@ -66,6 +70,7 @@ function CompanyDetail() {
     if (data && data.results && isSuccess) {
       form.resetField("full_name", { defaultValue: data.results.full_name });
       form.resetField("name", { defaultValue: data.results.name });
+      form.resetField("password",{defaultValue:""})
       setSelectedImage(data.results.logo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,7 +89,11 @@ function CompanyDetail() {
     });
     if (isSuccess && data && data.results.id) {
       updateCompany({ formData: formData, id: data.results.id });
-      updateUser(values.full_name);
+      if(values.password){
+        updateUser({full_name:values.full_name,password:values.password})
+      }else{
+        updateUser({full_name:values.full_name})
+      }
     }
   };
 
@@ -93,6 +102,7 @@ function CompanyDetail() {
       setSelectedImage(data.results.logo);
       form.resetField("full_name", { defaultValue: data.results.full_name });
       form.resetField("name", { defaultValue: data.results.name });
+      form.resetField("password",{defaultValue:""})
     } else {
       form.reset();
     }
@@ -123,7 +133,7 @@ function CompanyDetail() {
                       <Input
                         className="pointer-events-none"
                         accept="image/png,image/jpg,image/jpeg,image/webp"
-                        disabled={form.formState.isSubmitting ? true : false}
+                        disabled={isPending || (isSuccess && data.results.user_type === "member")}
                         type="file"
                         {...field}
                         onChange={(event) => {
@@ -157,6 +167,7 @@ function CompanyDetail() {
                   <FormControl>
                     <Input
                       placeholder="Vilicos"
+                      disabled={isPending || (isSuccess && data.results.user_type === "member")}
                       className="placeholder:text-sm placeholder:text-brand-fifth/20 placeholder:font-medium rounded-lg bg-transparent font-medium text-sm w-[350px]"
                       {...field}
                     />
@@ -185,6 +196,37 @@ function CompanyDetail() {
                     />
                   </FormControl>
 
+                  <FormMessage className="text-xs h-4 truncate absolute -bottom-5" />
+                </FormItem>
+                <Separator className="mt-8 mb-5" />
+              </>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <>
+                <FormItem className="relative space-y-0">
+                  <FormLabel className="font-bold text-xl !text-foreground">New Password</FormLabel>
+                  <FormDescription className="font-medium text-sm text-brand-fifth !my-5">This is your new password.</FormDescription>
+                  <FormControl>
+                    <Input
+                      placeholder="New Password"
+                      type={showPass ? "text" : "password"}
+                      className="placeholder:text-sm placeholder:text-brand-fifth/20 placeholder:font-medium rounded-lg pr-10 bg-transparent font-medium text-sm w-[350px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <Button
+                    className="absolute bottom-2 left-[315px] size-6 p-0 bg-transparent hover:bg-transparent z-10"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setPass(!showPass);
+                    }}
+                  >
+                    {showPass ? <img src="/svg/eye-open.svg" alt="" className="size-[22px]" /> : <img src="/svg/eye-off.svg" alt="" className="size-[22px]" />}
+                  </Button>
                   <FormMessage className="text-xs h-4 truncate absolute -bottom-5" />
                 </FormItem>
                 <Separator className="mt-8 mb-5" />
