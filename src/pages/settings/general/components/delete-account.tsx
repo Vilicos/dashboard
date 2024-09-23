@@ -1,12 +1,17 @@
-import { useGetCompany } from "@/api/use-get-company";
-import { Button } from "@components/ui/button"
-import { useCookies } from "react-cookie";
+import { useSign } from "@/api/use-sign";
+import { Button } from "@components/ui/button";
+
 function DeleteAccount() {
-  const [cookies] = useCookies(["refreshToken", "accessToken"]);
-  const { data, isPending, isSuccess } = useGetCompany(cookies.refreshToken);
+  const { deleteAccount } = useSign();
+
+  const deleteAction = () => {
+    deleteAccount.mutate();
+  };
   return (
-    <Button variant={'ghost'} disabled={isPending || (isSuccess && data.results.user_type === "member")} className="text-[#C70000] hover:text-[#FF5151] rounded-xl" type="button">Delete Account</Button>
-  )
+    <Button variant={"ghost"} onClick={deleteAction} disabled={deleteAccount.isPending} className="text-[#C70000] hover:text-[#FF5151] rounded-xl" type="button">
+      Delete Account
+    </Button>
+  );
 }
 
-export default DeleteAccount
+export default DeleteAccount;

@@ -32,11 +32,23 @@ export const useSign = () => {
       console.error(error)
   },
   });
+
+  const deleteAccount = useMutation<AxiosResponse<AuthResponse>, AxiosError<RegisterErrorResponse>>({
+    mutationFn: () => instance.delete("/api/user/delete"),
+    onSuccess() {
+      removeCookie('accessToken')
+      removeCookie('refreshToken')
+      queryClient.clear();
+  },
+    onError(error) {
+      console.error(error)
+  },
+  });
   const logOut = ()=>{
     removeCookie('accessToken')
     removeCookie('refreshToken')
     queryClient.clear();
 }
 
-  return { login, register,logOut};
+  return { login, register,logOut,deleteAccount};
 };
