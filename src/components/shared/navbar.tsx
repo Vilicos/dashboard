@@ -8,7 +8,7 @@ function Navbar() {
         {navList.map((item) =>
           item.parent ? (
             <li key={item.id}>
-              <NavLink to={item.path} className={`py-1 px-3 font-medium flex items-center gap-x-3 mb-3 hover:bg-background rounded-xl `}>
+              <NavLink to={item.path} className={`py-1 px-3 font-medium flex items-center gap-x-3 mb-3 rounded-xl ${item.disabled ? "pointer-events-none ":"hover:bg-background "}`}>
                 <img src={item.img} alt={item.name} className="size-[22px] shrink-0" />
                 {item.name}
               </NavLink>
