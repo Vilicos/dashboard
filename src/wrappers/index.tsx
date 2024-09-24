@@ -23,7 +23,6 @@ function Wrappers({ children }: { children: ReactNode }) {
     };
   }, [handleWindowSizeChange]);
 
-
   const isDesktop = width >= 1280;
   const content = isDesktop ? children : <NoSupport />;
 
