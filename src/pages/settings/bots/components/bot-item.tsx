@@ -4,6 +4,7 @@ import { botList } from "@constants/static-data";
 import { useInviteBot } from "@/api/use-invite-bot";
 import { useGetDiscordChannels } from "@/api/use-get-discord-channels";
 import { useCookies } from "react-cookie";
+import { useGetCompany } from "@/api/use-get-company";
 
 interface IProps {
   type: "discord" | "telegram" | "webchat"
@@ -13,7 +14,7 @@ function BotItem({type }: IProps) {
   const {enable,img,name} = botList[type]
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
   const {data,isPending,isSuccess} = useGetDiscordChannels(cookies.refreshToken)
-  
+  const { data:companyData, isPending:companyPending, isSuccess:companySuccess } = useGetCompany(cookies.refreshToken);
   const {mutate:inviteDiscord} = useInviteBot()
 
   const inviteBot = ()=>{
@@ -28,11 +29,11 @@ function BotItem({type }: IProps) {
       <p className="font-semibold mt-2 mb-5">{name}</p>
       {data && isSuccess && enable ? (
         <EditBot>
-          <Button className="h-8 w-[90px] rounded-lg font-normal" variant={'brand'}>Edit</Button>
+          <Button className="h-8 w-[90px] rounded-lg font-normal" variant={'brand'} disabled={(companySuccess && companyData.results.user_type === "member" || companyPending)}>Edit</Button>
         </EditBot>
         
       ) : (
-        <Button onClick={inviteBot} className={`${enable && !isPending ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} rounded-lg h-8 w-[90px] text-sm`}>
+        <Button onClick={inviteBot} disabled={(companySuccess && companyData.results.user_type === "member" || companyPending)} className={`${enable && !isPending ? "bg-primary hover:bg-brand-secondary" : "bg-muted pointer-events-none opacity-50"} rounded-lg h-8 w-[90px] text-sm`}>
           {
             enable ? (isPending ? "Loading" : "Activate"): "Soon"
           }
