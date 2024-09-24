@@ -8,6 +8,12 @@ import { queryClient } from "@wrappers/index";
 
 type RegisterErrorResponse = Array<string>
 
+type GoogleSignResponse = {
+  refresh:string;
+  access:string
+}
+
+
 export const useSign = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [_, setCookie, removeCookie] = useCookies(['refreshToken','accessToken']);
@@ -44,11 +50,23 @@ export const useSign = () => {
       console.error(error)
   },
   });
+
+  const googleSign = useMutation<AxiosResponse<GoogleSignResponse>, AxiosError<RegisterErrorResponse>, string>({
+    mutationFn: (token) => instance.post("/api/user/google/verify/",{access_token:token}),
+    onSuccess(data) {
+      setCookie("refreshToken", data.data.refresh,{secure:true,maxAge:env.VITE_Refresh_Expire,sameSite:"strict"});
+      setCookie("accessToken", data.data.access,{secure:true,maxAge:env.VITE_Access_Expire,sameSite:"strict"});
+  },
+    onError(error) {
+      console.error(error)
+  },
+  });
+
   const logOut = ()=>{
     removeCookie('accessToken')
     removeCookie('refreshToken')
     queryClient.clear();
 }
 
-  return { login, register,logOut,deleteAccount};
+  return { login, register,logOut,deleteAccount,googleSign};
 };

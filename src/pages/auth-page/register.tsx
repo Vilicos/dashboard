@@ -13,6 +13,7 @@ import AuthWrapper from "./auth-wrapper";
 import { Checkbox } from "@components/ui/checkbox";
 import { useSign } from "@/api/use-sign";
 import { preventEnterKeySubmission } from "@helpers/prevent-enter-submission-form";
+import GoogleSign from "./google-sign";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const registerFormSchema = z.object({
@@ -204,15 +205,7 @@ function Register() {
           <span className="text-brand-fifth text-sm font-medium inline-block mx-2">or</span>
           <Separator className="bg-brand-fifth shrink" />
         </div>
-        <Link
-          to={""}
-          className={`bg-primary  w-full py-[10px] px-5 rounded-lg flex items-center transition-colors ${
-            register.isPending ? "opacity-50 pointer-events-none" : "hover:bg-brand-secondary"
-          }`}
-        >
-          <img src="/img/google.png" alt="Google" className="pointer-events-none size-6 shrink-0" />
-          <span className="font-semibold ml-[62px]">Continue with Google</span>
-        </Link>
+        <GoogleSign type="register"/>
       </section>
     </AuthWrapper>
   );
