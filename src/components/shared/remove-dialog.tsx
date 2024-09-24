@@ -16,11 +16,11 @@ import {
 } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
-import type { removeDialogContent } from "@custom-types/index";
+import type { UserRole,removeDialogContent} from "@custom-types/index";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
-function RemoveDialog({ type, id, isAnalyzed = false }: { type: `${removeDialogContent}`; id: number; isAnalyzed?: boolean }) {
+function RemoveDialog({ type, id, isAnalyzed = false,role }: { type: `${removeDialogContent}`; id: number; isAnalyzed?: boolean;role?:`${UserRole}` }) {
   const [open, setOpen] = useState(false);
   const { mutate: mutateFile } = useDeleteFiles();
   const { mutate: mutateWebsites } = useDeleteWebsites();
@@ -28,7 +28,7 @@ function RemoveDialog({ type, id, isAnalyzed = false }: { type: `${removeDialogC
   const { mutate: mutateTeamMembers } = useDeleteTeamMembers();
 
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
-  const { data, isPending, isSuccess } = useGetCompany(cookies.refreshToken);
+  const { data,isSuccess } = useGetCompany(cookies.refreshToken);
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     switch (type) {
@@ -59,7 +59,7 @@ function RemoveDialog({ type, id, isAnalyzed = false }: { type: `${removeDialogC
 
         break;
       }
-      case "member": {
+      case "team": {
         mutateTeamMembers(id, {
           onSettled() {
             setOpen(false);
@@ -76,7 +76,7 @@ function RemoveDialog({ type, id, isAnalyzed = false }: { type: `${removeDialogC
       <AlertDialogTrigger asChild>
         <Button
           className="bg-input size-6 p-0 hover:bg-brand-dest-secondary rounded shrink-0"
-          disabled={isAnalyzed || (isPending || (isSuccess && data.results.user_type === "member") && type==="member")}
+          disabled={isAnalyzed || (type === "team" && (role === "admin" || (isSuccess && data.results.user_type === "member")))}
         >
           <img src="/svg/remove.svg" alt="Remove" className="w-[10] h-3 pointer-events-none" />
         </Button>

@@ -30,7 +30,7 @@ function TeamItem({ email, fullName, role,id }: IProps) {
         </Select>
       </TableCell>
       <TableCell className="ml-3 min-w-[56px] rounded-r-lg">
-          <RemoveDialog type="member" id={id}/>
+          <RemoveDialog type="team" id={id} role={role}/>
       </TableCell>
     </TableRow>
   );

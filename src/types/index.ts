@@ -18,7 +18,7 @@ export enum UserRole {
 }
 
 export enum removeDialogContent {
-  Member = "member",
+  Team = "team",
   File = "file",
   Website = "website",
   Source = "source"
