@@ -1,7 +1,6 @@
 import { useSign } from "@/api/use-sign";
 import { Button } from "@components/ui/button";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import { useEffect, useRef } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 type IProps = {
   type: "login" | "register";
