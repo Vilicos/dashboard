@@ -1,4 +1,5 @@
 import { useCreateCompany } from "@/api/use-create-company";
+import { useSign } from "@/api/use-sign";
 import LogoWrapper from "@components/shared/logo-wrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { Button } from "@components/ui/button";
@@ -36,6 +37,7 @@ function CreateCompany() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { mutate } = useCreateCompany();
+  const {logOut} = useSign()
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -78,7 +80,7 @@ function CreateCompany() {
 
   const previousNavigate = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate("/register", { replace: true });
+    logOut();
   };
 
   return (
