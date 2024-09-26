@@ -9,7 +9,7 @@ function AuthLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const path = location.pathname;
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
-  const { data, isPending, isSuccess, error } = useGetCompany(cookies.refreshToken);
+  const { isPending, isSuccess, error } = useGetCompany(cookies.refreshToken);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   useEffect(() => {
     if (cookies.refreshToken){
@@ -30,7 +30,7 @@ function AuthLayout({ children }: { children: ReactNode }) {
       navigate(path === "/register" ? "/register" : "/login")
     }
 
-  }, [cookies.refreshToken, data, error?.status,isPending, isSuccess, navigate, path]);
+  }, [cookies.refreshToken, error?.status,isPending, isSuccess, navigate, path]);
 
   if (!isAuthChecked) return <Loader/>
   return <>{children}</>;

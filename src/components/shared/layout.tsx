@@ -7,6 +7,7 @@ import LogoWrapper from "./logo-wrapper";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Loader from "./loader";
+import { useGetCompany } from "@/api/use-get-company";
 const loadFeatures = () => import("@constants/animations").then((response) => response.default);
 
 function Layout() {
@@ -14,6 +15,7 @@ function Layout() {
   const navigate = useNavigate();
   const path = location.pathname;
   const [cookies] = useCookies(["refreshToken", "accessToken"]);
+  const { isPending, isSuccess, error } = useGetCompany(cookies.refreshToken);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   // Auth Logic
 
@@ -21,10 +23,17 @@ function Layout() {
     // eslint-disable-next-line unicorn/no-negated-condition
     if (!cookies.refreshToken) {
       navigate("/login", { replace: true });
-    } else {
+    } else if(isPending){
+      setIsAuthChecked(false);
+    }else if(error?.status === 404){
+      setIsAuthChecked(false);
+      navigate("/create-company", { replace: true })
+    }else if(isSuccess){
+      setIsAuthChecked(true);
+    }else{
       setIsAuthChecked(true);
     }
-  }, [cookies.refreshToken, navigate, path]);
+  }, [cookies.refreshToken, error?.status, isPending, isSuccess, navigate, path]);
 
   if (!isAuthChecked) return <Loader/>;
   return (
