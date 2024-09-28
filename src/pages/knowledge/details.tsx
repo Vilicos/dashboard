@@ -14,7 +14,7 @@ function WebsiteDetails() {
   const { data, isPending, isSuccess } = useGetWebsitesSource(cookies.refreshToken,Number(id));
   const { paginatedData, pageRange, nextPage, previousPage, setPage, currentPage, totalData, endItemIndex, startItemIndex, hasNextPage, hasPreviousPage } = usePagination({
     data:  isSuccess ? data?.results : [],
-    perPage: 5,
+    perPage: 10,
   });
   return (
     <div>
